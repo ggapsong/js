@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="../style/index.css">
+</head>
+
+<body>
+    <div class="left">
+        <div class="please">请给下面的DIV设置样式</div>
+        <div class="buttom clearfix">
+            <a href="#">设置</a>
+            <a href="#">恢复</a>
+        </div>
+        <div class="box"></div>
+    </div>
+    <div class="alert">
+        <ul class="style kuandu clearfix">
+            <li><a href="#">宽度</a></li>
+            <li><a href="#">100px</a></li>
+            <li><a href="#">200px</a></li>
+            <li><a href="#">300px</a></li>
+            <li><a href="#">400px</a></li>
+            <li><a href="#">500px</a></li>
+            <li class="input-box">
+                <input type="text" id="w_i">
+            </li>
+            <li><a href="#">确定</a></li>
+        </ul>
+        <ul class="style height clearfix">
+            <li><a href="#">高度</a></li>
+            <li><a href="#">100px</a></li>
+            <li><a href="#">200px</a></li>
+            <li><a href="#">300px</a></li>
+            <li><a href="#">400px</a></li>
+            <li><a href="#">500px</a></li>
+            <li><a href="#">确定</a></li>
+
+        </ul>
+        <ul class="bg clearfix">
+            <li><a href="">背景</a></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li><a href="">确定</a></li>
+        </ul>
+        <div class="last clearfix">
+            <a href="#">确认</a>
+            <a href="#">恢复</a>
+        </div>
+    </div>
+    <script>
+        var alert = document.querySelector(".alert");
+        var set = document.querySelectorAll(".buttom a");
+        var kuandu = document.querySelectorAll(".kuandu a");
+        var box = document.querySelector(".left .box");
+        var queren = document.querySelectorAll(".last a");
+        var height = document.querySelectorAll(".height a");
+        var bg = document.querySelectorAll(".bg li");
+        var w_i = document.getElementById('w_i')
+        set[0].onclick = function () {
+            alert.style.display = "block";
+        }
+        queren[0].onclick = function () {
+            alert.style.display = "none";
+        }
+
+        set[1].onclick = function () {
+            box.style = "";
+        }
+        kuandu[1].onclick = function () {
+            box.style.width = "100px";
+        }
+        kuandu[2].onclick = function () {
+            box.style.width = "200px";
+        }
+        kuandu[3].onclick = function () {
+            box.style.width = "300px";
+        }
+        kuandu[4].onclick = function () {
+            box.style.width = "400px";
+        }
+        kuandu[5].onclick = function () {
+            box.style.width = "500px";
+        }
+        height[1].onclick = function () {
+            box.style.height = "100px";
+        }
+        height[2].onclick = function () {
+            box.style.height = "200px";
+        }
+        height[3].onclick = function () {
+            box.style.height = "300px";
+        }
+        height[4].onclick = function () {
+            box.style.height = "400px";
+        }
+        height[5].onclick = function () {
+            box.style.height = "500px";
+        }
+        bg[1].onclick = function () {
+            console.log = (1);
+            box.style.backgroundColor = "#ff0000";
+        }
+        bg[2].onclick = function () {
+            console.log = (1);
+            box.style.backgroundColor = "#0000ff";
+        }
+        bg[3].onclick = function () {
+            console.log = (1);
+            box.style.backgroundColor = "#00ff00";
+        }
+        bg[4].onclick = function () {
+            console.log = (1);
+            box.style.backgroundColor = "#00ffff";
+        }
+        bg[5].onclick = function () {
+            console.log = (1);
+            box.style.backgroundColor = "#ff00ff";
+        }
+        kuandu[kuandu.length-1].onclick = function(){
+            box.style.width = w_i.value +'px';  
+        }
+        
+    </script>
+</body>
+
+</html>

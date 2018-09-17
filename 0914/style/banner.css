@@ -1,0 +1,92 @@
+.bg_box {
+  background-color: #000;
+  width: 550px;
+  padding-top: 15px;
+}
+.bg_box .next {
+  border: 1px solid #cfd1d0;
+  width: 261px;
+  margin: 0 auto;
+}
+.bg_box .next .xuanhaun {
+  width: 50%;
+  float: left;
+  font: 15px/34px "微软雅黑";
+  color: #fff;
+  text-align: center;
+}
+.bg_box .next .shunxu {
+  width: 50%;
+  float: left;
+  font: 15px/34px "微软雅黑";
+  color: #fff;
+  text-align: center;
+}
+.bg_box .next .ac {
+  background-color: #fff;
+  color: #000;
+}
+.bg_box .info {
+  font: 12px/28px "微软雅黑";
+  color: #585755;
+  text-align: center;
+  padding-bottom: 6px;
+}
+.bg_box .banner {
+  width: 550px;
+  height: 315px;
+  position: relative;
+}
+.bg_box .banner .left {
+  width: 35px;
+  height: 50px;
+  background: url("../images/shangyiye.png") no-repeat center center;
+  position: absolute;
+  z-index: 9;
+  background-size: 13px 24px;
+  left: 0;
+  top: 130px;
+}
+.bg_box .banner .left:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.bg_box .banner .right {
+  width: 35px;
+  height: 50px;
+  background: url("../images/next.png") no-repeat center center;
+  position: absolute;
+  background-size: 13px 24px;
+  right: 0;
+  top: 130px;
+}
+.bg_box .banner .right:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.bg_box .banner ul li {
+  position: relative;
+  height: 315px;
+}
+.bg_box .banner ul li img {
+  width: 550px;
+  height: 315px;
+}
+.bg_box .banner ul li .top {
+  font: 14px/34px "微软雅黑";
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  top: 0;
+}
+.bg_box .banner ul li .bottom {
+  font: 12px/40px "微软雅黑";
+  color: #fff;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.2);
+  left: 0;
+  right: 0;
+  text-align: center;
+  bottom: 0;
+}

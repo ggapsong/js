@@ -1,0 +1,91 @@
+.bg_box {
+  width: 480px;
+  background-color: #fff;
+  padding-top: 20px;
+}
+.bg_box .item {
+  height: 35px;
+}
+.bg_box .item:nth-of-type(2n) {
+  background-color: #f7c5ce;
+}
+.bg_box .item i {
+  width: 15px;
+  height: 15px;
+  background: url(../images/lbox.jpg) no-repeat;
+  float: left;
+  margin: 9px 20px 0 29px;
+}
+.bg_box .item .ac {
+  width: 15px;
+  height: 15px;
+  background: url(../images/bingo.jpg) no-repeat;
+  float: left;
+  margin: 9px 20px 0 29px;
+}
+.bg_box .item .song_name {
+  font: 13px/35px "微软雅黑";
+  color: #000;
+  float: left;
+}
+.bg_box .item .songer {
+  font: 13px/35px "微软雅黑";
+  color: #000;
+  float: right;
+  margin-right: 30px;
+}
+.bg_box .last_bg {
+  margin-top: 20px;
+  width: 480px;
+  background-color: #de4a63;
+  display: flex;
+  justify-content: space-between;
+}
+.bg_box .last_bg .last {
+  margin: 0 auto;
+}
+.bg_box .last_bg .last .select {
+  margin-right: 44px;
+  float: left;
+}
+.bg_box .last_bg .last .select .f {
+  width: 15px;
+  height: 15px;
+  display: block;
+  background: url(../images/dui_09.jpg) no-repeat;
+  margin-top: 15px;
+  float: left;
+}
+.bg_box .last_bg .last .select .s {
+  width: 24px;
+  height: 21px;
+  display: block;
+  background: url(../images/b_06.jpg) no-repeat;
+  margin-top: 12px;
+  float: left;
+}
+.bg_box .last_bg .last .select .t {
+  width: 24px;
+  height: 25px;
+  display: block;
+  background: url(../images/b_03.jpg) no-repeat;
+  margin-top: 9px;
+  float: left;
+}
+.bg_box .last_bg .last .select .c {
+  width: 24px;
+  height: 25px;
+  display: block;
+  background: url(../images/delete_03.jpg) no-repeat;
+  margin-top: 9px;
+  float: left;
+}
+.bg_box .last_bg .last .select span {
+  font: 12px/45px "微软雅黑";
+  color: #fff;
+  margin-left: 19px;
+  float: left;
+}
+.ac {
+  background: url(../images/bingo.jpg) no-repeat !important;
+}

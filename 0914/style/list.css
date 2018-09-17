@@ -1,0 +1,51 @@
+.list_box {
+  width: 280px;
+  background-color: #000;
+  margin-bottom: 11px;
+}
+.list_box .first {
+  width: 5px;
+  height: 9px;
+  display: block;
+  background: url("../images/right.jpg") no-repeat;
+  margin: 19px 17px 0 10px;
+  float: left;
+}
+.list_box .second {
+  width: 9px;
+  height: 5px;
+  display: none;
+  background: url("../images/bottom.jpg") no-repeat;
+  margin: 19px 17px 0 10px;
+  float: left;
+}
+.list_box span {
+  font: 13px/47px "微软雅黑";
+  color: #fff;
+  float: left;
+}
+.list_box .list {
+  width: 280px;
+  background-color: #000;
+  display: none;
+}
+.list_box .list li {
+  font: 13px/47px "微软雅黑";
+  color: #fff;
+  padding-left: 34px;
+}
+.list_box .list li:nth-of-type(2) {
+  background-color: #b54658;
+}
+.show {
+  background-color: #b54658;
+}
+.show .first {
+  display: none;
+}
+.show .second {
+  display: block;
+}
+.show .list {
+  display: block;
+}
