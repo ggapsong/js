@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .msg-box{
+            width: 306px;
+            height: 535px;
+            border: 2px solid #ccc;
+            position: relative;
+        }
+        .msg-list{
+            padding: 10px 20px;
+            background-color: #fff;
+            margin: 0;
+            list-style: none;
+            height: 481px;
+            overflow-y: auto;
+        }
+        .msg-list li{
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .msg-list li img,.msg-list li span{
+            float: left;
+        }
+        .msg-list li img{
+            width: 36px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .msg-list li span{
+            padding: 8px 12px;
+            background-color: #e1e1e1;
+            border-radius: 6px;
+        }
+        .msg-list .r img,.msg-list .r span{
+            float: right;
+        }
+        .msg-list .r img{
+            margin-right: 0;
+            margin-left: 10px;
+        }
+        .msg-list .r span{
+            background-color: #b2a9c8;
+        }
+        .msg-info{
+            height: 58px;
+            background-color: #e3e3e3;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right:0;
+
+        }
+        .msg-info *{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .msg-info div{
+            line-height: 58px;
+        }
+        .msg-info img{
+           margin-right: 10px;
+           margin-left: 10px;
+        }
+        .msg-info input{
+           margin-right: 10px;
+           box-sizing: border-box;
+           padding: 0 6px;
+           width: 184px;
+           height: 40px;
+           border: none;
+           background-color: #fff;
+           border-radius: 6px;
+           outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="msg-box">
+        <ul class="msg-list">
+            <!-- <li class="l">
+                <img src="../img/p1.png" alt="">
+                <span>jkjk</span>
+            </li>
+            <li class="r">
+                <img src="../img/p2.png" alt="">
+                <span>jkjk</span>
+            </li> -->
+        </ul>
+        <div class="msg-info">
+            <img src="../img/p1.png" alt="" data-type='1'>
+            <input type="text" id="input">
+            <div>发送</div>
+        </div>
+    </div>
+</body>
+<script>
+    var p1 = '../img/p1.png';
+    var p2 = '../img/p2.png';
+    var img = document.querySelector(".msg-info img");
+    img.person = 1;
+    var input = document.querySelector("#input");
+    var sent = document.querySelector(".msg-info div");
+    img.onclick = function () {
+        if (this.person == 1) {
+            this.src = p2;
+            this.person = 2;
+        } else {
+            this.src = p1;
+            this.person = 1;
+        };
+    };
+    sent.onclick = function () {
+        if (input.value == "") {
+            alert("请输入内容");
+        } else {
+            if(img.person==1){
+                var str = '<li class="l"><img src="../img/p1.png" alt=""><span>'+input.value+'</span></li>';
+                document.querySelector('.msg-list').innerHTML = str + document.querySelector('.msg-list').innerHTML
+                input.value="";
+            }else{
+                var str = '<li class="r"><img src="../img/p2.png" alt=""><span>'+input.value+'</span></li>';
+                document.querySelector('.msg-list').innerHTML = str + document.querySelector('.msg-list').innerHTML
+                input.value="";
+            }
+        };
+    };
+</script>
+
+</html>
