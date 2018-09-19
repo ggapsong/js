@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="../style/indexsent.css">
+</head>
+<body>
+    <div class="box">
+        <ul class="list clearfix">
+            <!-- <li class="fl left">
+                <img src="../img/p1.png" alt="">
+                <span>欢迎来到妙味课堂</span>
+            </li>
+            <li class="fr right">
+                <img src="../img/p2.png" alt="">
+                <span>边伯贤在演唱会现场吗</span>   
+            </li> -->
+           
+        </ul>
+        <div class="bottom clearfix">
+            <img src="../img/p1.png" alt="">
+            <input type="text" placeholder="请输入内容" class="input">
+            <div class="sent">发送</div>
+        </div>
+    </div>
+    <script>
+        var sent = document.querySelector(".bottom .sent");
+        var input =  document.querySelector(".bottom .input");
+        var imG =  document.querySelector(".bottom img");
+        var list =  document.querySelector(".list");
+        var span =  document.querySelector(".li span");
+
+        var p1 = "../img/p1.png";
+        var p2 = "../img/p2.png";
+        var num = 1;
+        //点击imG的时候切换图片 
+        // 切换不同的图片list里面的li不一样
+        // 点击sent的时候list里面会多一个li 
+        imG.onclick=function(){
+            if(num ==1){
+                imG.src=p2;
+                num=2;
+            }else{
+                imG.src=p1;
+                num=1;
+            }
+        }
+        sent.onclick=function(){
+           if(input.value==""){
+               alert("请输入内容");
+           }else{
+            
+               if(num ==1){
+                list.innerHTML='<li class="fl left"><img src="../img/p1.png" alt=""><span>'+input.value+'</span></li>'+list.innerHTML;
+                input.value='';
+               }else{
+                list.innerHTML='<li class="fr right"><img src="../img/p2.png" alt=""><span>'+input.value+'</span></li>'+list.innerHTML;  
+                input.value='';
+               }
+           }
+        };
+       
+        
+
+    </script>
+</body>
+</html>
