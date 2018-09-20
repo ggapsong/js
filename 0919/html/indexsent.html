@@ -33,25 +33,24 @@
         var imG =  document.querySelector(".bottom img");
         var list =  document.querySelector(".list");
         var span =  document.querySelector(".li span");
-
         var p1 = "../img/p1.png";
         var p2 = "../img/p2.png";
         var num = 1;
         //点击imG的时候切换图片 
         // 切换不同的图片list里面的li不一样
         // 点击sent的时候list里面会多一个li 
-        imG.onclick=function(){
-            if(num ==1){
-                imG.src=p2;
+        imG.onclick=function(){//当点击imG的时候
+            if(num ==1){//判断条件
+                imG.src=p2;//切换到p2这张图片
                 num=2;
             }else{
-                imG.src=p1;
+                imG.src=p1;//切换到p1这张图片
                 num=1;
             }
-        }
+        }//以上是图片切换
         sent.onclick=function(){
            if(input.value==""){
-               alert("请输入内容");
+               alert("请输入内容");//判断有无输入内容
            }else{
             
                if(num ==1){

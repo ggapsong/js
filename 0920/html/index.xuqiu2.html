@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:50px;
+            height:50px;
+            background: #8dd5f4;
+            margin:5px;
+            float: left;
+        }
+        .red{
+            background: red;
+        }
+        em{
+            color: red;
+            font-size:24px;
+            font-style: normal;
+            padding:0 10px;
+        }
+    </style>
+</head>
+<body>
+
+<p>当前一共有<em>0</em>个元素加上了红色背景</p>
+
+<script>
+
+    var num = document.querySelector('p em');  //#####获取p标签里面的em标签；
+    for(var i=0;i<100;i++){
+        document.write('<div class="box">'+ (i+1) +'</div>');
+    }//在页面中写入100个盒子
+    var box = document.querySelectorAll('.box');//#####获取页面中所有的盒子；
+    var count = 0;
+    for(var a = 0;a<box.length;a++){  
+//        console.log(a);
+        box[a].onclick = function(){   //#####添加点击事件
+            /*console.log(this.className);
+            if(this.className == 'box'){
+                this.className = 'box red';
+            }else{
+                this.className = 'box';
+            }*/
+            this.classList.toggle('red');   //#####这里的this 代表的是 box[a] ；点击第 box[a]个盒子的时候会多出一个class属性；
+            if(this.className == 'box red'){  //#####这里是判断如果这个的className里面的值是 box red count就自增1；
+                count ++;
+            }else{
+                count --;
+            }
+            console.log(count);
+            num.innerText = count; //em里面的值是count；
+//            num.innerText = document.querySelectorAll('.red').length;
+        }
+    }
+</script>
+
+</body>
+</html>

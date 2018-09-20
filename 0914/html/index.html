@@ -30,9 +30,48 @@
             </li>
         </ul>
     </div>
-
 </body>
+
 <script>
+/*
+       1.点击li的时后右下角的图标显示出来
+       2.点击下一个的时候上一个的1.消失；
+*/
+
+   var li = document.querySelectorAll("li");//获取li
+   var a=0;
+   for(var i = 0;i<li.length;i++){
+       li[i].index = i;// 0 1 2
+          li[i].onclick= function(){
+            li[a].classList.remove("active");
+            this.classList.add("active");
+            a= this.index;
+          }
+   }
+1
+2
+3
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <script>
     // var radios = document.querySelectorAll('.radio_box li');
     // for (var i = 0; i < radios.length; i++) {
     //     radios[i].onclick = function(){
@@ -42,6 +81,6 @@
     //         this.className = 'active';
     //     }
     // }
-</script>
+</script> -->
 
 </html>

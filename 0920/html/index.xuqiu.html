@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 50px;
+            height: 50px;
+            background: #8dd5f4;
+            margin: 5px;
+            float: left;
+        }
+
+        .red {
+            background-color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- <div class="box"></div> -->
+    <p>当前一共有<em>0</em>个元素加上了红色背景</p>
+    <script>
+        //首先向页面添加100个盒子
+        for (var i = 0; i < 100; i++) {
+            document.write('<div class="box">' + (i + 1) + '</div>');
+            // var box = document.querySelectorAll(".box");
+            // box[i].onclick = function () {
+            //     this.classList.toggle("red");
+            // }
+        };
+        // 页面上有100个盒子；
+        var count = 0;
+        var em = document.querySelector("p em");
+        var box = document.querySelectorAll(".box"); //获取页面上所有的box
+        for (var j = 0; j < box.length; j++) {
+            //给box添加单机事件
+            box[j].onclick = function () {
+                this.classList.toggle("red");
+                if (this.classList == "box red") {
+                    count++;
+                } else {
+                    count--;
+                }
+                em.innerHTML = count;
+                console.log(count)
+                // p.innterHtml='<p>现在背景为红色的盒子个数有'+count+'个</p>';
+            }
+            /* 现在的需求是
+                记录红色背景的个数
+                （记录下来classList有red的个数；）
+            */
+
+
+        }
+    </script>
+</body>
+
+</html>
