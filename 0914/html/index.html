@@ -31,26 +31,49 @@
         </ul>
     </div>
 </body>
-
 <script>
-/*
+    /*
        1.点击li的时后右下角的图标显示出来
        2.点击下一个的时候上一个的1.消失；
 */
 
-   var li = document.querySelectorAll("li");//获取li
-   var a=0;
-   for(var i = 0;i<li.length;i++){
-       li[i].index = i;// 0 1 2
-          li[i].onclick= function(){
-            li[a].classList.remove("active");
+    var li = document.querySelectorAll("li"); //获取li
+    var a = 0;
+    for (var i = 0; i < li.length; i++) {//循环
+        li[i].index = i; // 0 1 2
+        // console.log(i);
+        li[i].onclick = function () {
+            // console.log(i);
+            li[a].classList.remove("active");//点击的上 一个li清除active样式；
             this.classList.add("active");
-            a= this.index;
-          }
-   }
-1
-2
-3
+            a = this.index;
+        }
+    }
+
+/*第一次循环
+i=0
+循环一次
+走到循环的后面i变为1；
+第二次循环
+i=1
+循环一次
+走到循环的后面i变为2；
+第三次循环
+i=2
+循环一次
+走到循环的后面i变为3；
+第四次
+i=3
+判断条件不成立就不会在循环
+所以i最后的值是3
+*/
+
+
+
+
+
+
+
 </script>
 
 

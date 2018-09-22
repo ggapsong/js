@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow: hidden;
+        }
+        li {
+            width: 100px;
+            height: 30px;
+            border: 1px solid #000;
+            float: left;
+            text-align: center;
+        }
+        .active {
+            background-color: #f00;
+        }
+        .content{
+            width:300px;
+            height: 200px;
+            text-align: center;
+            border:1px solid #000;
+            margin-top:-1px;
+        }
+        .content div{
+            font:14px/200px "宋体";
+            color:#000;
+            display: none;
+        }
+        .content .show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <div class="content">
+        <div class="show">1</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <script>
+        var li = document.querySelectorAll("li");
+        var con= document.querySelectorAll(".content div");
+        var a=0;
+        for (var i = 0; i < li.length; i++) {
+            li[i].index=i;
+            // console.log(i);
+            li[i].onclick = function () {
+                for(var i =0;i<li.length;i++){
+                    console.log(1);
+                    li[i].classList.remove("active");
+                    con[i].classList.remove("show");       
+                }
+               this.classList.add("active");
+               con[this.index].classList.add("show");
+            }
+        };     
+    </script>
+</body>
+</html>

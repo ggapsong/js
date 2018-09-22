@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 100px;
+            height:100px;
+            background: #f1b0b7;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    //box的第四个和第五个元素的top值和left值不一样；
+    var box = document.querySelectorAll("box");
+    for(var i=0;i<5;i++){
+        document.write('<div class="box" style="left:'+ i*110 +'px;top:'+ i*110 +'px"></div>');
+        
+    }
+   
+</script>
+
+</body>
+</html>
