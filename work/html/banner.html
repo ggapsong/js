@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/banner.css">
+</head>
+<body>
+    <div class="box">
+        <div class="befor"><</div>
+        <ul>
+            <li>
+                <img src="../img/1.jpeg" alt="">
+            </li>
+        </ul>
+        <div class="next">></div>
+        <div class="banner">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <script>
+        var imgs = [
+            "../img/1.jpeg",
+            "../img/2.jpeg",
+            "../img/3.jpeg",
+            "../img/4.jpeg",
+            "../img/5.jpeg"
+        ];
+        var num = 0;
+        var befor = document.querySelector(".befor");
+        var next = document.querySelector(".next");
+        var img = document.querySelector("img");
+        var spans = document.querySelectorAll('.banner span');
+
+        next.onclick = function(){
+            num++
+            if(num>imgs.length-1){
+                num=0;
+            };
+            img.src=imgs[num];
+        };
+        befor.onclick = function(){
+            num--
+            if(num<0){
+                num=imgs.length-1;
+            };
+            img.src=imgs[num];
+        };
+        for (var i = 0; i < spans.length; i++) {
+            spans[i].index = i;
+            spans[i].onclick = function(){
+                spans[num].classList.remove('active');
+                num = this.index;
+                this.classList.add('active');
+                img.src = imgs[num];
+            };
+        };
+    </script>
+</body>
+</html>

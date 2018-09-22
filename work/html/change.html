@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 74px;          
+        }
+        .title{
+            font:14px/32px "宋体";
+            color:#636363;
+            border:1px solid #c0c0c0;
+            text-align: center;
+        }
+        ul{
+            padding:0;
+            margin:-1px 0 0;
+            list-style: none;
+            border:1px solid #cecece;   
+            display: none;        
+        }
+       li{
+        color:#636363;
+        font:14px/32px "宋体";
+        border-bottom: 1px solid #cecece;
+        text-align: center;
+       
+       }
+       .active{
+           background-color: #fff7de;
+           color:#ef7b08;
+       }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="title">微博</div>
+        <ul class="list">
+            <li>新闻</li>
+            <li>微博</li>
+            <li>图片</li>
+            <li>博客</li>
+            <li>视频</li>
+            <li>更多 》</li>
+        </ul>
+    </div>
+    <script>
+    var title = document.querySelector(".title");
+    var li = document.querySelectorAll("li");
+    var ul = document.querySelector(".list");
+    var num = 0;
+    title.onclick=function(){
+        if(num=='0'){
+            ul.style.display="block";
+            num=1;
+        }else{
+            ul.style.display="none";
+            num=0;
+        }
+    };
+    for(var n=0;n<li.length;n++){
+        li[n].onclick=function(){
+            title.innerHTML=this.innerHTML;
+            ul.style.display="none" 
+            num=0;       
+        }
+    };
+    </script>
+</body>
+</html>

@@ -12,7 +12,7 @@
 
 <body>
     <div class="list_box">
-        <div class="clearfix">
+        <div class="clearfix title">
             <i class="first"></i>
             <i class="second"></i>
             <span>我的好友</span>
@@ -25,7 +25,7 @@
         </ul>
     </div>
     <div class="list_box">
-        <div class="clearfix">
+        <div class="clearfix title">
             <i class="first"></i>
             <i class="second"></i>
             <span>企业好友</span>
@@ -36,8 +36,8 @@
             <li>奥巴马</li>
         </ul>
     </div>
-    <div class="list_box">
-        <div class="clearfix">
+    <div class="list_box ">
+        <div class="clearfix title">
             <i class="first"></i>
             <i class="second"></i>
             <span>黑名单</span>
@@ -47,6 +47,57 @@
             <li>杜特尔特</li>
         </ul>
     </div>
+    <script>  
+        var title = document.querySelectorAll('.title');
+        var list = document.querySelectorAll('.list');
+        var lis = document.querySelectorAll('.list li');
+        //background-color: #b54658;
+        var n = -1;
+        var a =-1;
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].onmouseover = function(){
+                this.style.backgroundColor = '#ccc';
+            };
+            lis[i].onmouseout = function(){
+                this.style.backgroundColor = '';
+                
+            };
+            lis[i].index=i;
+            lis[i].onclick = function(){
+                if(a==-1){
+                    this.style.color="red";
+                    a=this.index;
+                    return false;
+                }
+                if(a==this.index){
+                    this.style.color='';
+                    a=-1;
+                    return false;
+                }
+                lis[a].style.color='';
+                this.style.color = "red";
+                a=this.index;
+            };
+        }
+        for (var i = 0; i < title.length; i++) {
+            title[i].index = i;
+            title[i].onclick = function(){
+                if(n==this.index){
+                    list[n].style.display = 'none';
+                    n = -1;
+                    return false;
+                }
+                if(n<0){
+                    list[this.index].style.display = 'block';
+                    n = this.index;
+                    return false;
+                }
+                list[n].style.display = 'none';
+                list[this.index].style.display = 'block';
+                n = this.index;
+            }
+        }
+    </script>
 </body>
 
 </html>
