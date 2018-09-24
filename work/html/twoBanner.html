@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/twobanner.css">
+</head>
+
+<body>
+
+    <div class="box">
+        <div class="button">
+            <div class="prev">上一组</div>
+            <div class="next">下一组</div>
+        </div>
+        <div class="bbox">
+            <div class="left">
+                <ul class="lleft" id="lleft">
+                    <li>
+                        <img id="img1" src="../img/1.jpeg" alt="">
+                    </li>
+                </ul>
+                <div class="info">第一组第1张</div>
+                <div class="page"></div>
+            </div>
+            <div class="right">
+                <ul class="lleft" id="right">
+                    <li>
+                        <img id="img2" src="../img/1.jpeg" alt="">
+                    </li>
+                </ul>
+                <div class="info">第二组第一张</div>
+                <div class="page"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var left = document.getElementById("lleft");
+        var right = document.getElementById("right");
+        var img1 = document.getElementById('img1');
+        var img2 = document.getElementById('img2');
+        var info = document.querySelectorAll(".info");
+        var page = document.querySelectorAll(".page");
+        var prev = document.querySelector(".prev");
+        var next = document.querySelector(".next");
+        var num1 = 0;
+        var num2 = 0;
+        var imgs1 = [
+            '../img/1.jpeg',
+            '../img/2.jpeg',
+            '../img/3.jpeg',
+            '../img/4.jpeg',
+            '../img/5.jpeg'
+        ];
+        var imgs2 = [
+            '../img/1.jpeg',
+            '../img/2.jpeg',
+            '../img/3.jpeg',
+            '../img/4.jpeg'
+        ];
+        //初始化页码信息
+        page[0].innerHTML = 1 + '/' + imgs1.length;
+        page[1].innerHTML = 1 + '/' + imgs2.length;
+
+        //只需要关心 num1 和 num2的变化即可 ， 因为num1
+        //或2 代表的是页码
+
+        left.onclick = function () {
+            num1++;
+            img1Change()
+        };
+        prev.onclick=function(){
+            num1--
+            num2--
+            if(num1<0){
+                num1=imgs1.length-1;
+            }
+            if(num2<0){
+                num2=imgs2.length-1;
+            } 
+            img1Change()
+            img2Change()
+        }
+        next.onclick=function(){
+            num1++
+            num2++
+            img1Change()
+            img2Change()
+        }
+        right.onclick = function () {
+            num2++;
+            img2Change()
+        }
+        function img1Change(){
+            img1.src = imgs1[num1 % imgs1.length];
+            info[0].innerHTML = '第一组第' + (num1 % imgs1.length + 1) + '张';
+            page[0].innerHTML = (num1 % imgs1.length + 1) + '/' + imgs1.length;
+        };
+        function img2Change(){
+            img2.src = imgs2[num2 % imgs2.length];
+            info[1].innerHTML = '第二组第' + (num2 % imgs2.length + 1) + '张'
+            page[1].innerHTML = (num2 % imgs2.length + 1) + '/' + imgs2.length;
+        }
+    </script>
+</body>
+
+</html>

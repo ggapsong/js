@@ -1,3 +1,9 @@
+.bg{
+    width:800px;
+    height:800px;
+    margin:0 auto;
+    text-align: center;
+}
 .box{
     width:500px;
     height:500px;
@@ -39,13 +45,28 @@
         width:100%;
         text-align: center;
         margin-top:20px;
-        span{
+        .span{
             display:inline-block;
             width:16px ;
             height: 16px;
             border-radius: 50%;
             background-color: #c5c5c6;
             margin-right:5px;
+            position: relative;
+            span{
+                position: absolute;
+                top: -39px;
+                left: -6px;
+            }
+            img{
+                width:30px;
+                height: 30px;
+                display: none;
+                
+            }
+            &:hover img{
+                display: block;
+            }
         }
         .active{
             background-color: #1b9fe2;
