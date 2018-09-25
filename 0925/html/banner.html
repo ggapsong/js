@@ -13,26 +13,26 @@
     <div class="bg">
         <div class="box">
             <div class="befor"><</div>
-             <ul>
-                    <li>
-                        <img src="../img/1.jpeg" alt="">
-                    </li>
-                    <!-- <li>
-                        <img src="../img/2.jpeg" alt="">
-                    </li>
-                    <li>
-                        <img src="../img/3.jpeg" alt="">
-                    </li>
-                    <li>
-                        <img src="../img/4.jpeg" alt="">
-                    </li>
-                    <li>
-                        <img src="../img/5.jpeg" alt="">
-                    </li> -->
-                    </ul>
-                    <div class="next">></div>
+            <ul>
+                <li>
+                    <img src="../img/1.jpeg" alt="">
+                </li>
+                <!-- <li>
+                    <img src="../img/2.jpeg" alt="">
+                </li>
+                <li>
+                    <img src="../img/3.jpeg" alt="">
+                </li>
+                <li>
+                    <img src="../img/4.jpeg" alt="">
+                </li>
+                <li>
+                    <img src="../img/5.jpeg" alt="">
+                </li> -->
+            </ul>
+            <div class="next">></div>
                    
-            </div>
+        </div>
             <div class="banner">
                 <span class="active span">
                     <span>
@@ -66,40 +66,39 @@
         '../img/3.jpeg',
         '../img/4.jpeg',
         '../img/5.jpeg'
-    ]
-    var befor = document.querySelector('.befor');
-    var next = document.querySelector('.next');
-    var spans = document.querySelectorAll(".span");
+    ];
     var num = 0;
-    var img = document.querySelector("li img");
-    befor.onclick=function(){
-        spans[num].classList.remove("active");
+    var left = document.querySelector('.befor');
+    var right = document.querySelector('.next');
+    var img = document.querySelector('.box img');
+    var spans = document.querySelectorAll('.span');
+
+    for (let i = 0; i < spans.length; i++) {
+        spans[i].onclick = function(){
+            spans[num].classList.remove('active');
+            num = i;
+            spans[num].classList.add('active');
+            img.src = imgs[num];
+        }
+    }
+    right.onclick = function(){
+        spans[num].classList.remove('active');
+        num++;
+        if(num>=imgs.length){
+            num = 0;
+        };
+        spans[num].classList.add('active');
+        img.src = imgs[num];
+    }
+    left.onclick = function(){
+        spans[num].classList.remove('active');
         num--;
         if(num<0){
-            num=imgs.length-1;
-        }
-        img.src=imgs[num];
-        spans[num].classList.add("active");
-    };
-    next.onclick=function(){
-        spans[num].classList.remove("active");
-        num++;
-        if(num>imgs.length-1){
-            num=0;
-        }
-        img.src=imgs[num];
-        spans[num].classList.add("active");
-    };
-//  
-for(var i=0;i<spans.length;i++){
-    spans[i].index=i;
-    spans[i].onclick=function(){
-        spans[num].classList.remove("active");
-        this.classList.add("active");
-        num=this.index;//记录当前是第几个；
-        img.src=imgs[num]
+            num = imgs.length-1;
+        };
+        spans[num].classList.add('active');
+        img.src = imgs[num];
     }
-}
 </script>
 </body>
 

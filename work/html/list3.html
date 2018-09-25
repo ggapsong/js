@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="../style/list.css">
+</head>
+<body>
+    <div class="list_box">
+        <div class="clearfix title">
+            <i class="first"></i>
+            <i class="second"></i>
+            <span>我的好友</span>
+        </div>
+        <ul class="list">
+            <li>小佳love</li>
+            <li>从来就是这么正经</li>
+            <li>leo是胖子</li>
+            <li>momo不是陌陌</li>
+        </ul>
+    </div>
+    <div class="list_box">
+        <div class="clearfix title">
+            <i class="first"></i>
+            <i class="second"></i>
+            <span>企业好友</span>
+        </div>
+        <ul class="list">
+            <li>习近平</li>
+            <li>普京</li>
+            <li>奥巴马</li>
+        </ul>
+    </div>
+    <div class="list_box ">
+        <div class="clearfix title">
+            <i class="first"></i>
+            <i class="second"></i>
+            <span>黑名单</span>
+        </div>
+        <ul class="list">
+            <li>安培</li>
+            <li>杜特尔特</li>
+        </ul>
+    </div>
+    <script>
+    var titles = document.querySelectorAll(".title");
+    var list = document.querySelectorAll(".list");
+    var num = 0;
+    // 点击titles的时候list显示出来；
+    // 点击下一个把上一个隐藏；
+    for (let i = 0; i < titles.length; i++) {
+        titles[i].onclick = function(){
+            if(this.open){
+                this.open = false;
+                list[i].style.display = 'none';
+            }else{
+                list[num].style.display = 'none';
+                titles[num].open = false;
+                num = i;
+                this.open = true;
+                list[i].style.display = 'block';
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // var isHide = true;
+    // for(var i=0;i<titles.length;i++ ){
+    //     titles[i].index=i;
+    //     titles[i].isHide=true;
+    //     titles[i].onclick=function(){
+    //         list[this.index].style.display="block";
+    //         // if(this==this.index){
+    //         //     list[this.index].style.display="none";
+    //         // }
+    //         if(titles[this.index].isHide){
+    //             for(var i=0;i<titles.length;i++ ){
+    //                 list[i].style.display="none";
+    //                 list[i].isHide=true;
+    //             }
+    //             list[this.index].style.display="block";
+    //             list[this.index].isHide=false;
+    //         }else{
+    //             list[this.index].style.display="none";
+    //             list[this.index].isHide=true;
+    //         }
+    //     }
+    // };
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
