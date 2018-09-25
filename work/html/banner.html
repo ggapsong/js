@@ -20,7 +20,7 @@
                     </ul>
                     <div class="next">></div>
                     <div class="banner">
-                        <span class="active span">
+                        <!-- <span class="active span">
                             <span>
                                 <img src="../img/1.jpeg" alt="">
                             </span>
@@ -42,7 +42,7 @@
                             <span>
                                 <img src="../img/5.jpeg" alt="">
                             </span>
-                        </span>
+                        </span> -->
                     </div>
             </div>
         </div>
@@ -58,20 +58,35 @@
             var befor = document.querySelector(".befor");
             var next = document.querySelector(".next");
             var img = document.querySelector("img");
-            var spans = document.querySelectorAll('.banner .span');
 
+            
+            var str = '';
+            for (let i = 0; i < imgs.length; i++) {
+                
+                str += '<span class="span '+(i==0?"active":"")+'">'+
+                            '<span>'+
+                                '<img src="'+imgs[i]+'" alt="">'+
+                            '</span>'+
+                        '</span>'
+            }
+            document.querySelector('.banner').innerHTML = str;
+            var spans = document.querySelectorAll('.banner .span');
             next.onclick = function(){
+                spans[num].classList.remove('active');
                 num++
                 if(num>imgs.length-1){
                     num=0;
                 };
+                spans[num].classList.add('active');
                 img.src=imgs[num];
             };
             befor.onclick = function(){
+                spans[num].classList.remove('active');
                 num--
                 if(num<0){
                     num=imgs.length-1;
                 };
+                spans[num].classList.add('active');
                 img.src=imgs[num];
             }; 
             //  befor.onclick = function () {
@@ -89,7 +104,6 @@
             //     img.src = imgs[num];
             // };
             for (var i = 0; i < spans.length; i++) {
-                console.log(i);
                 spans[i].index = i;
                 spans[i].onclick = function () {
                     spans[num].classList.remove('active');
@@ -98,27 +112,27 @@
                     img.src = imgs[num];
                 }
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            // var data = [
+            //     {
+            //         age:17,
+            //         name:'小明'
+            //     },
+            //     {
+            //         age:16,
+            //         name:'小红'
+            //     },
+            //     {
+            //         age:18,
+            //         name:'小花'
+            //     }
+            // ]
+            // ########################添加定时器###################################
+            // for (let i = 0; i < data.length; i++) {
+            //     setTimeout(() => {
+            //         console.log('我是'+data[i].name+',我今年'+data[i].age+'岁');
+            //     }, (i+1)*1000);
+            // }
+            //#####################################################################
 
             // for (var i = 0; i < spans.length; i++) {
             //     spans[i].index = i;
