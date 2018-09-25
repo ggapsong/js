@@ -1,0 +1,77 @@
+.bg {
+  width: 800px;
+  height: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.box {
+  width: 500px;
+  height: 500px;
+  border: 2px solid #0c1030;
+  margin: 100px auto;
+  position: relative;
+}
+.box .befor {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #ccc;
+  top: 250px;
+  left: 0;
+  text-align: center;
+  z-index: 2;
+}
+.box .next {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #ccc;
+  top: 250px;
+  right: 0;
+  text-align: center;
+}
+.box ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+}
+.box ul li {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.box ul li img {
+  width: 500px;
+  height: 500px;
+}
+.banner {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+.banner .span {
+  display: inline-block;
+  width: 16px ;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #c5c5c6;
+  margin-right: 5px;
+  position: relative;
+}
+.banner .span span {
+  position: absolute;
+  top: -39px;
+  left: -6px;
+}
+.banner .span img {
+  width: 30px;
+  height: 30px;
+  display: none;
+}
+.banner .span:hover img {
+  display: block;
+}
+.banner .active {
+  background-color: #1b9fe2;
+}

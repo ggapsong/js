@@ -12,15 +12,15 @@
 <body>
     <div class="bg">
         <div class="box">
-            <div class="befor">
-                <</div> <ul>
+            <div class="befor"><</div>
+            <ul>
                     <li>
                         <img src="../img/1.jpeg" alt="">
                     </li>
                     </ul>
                     <div class="next">></div>
                     <div class="banner">
-                        <!-- <span class="active span">
+                        <span class="active span">
                             <span>
                                 <img src="../img/1.jpeg" alt="">
                             </span>
@@ -42,7 +42,7 @@
                             <span>
                                 <img src="../img/5.jpeg" alt="">
                             </span>
-                        </span> -->
+                        </span>
                     </div>
             </div>
         </div>
@@ -58,18 +58,7 @@
             var befor = document.querySelector(".befor");
             var next = document.querySelector(".next");
             var img = document.querySelector("img");
-
-            
-            var str = '';
-            for (let i = 0; i < imgs.length; i++) {
-                
-                str += '<span class="span '+(i==0?"active":"")+'">'+
-                            '<span>'+
-                                '<img src="'+imgs[i]+'" alt="">'+
-                            '</span>'+
-                        '</span>'
-            }
-            document.querySelector('.banner').innerHTML = str;
+            // document.querySelector('.banner').innerHTML = str;
             var spans = document.querySelectorAll('.banner .span');
             next.onclick = function(){
                 spans[num].classList.remove('active');
@@ -105,11 +94,12 @@
             // };
             for (var i = 0; i < spans.length; i++) {
                 spans[i].index = i;
+                console.log(spans[i]);
                 spans[i].onclick = function () {
                     spans[num].classList.remove('active');
                     this.classList.add('active');
                     num = this.index;
-                    img.src = imgs[num];
+                    img.src = imgs[num]
                 }
             }
             // var data = [

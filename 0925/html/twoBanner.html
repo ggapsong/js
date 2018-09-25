@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/twobanner.css">
+</head>
+
+<body>
+
+    <div class="box">
+        <div class="button">
+            <div class="prev">上一组</div>
+            <div class="next">下一组</div>
+        </div>
+        <div class="bbox">
+            <div class="left">
+                <ul class="lleft" id="lleft">
+                    <li>
+                        <img id="img1" src="../img/1.jpeg" alt="">
+                    </li>
+                </ul>
+                <div class="info"></div>
+                <div class="page"></div>
+            </div>
+            <div class="right">
+                <ul class="lleft" id="right">
+                    <li>
+                        <img id="img2" src="../img/1.jpeg" alt="">
+                    </li>
+                </ul>
+                <div class="info"></div>
+                <div class="page"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var left = document.querySelector(".left");
+        var right = document.querySelector(".right");
+        var img = document.querySelector(".left img");
+        var img1 = document.querySelector(".right img");
+        var infos = document.querySelectorAll(".info");
+        var pages = document.querySelectorAll(".page");
+        var prev = document.querySelector(".prev");
+        var next = document.querySelector(".next");
+        var imgs1 = [
+            "../img/1.jpeg",
+            "../img/2.jpeg",
+            "../img/3.jpeg",
+            "../img/4.jpeg",
+            "../img/5.jpeg"
+        ];
+        var imgs2 = [
+            "../img/1.jpeg",
+            "../img/2.jpeg",
+            "../img/3.jpeg",
+            "../img/4.jpeg"
+        ];
+        var num1 = 0;
+        var num2 = 0;
+        pages[0].innerHTML = 1 + '/' + imgs1.length;
+        infos[0].innerHTML = '第一组第' + (num1 + 1) + '张';
+        pages[1].innerHTML = 1 + '/' + imgs2.length;
+        infos[1].innerHTML = '第一组第' + (num2 + 1) + '张';
+        left.onclick = function () {
+            num1++
+            if (num1 > imgs1.length - 1) {
+                num1 = 0;
+            }
+            tab1();
+        };
+        right.onclick = function () {
+            num2++
+            if (num2 > imgs2.length - 1) {
+                num2 = 0;
+            }
+            tab2();
+        };
+        next.onclick = function () {
+            num1++
+            if (num1 > imgs1.length - 1) {
+                num1 = 0;
+            }
+            tab1();
+            num2++
+            if (num2 > imgs2.length - 1) {
+                num2 = 0;
+            }
+            tab2();
+        }
+        prev.onclick = function () {
+            num1--
+            if (num1 < 0) {
+                num1 = imgs1.length - 1;
+            }
+            tab1();
+            num2--
+            if (num2 < 0) {
+                num2 = imgs2.length - 1;
+            }
+           tab2();
+        }
+        function tab1() {
+            img.src = imgs1[num1];
+            infos[0].innerHTML = '第一组第' + (num1 + 1) + '张';
+            pages[0].innerHTML = ((num1 % imgs1.length) + 1) + '/' + imgs1.length;
+        }
+        function tab2(){
+            img1.src = imgs2[num2];
+            infos[1].innerHTML = '第一组第' + (num2 + 1) + '张';
+            pages[1].innerHTML = ((num2 % imgs2.length) + 1) + '/' + imgs2.length;
+        }
+    </script>
+</body>
+
+</html>
