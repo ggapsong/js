@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="num">所有的数字是：</p>
+    <p id="can_num">可以转换成数字的：</p>
+    <p id="max_num">转成数字的最大值:</p>
+    <p id="nan">所有远算结果为NaN的位置：</p>
+    <script>
+        var arr = ['100px', 'abc' - 6, [], -98765, 34, -2, 0, '300', , function () {alert(1);}, null, document, [], true, '200px' - 30, '23.45元', 5, Number('abc'), function () {alert(3);}, 'xyz' - 90];
+        //先找数字
+        var n = -Infinity;
+        for(var i= 0;i<arr.length;i++){
+            if(typeof(arr[i])=="number"&&arr[i]===arr[i]){
+                num.innerHTML+=arr[i]+",";
+            }
+            if(!isNaN(parseFloat(arr[i]))){
+                can_num.innerHTML += arr[i] + ',';
+                if(n<parseFloat(arr[i])){
+                    n = parseFloat(arr[i])
+                }
+            }
+            if(isNaN(arr[i])&&typeof(arr[i])=='number'){
+                nan.innerHTML += i +','
+            }
+        }
+        max_num.innerHTML += n;
+    </script>
+
+</body>
+
+</html>

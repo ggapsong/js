@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+          overflow: hidden;
+      }
+      .qq{
+          float: left;
+      }
+      .input{
+        float: left;
+      }
+      .button{
+        float: left;
+      }
+      
+    .notice{
+        font:12px/20px "宋体";
+        color:#000;
+        width:300px;
+        text-align: center;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="qq">请输入QQ号码</div>
+        <input class="input" type="text">
+        <div class="button">检测</div>
+    </div>
+    <div class="notice"></div>
+
+
+    <script>
+        //1.输入的数字位数为5为以上、10位以下；
+        // 2.请输入数字；
+        // 3.0不能在前面
+        var box = document.querySelector(".box");
+        var qq = document.querySelector(".qq");
+        var input = document.querySelector(".input");
+        var button = document.querySelector(".button");
+        var notice = document.querySelector(".notice");
+
+        button.onclick = function () {
+            if (isNaN(Number(input.value))){
+                notice.innerHTML = "请输入数字";
+            }else if(input.value.charAt(0)=="0"){
+                notice.innerHTML="第一位不能为0"
+            }else if(input.value.length<5||input.value.length>10){
+                notice.innerHTML="请输入5-10位数字"
+            }else if(!(parseInt(input.value)==input.value)){
+                notice.innerHTML = "不要输入小数点";
+            }else{
+                notice.innerHTML = "通过";
+            }
+            
+        };
+    </script>
+</body>
+
+</html>

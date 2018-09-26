@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+          overflow: hidden;
+      }
+      .qq{
+          float: left;
+      }
+      .input{
+        float: left;
+      }
+      .button{
+        float: left;
+      }
+      
+    .notice{
+        font:12px/20px "宋体";
+        color:#000;
+        width:300px;
+        text-align: center;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="qq">请输入QQ号码</div>
+        <input class="input" id="i" type="text">
+        <div class="button" id="n">检测</div>
+    </div>
+    <div class="notice" id="s"></div>
+
+
+    <script>
+        //形参（形式上的参数）
+        function showNum(s,k){
+            s.innerHTML = k
+        }
+        //实参（实际的参数）
+        n.onclick = function(){
+            showNum(0,i.value)
+        }
+    </script>
+</body>
+
+</html>
