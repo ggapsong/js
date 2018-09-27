@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="../style/song.css">
+</head>
+
+<body>
+    <div class="bg_box">
+        <div class="item clearfix active">
+            <i></i>
+            <div class="song_name">泡沫</div>
+            <div class="songer">邓紫棋</div>
+        </div>
+        <div class="item clearfix">
+            <i></i>
+            <div class="song_name">说爱你</div>
+            <div class="songer">蔡依林</div>
+        </div>
+        <div class="item clearfix">
+            <i></i>
+            <div class="song_name">稻香</div>
+            <div class="songer">周杰伦</div>
+        </div>
+        <div class="item clearfix">
+            <i></i>
+            <div class="song_name">我的梦</div>
+            <div class="songer">张靓颖</div>
+        </div>
+        <div class="item clearfix">
+            <i></i>
+            <div class="song_name">怎么说我不爱你</div>
+            <div class="songer">萧敬腾</div>
+        </div>
+        <div class="item clearfix">
+            <i></i>
+            <div class="song_name">无处安放</div>
+            <div class="songer">白若曦</div>
+        </div>
+        <div class="last_bg">
+            <div class="last clearfix">
+                <div class="select">
+                    <i class="f" id="all"></i>
+                    <span>全选</span>
+                </div>
+                <div class="select">
+                    <i class="s"></i>
+                    <span>收藏</span>
+                </div>
+                <div class="select">
+                    <i class="t"></i>
+                    <span>添加</span>
+                </div>
+                <div class="select">
+                    <i class="c"></i>
+                    <span>删除</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script>
+    //  1. 获取元素
+    var itemsbgc = document.querySelectorAll(".item")
+    var items = document.querySelectorAll('.item i'); //所有的小复选框
+    var allCheck = document.getElementById('all'); //全选框
+    for (var i = 0; i < items.length; i++) {
+        items[i].index = i;
+        items[i].onclick = function () {
+            allCheck.className = "f";
+            if (this.className == "ac") {
+                this.className = "";
+                itemsbgc[this.index].classList.remove("bgc");
+            } else {
+                this.className = 'ac';
+                itemsbgc[this.index].classList.add("bgc");
+                if (document.querySelectorAll(".ac").length >= items.length) {
+                    allCheck.className = "f ac";
+                }
+            }
+        }
+    }
+    allCheck.onclick = function () {
+        if (this.className == 'f') {
+            this.className = "f ac"
+            for (var i = 0; i < items.length; i++) {
+                items[i].className = "ac";
+                itemsbgc[i].classList.add("bgc");
+            }
+        } else {
+            this.className = "f";
+            for (var i = 0; i < items.length; i++) {
+                items[i].className = "";
+                itemsbgc[i].classList.remove("bgc");
+            }
+        }
+    }
+</script>
+
+</html>
