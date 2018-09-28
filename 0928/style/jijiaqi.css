@@ -1,0 +1,121 @@
+.box {
+  margin: 50px auto;
+  width: 480px;
+}
+.list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 30px;
+}
+.list li {
+  float: left;
+  margin-bottom: 20px;
+}
+.list .left {
+  float: left;
+}
+.list .left .jian {
+  width: 43px;
+  height: 35px;
+  border: 2px solid #000;
+  font: 15px/30px "宋体";
+  color: #000;
+  float: left;
+  text-align: center;
+  margin-right: 10px;
+}
+.list .left .num {
+  width: 43px;
+  height: 35px;
+  border: 2px solid #000;
+  font: 15px/30px "宋体";
+  color: #000;
+  float: left;
+  text-align: center;
+  margin-right: 10px;
+}
+.list .left .add {
+  width: 43px;
+  height: 35px;
+  border: 2px solid #000;
+  font: 15px/30px "宋体";
+  color: #000;
+  float: left;
+  text-align: center;
+  margin-right: 10px;
+}
+.list .right {
+  float: left;
+  width: 210px;
+  background-color: #171717;
+  padding-left: 10px;
+}
+.list .right .price {
+  font: 15px/40px "宋体";
+  color: #fff;
+  float: left;
+  width: 50%;
+}
+.list .right span {
+  font: 15px/40px "宋体";
+  color: #fff;
+}
+.list .right .money {
+  font: 15px/40px "宋体";
+  color: #fff;
+}
+.bottom {
+  background-color: #1f1f1f;
+  padding-left: 30px;
+  height: 150px;
+}
+.bottom .business {
+  font: 15px/40px "宋体";
+  color: #fff;
+}
+.bottom .business .bleft {
+  float: left;
+  width: 50%;
+}
+.bottom .business .bleft .packages {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.4px "宋体";
+  color: #f00;
+  text-align: center;
+  margin-bottom: -20px;
+}
+.bottom .business .bright {
+  float: left;
+  width: 50%;
+}
+.bottom .business .bright .packages {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.4px "宋体";
+  color: #f00;
+  text-align: center;
+  margin-bottom: -20px;
+}
+.bottom .expensive {
+  color: #fff;
+}
+.bottom .expensive .packages {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.4px "宋体";
+  color: #f00;
+  text-align: center;
+  margin-bottom: -20px;
+}

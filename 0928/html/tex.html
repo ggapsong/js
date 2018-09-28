@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="../style/text.css">
+</head>
+
+<body>
+        <div class="box">
+                <div class="top">
+                        <div class="info">
+                                <div class="words">hello</div>
+                                <i class="i"></i>
+                        </div>
+                        <div class="none">
+                                <input class="input" type="text" />
+                                <div class="enter">确定</div>
+                                <div class="cancel">取消</div>
+                        </div>
+                </div>
+                <div class="top">
+                        <div class="info">
+                                <div class="words">欢迎来到妙味课堂</div>
+                                <i class="i"></i>
+                        </div>
+                        <div class="none">
+                                <input class="input" type="text" value="欢迎来到妙味课堂">
+                                <div class="enter">确定</div>
+                                <div class="cancel">取消</div>
+                        </div>
+                </div>
+        </div>
+        <script>
+                var words = document.querySelectorAll(".words");
+                var icons = document.querySelectorAll(".i");
+                var None = document.querySelectorAll(".none");
+                var info = document.querySelectorAll(".info");
+                var cancel = document.querySelectorAll(".none .cancel");
+                var enter = document.querySelectorAll(".none .enter");
+                var input = document.querySelectorAll(".none .input");
+                for (let i = 0; i < icons.length; i++) {
+                        icons[i].onclick = function () {
+                                None[i].style.display = "block";
+                                info[i].style.display = "none";
+                        };
+                        cancel[i].onclick = function () {
+                                None[i].style.display = "none";
+                                info[i].style.display = "block";
+                        };
+                        enter[i].onclick = function () {
+                                if (input[i].value == "") {
+                                        alert("输入的内容不能为空");
+                                } else {
+                                        words[i].innerHTML = input[i].value;
+                                        None[i].style.display = "none";
+                                        info[i].style.display = "block";
+                                }
+                        }
+                }
+        </script>
+</body>
+
+</html>

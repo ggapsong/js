@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="../style/text.css">
+</head>
+
+<body>
+        <div class="box">
+                <div class="top">
+                        <div class="info">
+                                <div class="words">hello</div>
+                                <i class="i"></i>
+                        </div>
+                        <div class="none">
+                                <input class="input" type="text" />
+                                <div class="enter">确定</div>
+                                <div class="cancel">取消</div>
+                        </div>
+                </div>
+                <div class="top">
+                        <div class="info">
+                                <div class="words">欢迎来到妙味课堂</div>
+                                <i></i>
+                        </div>
+                        <div class="none">
+                                <input class="input" type="text" value="欢迎来到妙味课堂">
+                                <div class="enter">确定</div>
+                                <div class="cancel">取消</div>
+                        </div>
+                </div>
+        </div>
+        <script>
+                var info = document.querySelector(".info");
+                var words = document.querySelector(".words");
+                var i = document.querySelector(".i");
+                var None = document.querySelector(".none");
+                var info = document.querySelector(".info");
+                var cancel = document.querySelector(".none .cancel");
+                var enter = document.querySelector(".none .enter");
+                var input = document.querySelector(".none .input");
+                i.onclick = function () {
+                        None.style.display = "block";
+                        info.style.display = "none";
+                };
+                cancel.onclick = function () {
+                        None.style.display = "none";
+                        info.style.display = "block";
+                };
+                enter.onclick = function () {
+                        if (input.value == "") {
+                                alert("输入的内容不能为空");
+                        } else {
+                                words.innerHTML = input.value;
+                                None.style.display = "none";
+                                info.style.display = "block";
+                                // input.value = words.innerHTML;
+                                // input.value="";
+                        }
+                }
+        </script>
+</body>
+
+</html>

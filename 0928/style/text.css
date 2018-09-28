@@ -1,0 +1,58 @@
+.box {
+  background-color: #321c1f;
+  width: 440px;
+  height: 164px;
+  padding-left: 23px;
+}
+.box .top {
+  height: 50%;
+  font: 10px/35px "宋体";
+  color: #000;
+  overflow: hidden;
+  border-bottom: 1px dotted #000;
+}
+.box .top .none {
+  display: none;
+}
+.box .top .input {
+  width: 250px;
+  height: 35px;
+  margin-top: 20px;
+  float: left;
+}
+.box .top .enter {
+  width: 60px;
+  height: 35px;
+  background-color: #e74e68;
+  font: 14px/35px "宋体";
+  color: #fff;
+  float: left;
+  text-align: center;
+  margin: 20px 0 0 10px;
+}
+.box .top .cancel {
+  width: 60px;
+  height: 35px;
+  background-color: #e74e68;
+  font: 14px/35px "宋体";
+  color: #fff;
+  float: left;
+  text-align: center;
+  margin: 20px 0 0 10px;
+}
+.box .top .info {
+  margin-top: 20px;
+}
+.box .top .info .words {
+  color: #fff;
+  font: 20px/35px "宋体";
+  float: left;
+}
+.box .top .info i {
+  width: 23px;
+  height: 23px;
+  display: block;
+  background: url("../img/p.png") no-repeat;
+  float: left;
+  margin: 5px 0 0 23px;
+}
