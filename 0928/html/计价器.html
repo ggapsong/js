@@ -120,14 +120,14 @@
     function scalePrice(index,num){
         itemTotalSale[index].innerHTML = prices[index].innerHTML * num + '元';
     }
-    function scaleTotalMoney(){
+    function scaleTotalMoney(){//共花费了多少钱；
         var num = 0;
         for (let i = 0; i < itemTotalSale.length; i++) {
             num += parseFloat(itemTotalSale[i].innerHTML);
         };
         totalMoney.innerHTML = num;
     }
-    function scaleMaxPrice(){
+    function scaleMaxPrice(){//花费最多的商品单价
         var max = 0;
         for (let i = 0; i < num.length; i++) {
             if(num[i].innerHTML>0 && prices[i].innerHTML>max){

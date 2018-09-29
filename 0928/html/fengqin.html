@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/fengqin.css">
+</head>
+
+<body>
+    <ul class="show1">
+        <li style="left:0;z-index:6;">
+            <span>这是第一个</span>
+            <img src="../img/t103_26.jpg" />
+        </li>
+        <li style="left:22px;z-index:5;">
+            <span>这是第二个</span>
+            <img src="../img/t103_27.jpg" />
+        </li>
+        <li style="left:44px;z-index:4;">
+            <span>这是第三个</span>
+            <img src="../img/t103_28.jpg" />
+        </li>
+        <li style="left:66px;z-index:3;">
+            <span>这是第四个</span>
+            <img src="../img/t103_29.jpg" />
+        </li>
+        <li style="left:88px;z-index:2;">
+            <span>这是第五个</span>
+            <img src="../img/tlh_06.jpg" />
+        </li>
+        <li style="left:110px;z-index:1;">
+            <span>这是第六个</span>
+            <img src="../img/tlh_29.jpg" />
+        </li>
+    </ul>
+    <script>
+        var lis = document.querySelectorAll("li");
+        var span = document.querySelectorAll("span");
+        for (let i = 0; i < span.length; i++) {
+            span[i].onmouseover = function () {
+                for (let n = 0; n < span.length; n++) {
+                    if (n < i) {
+                        lis[n].style.transform = 'translate3d(-528px,0,0)';
+                    } else {
+                        lis[n].style.transform = 'translate3d(0,0,0)';
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // for (let i = 0; i < span.length; i++) { //0 1 2 3 4 5
+        //     span[i].onmouseover = function () {
+        //         for (let n = 0; n < lis.length; n++) {
+        //             lis[n].style.transform = 'translate3d(0,0,0)';
+        //         } //li恢复到原来的位置
+        //         for (let n = 0; n < i; n++) { //0 1 2 3 4 5 
+        //             lis[n].style.transform = 'translate3d(-528px,0,0)';
+        //         }
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

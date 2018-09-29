@@ -82,84 +82,42 @@
     </div>
 </body>
 <script>
-    let jian = document.querySelectorAll(".jian");
-    let add = document.querySelectorAll(".add");
-    let num = document.querySelectorAll(".num");
-    let prices = document.querySelectorAll('.price span');
-    let itemTotalSale = document.querySelectorAll('.money span');
-    let totalBox = document.querySelector('.bleft .packages');
-    let totalMoney = document.querySelector('.bright .packages');
-    var expensive = document.querySelector(".expensive .packages");
+    var jian = document.querySelectorAll(".jian");
+    var add = document.querySelectorAll(".add");
+    var num = document.querySelectorAll(".num");
+    var prices = document.querySelectorAll('.price span');
+    var itemTotalSale = document.querySelectorAll('.money span');
+    var totalBox = document.querySelector('.bleft .packages');
+    var totalMoney = document.querySelector('.bright .packages');
+    var xiaoji = document.querySelectorAll(".money span")
 
-    for (let i = 0; i < num.length; i++) {
-        add[i].onclick = function () {
-            let n = num[i].innerHTML;
-            var totle = totalBox.innerHTML
-            totle++
-            n++;
-            num[i].innerHTML = n;
-            totalBox.innerHTML = totle;
-            itemTotalSale[i].innerHTML = n * parseFloat(prices[i].innerHTML) + "元";
-            scaleTotalMoney()
-            expensivebox()
-            expensive.innerHTML = expensivebox();
-            totalBox.innerHTML = totoljian();
-        }
+    for (let i = 0; i < add.length; i++) {
         jian[i].onclick = function () {
-            let n = num[i].innerHTML;
+            let n = num[i].innerHTML
             n--;
             if (n < 0) {
                 n = 0;
             }
-            num[i].innerHTML = n;
-            itemTotalSale[i].innerHTML = n * parseFloat(prices[i].innerHTML) + "元";
-            scaleTotalMoney()
-            expensivebox()
-            expensive.innerHTML = expensivebox();
-            totalBox.innerHTML = totoljian();
+            num[i].innerHTML= n;
+            xiaoji[i].innerHTML=n*Number(prices[i].innerHTML)+"元";
+            totalBox.innerHTML=totoljian();
+        }
+        add[i].onclick = function () {
+            let n=num[i].innerHTML
+            n++
+            num[i].innerHTML= n;
+            xiaoji[i].innerHTML=n*Number(prices[i].innerHTML)+"元";
+            totalBox.innerHTML=totoljian();
         }
     }
-
-    function scaleTotalMoney() { //共花费了多少元；
-        var num = 0;
-        for (let i = 0; i < itemTotalSale.length; i++) {
-            num += parseFloat(itemTotalSale[i].innerHTML);
-        }
-        totalMoney.innerHTML = num;
-    }
-
-    function expensivebox() { //最贵的
-        var max = 0;
-        for (var i = 0; i < prices.length; i++) {
-            let n = Number(num[i].innerHTML);
-            if (n > 0) {
-                max = parseFloat(prices[i].innerHTML);
-            }
-        }
-        return max
-    }
-
-    function totoljian() { //商品总件数
-        let n = Number(num[0].innerHTML);
-        for (var i = 1; i < num.length; i++) {
-            n += Number(num[i].innerHTML);
+    function totoljian(){//商品总件数
+        let n=Number(num[0].innerHTML);
+        for(var i=1;i<num.length;i++){
+            n+=Number(num[i].innerHTML);
         }
         return n;
     }
-    //     function scaleTotalMoney(){//共花费了多少钱；
-    //     var num = 0;
-    //     for (let i = 0; i < itemTotalSale.length; i++) {
-    //         num += parseFloat(itemTotalSale[i].innerHTML);
-    //     };
-    //     totalMoney.innerHTML = num;
-    //  }
-    //总和 
-    // let zong=Number(num[0].innerHTML);
-    // for(var b=0;b<num.length;b++){
-    //     zong += Number(num[b].innerHTML); 
-    // }
-    // console.log(zong);
-    // totalBox.innerHTML=zong;
+    
 </script>
 
 </html>
