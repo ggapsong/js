@@ -94,6 +94,10 @@
     // 如果所有的items 都选上了 allCheck也勾选；
     // 如果有一个没有勾选allCheck也就不勾选；
     // 点击allCheck的时候所有的items都勾选，再点一次所有的items都不勾选
+    arr=[
+        'white',
+        'pink'
+    ]
     allCheck.onclick = function () {
         if (this.className == "f") {
             this.className = "f ac";
@@ -116,7 +120,7 @@
         }
         item[i].onmouseout=function(){
            
-           this.style.backgroundColor="yellow";
+           this.style.backgroundColor=arr[i%arr.length];
        }
     }
 </script>

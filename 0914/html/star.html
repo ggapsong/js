@@ -17,27 +17,72 @@
             <i></i>
             <span>总体评价</span>
         </div>
-       <div class="clearfix b">
-        <ul class="fl">
-            <li class=""></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-        <div class="info fl">极差</div>
-        <!-- <div class="info fl">一般</div>
+        <div class="clearfix b">
+            <ul class="fl" id="stars">
+                <li class=""></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div class="info fl"></div>
+            <!-- <div class="info fl">一般</div>
         <div class="info fl">不错</div>
         <div class="info fl">推荐</div>
         <div class="info fl">力荐</div> -->
 
-       </div>
-          <div class="last">
-              小提示：点击星星就能打分
-          </div> 
-      
-       
+        </div>
+        <div class="last">
+            小提示：点击星星就能打分
+        </div>
     </div>
+    <script>
+        var stars = document.querySelectorAll('#stars li');
+        var info = document.querySelector('.info');
+        var click = -1;
+        var arr = [
+            '极差',
+            '一般',
+            '不错',
+            '推荐',
+            '力荐'
+        ];
+        for (let i = 0; i < stars.length; i++) {
+            stars[i].index = i;
+            stars[i].onmouseover = function () {
+                if (i < 0) {
+                    info.innerHTML = '';
+                }
+                info.innerHTML = arr[i];
+                for (let n = 0; n < stars.length; n++) {
+                    if (n <= i) {
+                        stars[n].className = "star";
+                    } else {
+                        stars[n].className = "";
+                    }
+                }
+            }
+            stars[i].onmouseout = function () {
+                if (click < 0) {
+                    for (let n = 0; n < stars.length; n++) {
+                        stars[n].className = "";
+                        info.innerHTML = '';
+                    }
+                } else {
+                    for (let a = 0; a < stars.length; a++) {
+                        if (a <= click) {
+                            stars[a].className = "star";
+                        } else {
+                            stars[a].className = "";
+                        }
+                    }
+                }
+            }
+            stars[i].onclick = function () {
+                click = this.index;
+            }
+        };
+    </script>
 </body>
 
 </html>

@@ -39,17 +39,49 @@
     <script>
         var lis = document.querySelectorAll("li");
         var span = document.querySelectorAll("span");
-        for (let i = 0; i < span.length; i++) {
-            span[i].onmouseover = function () {
-                for (let n = 0; n < span.length; n++) {
-                    if (n < i) {
-                        lis[n].style.transform = 'translate3d(-528px,0,0)';
-                    } else {
-                        lis[n].style.transform = 'translate3d(0,0,0)';
-                    }
+        for(let i=0;i<span.length;i++){
+            span[i].onmouseover=function(){
+                for (let s = 0; s < i; s++) {
+                    lis[s].style.transform = 'translate3d(-528px,0,0)'
+                }
+                for (let n = i; n < lis.length; n++) {
+                    lis[n].style.transform = '';
                 }
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // for (let i = 0; i < span.length; i++) {
+        //     span[i].onmouseover = function () {
+        //         for (let n = 0; n < span.length; n++) {
+        //             if (n < i) {
+        //                 lis[n].style.transform = 'translate3d(-528px,0,0)';
+        //             } else {
+        //                 lis[n].style.transform = 'translate3d(0,0,0)';
+        //             }
+        //         }
+        //     }
+        // }
 
 
 

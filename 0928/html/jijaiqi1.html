@@ -89,7 +89,8 @@
     var itemTotalSale = document.querySelectorAll('.money span');
     var totalBox = document.querySelector('.bleft .packages');
     var totalMoney = document.querySelector('.bright .packages');
-    var xiaoji = document.querySelectorAll(".money span")
+    var xiaoji = document.querySelectorAll(".money span");
+    var expensive = document.querySelector(".expensive .packages")
 
     for (let i = 0; i < add.length; i++) {
         jian[i].onclick = function () {
@@ -98,26 +99,61 @@
             if (n < 0) {
                 n = 0;
             }
-            num[i].innerHTML= n;
-            xiaoji[i].innerHTML=n*Number(prices[i].innerHTML)+"元";
-            totalBox.innerHTML=totoljian();
+            num[i].innerHTML = n;
+            xiaoji[i].innerHTML = n * Number(prices[i].innerHTML) + "元";
+            totalBox.innerHTML = totalBoxs();
+            totalMoney.innerHTML = totalMoneyboxs();
+            expensive.innerHTML = max();
         }
         add[i].onclick = function () {
-            let n=num[i].innerHTML
+            let n = num[i].innerHTML
             n++
-            num[i].innerHTML= n;
-            xiaoji[i].innerHTML=n*Number(prices[i].innerHTML)+"元";
-            totalBox.innerHTML=totoljian();
+            num[i].innerHTML = n;
+            xiaoji[i].innerHTML = n * Number(prices[i].innerHTML) + "元";
+            totalBox.innerHTML = totalBoxs();
+            totalMoney.innerHTML = totalMoneyboxs();
+            expensive.innerHTML = max();
         }
     }
-    function totoljian(){//商品总件数
-        let n=Number(num[0].innerHTML);
-        for(var i=1;i<num.length;i++){
-            n+=Number(num[i].innerHTML);
+
+    function totalBoxs() {//商品总件数
+        var nums = 0;
+        for (let i = 0; i < num.length; i++) {
+            nums += Number(num[i].innerHTML);
         }
-        return n;
+        return nums;
     }
-    
+
+    function totalMoneyboxs() {//商品总价格
+        var nums = 0;
+        for (let i = 0; i < xiaoji.length; i++) {
+            nums += parseFloat(xiaoji[i].innerHTML);
+        }
+        return nums;
+    }
+
+    function max() {
+        var n = 0;
+        for (var i = 0; i < prices.length; i++) {
+            if (num[i].innerHTML > 0) {
+                if (Number(prices[i].innerHTML) > n) {
+                    n = Number(prices[i].innerHTML)
+                }
+            }
+        }
+        return n
+        // var arr = [];
+        // prices.forEach(function(item,index){
+        //     if(num[index].innerHTML>0){
+        //         arr.push(item.innerHTML)
+        //     }
+        // });
+        // if(arr.length>0){
+        //     return Math.max(...arr);
+        // }else{
+        //     return 0
+        // }
+    }
 </script>
 
 </html>
