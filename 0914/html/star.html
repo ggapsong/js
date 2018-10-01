@@ -47,41 +47,83 @@
             '推荐',
             '力荐'
         ];
-        for (let i = 0; i < stars.length; i++) {
-            stars[i].index = i;
-            stars[i].onmouseover = function () {
-                if (i < 0) {
-                    info.innerHTML = '';
-                }
-                info.innerHTML = arr[i];
-                for (let n = 0; n < stars.length; n++) {
-                    if (n <= i) {
-                        stars[n].className = "star";
-                    } else {
-                        stars[n].className = "";
-                    }
-                }
+    for(let i=0;i<stars.length;i++){
+        stars[i].onmouseover=function(){
+            if(i<0){
+                info[i].innerHTML="";
+            }else{
+                info.innerHTML=arr[i];
             }
-            stars[i].onmouseout = function () {
-                if (click < 0) {
-                    for (let n = 0; n < stars.length; n++) {
-                        stars[n].className = "";
-                        info.innerHTML = '';
-                    }
-                } else {
-                    for (let a = 0; a < stars.length; a++) {
-                        if (a <= click) {
-                            stars[a].className = "star";
-                        } else {
-                            stars[a].className = "";
-                        }
-                    }
+            for(let n=0;n<stars.length;n++){
+                if(n<=i){
+                    stars[n].className="star";
+                }else{
+                    stars[n].className="";
                 }
             }
-            stars[i].onclick = function () {
-                click = this.index;
+        }
+        stars[i].onmouseout=function(){
+            if(click<0){
+               
             }
-        };
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // for (let i = 0; i < stars.length; i++) {
+        //     stars[i].index = i;
+        //     stars[i].onmouseover = function () {
+        //         if (i < 0) {
+        //             info.innerHTML = '';
+        //         }
+        //         info.innerHTML = arr[i];
+        //         for (let n = 0; n < stars.length; n++) {
+        //             if (n <= i) {
+        //                 stars[n].className = "star";
+        //             } else {
+        //                 stars[n].className = "";
+        //             }
+        //         }
+        //     }
+        //     stars[i].onmouseout = function () {
+        //         if (click < 0) {
+        //             for (let n = 0; n < stars.length; n++) {
+        //                 stars[n].className = "";
+        //                 info.innerHTML = '';
+        //             }
+        //         } else {
+        //             for (let a = 0; a < stars.length; a++) {
+        //                 if (a <= click) {
+        //                     stars[a].className = "star";
+        //                     info.innerHTML = arr[a];//字变回到点击时的字；
+        //                 } else {
+        //                     stars[a].className = "";
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     stars[i].onclick = function () {
+        //         click = this.index
+        //     }
+        // };
     </script>
 </body>
 

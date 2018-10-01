@@ -1,0 +1,41 @@
+.box {
+  width: 420px;
+  margin: 50px auto;
+}
+.box .view {
+  overflow: hidden;
+  height: 304px;
+  margin-bottom: 1px;
+}
+.box .view .big {
+  float: left;
+  margin-right: 1px;
+}
+.box .view .big img {
+  width: 300px;
+  height: 300px;
+  border: 1px solid #000;
+}
+.box .view .right {
+  float: left;
+}
+.box .view .right .smallpic img {
+  width: 96px;
+  height: 96px;
+  vertical-align: top;
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+}
+.box .bottom {
+  width: 100%;
+}
+.box .bottom .smallpic {
+  float: left;
+}
+.box .bottom .smallpic img {
+  width: 96px;
+  height: 96px;
+  vertical-align: top;
+  margin-right: 2px;
+  border: 1px solid transparent;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/work1.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="view">
+            <div class="big">
+                <img src="../img/01.png" alt="">
+            </div>
+            <div class="right">
+                <div class="smallpic">
+                    <img src="../img/02.png" alt="">
+                </div>
+                <div class="smallpic">
+                    <img src="../img/t103_26.jpg" alt="">
+                </div>
+                <div class="smallpic">
+                    <img src="../img/02.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="smallpic">
+                <img src="../img/02.png" alt="">
+            </div>
+            <div class="smallpic">
+                <img src="../img/02.png" alt="">
+            </div>
+            <div class="smallpic">
+                <img src="../img/02.png" alt="">
+            </div>
+            <div class="smallpic">
+                <img src="../img/02.png" alt="">
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        let big = document.querySelector(".big img");
+        let smallpic = document.querySelectorAll(".smallpic img");
+        for (let i = 0; i < smallpic.length; i++) {
+            smallpic[i].onmouseover=function(){
+                this.style.border="1px solid #f00"
+                big.src=this.src;
+            }
+            smallpic[i].onmouseout=function(){
+                this.style.border="";
+            }
+        };
+    </script>
+</body>
+
+</html>
