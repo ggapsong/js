@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/work.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="top">
+            <div class="img">
+                <img src="../img/01.jpg" alt="">
+            </div>
+            <div class="info">
+                <span class="left">美丽的星空1</span>
+                <span class="right">1/10</span>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="prev">上一张</div>
+            <div class="list_box">
+                <ul class="list">
+
+                </ul>
+            </div>
+            <div class="next">下一张</div>
+        </div>
+    </div>
+    <script>
+        let lisImgs = [{
+                src: "../img/01.jpg",
+                info: '美丽的星空1',
+            },
+            {
+                src: "../img/02.jpg",
+                info: '美丽的星空2',
+            },
+            {
+                src: "../img/03.jpg",
+                info: '美丽的星空3',
+            },
+            {
+                src: "../img/04.jpg",
+                info: '美丽的星空4',
+            },
+            {
+                src: "../img/05.jpg",
+                info: '美丽的星空5',
+            },
+            {
+                src: "../img/06.jpg",
+                info: '美丽的星空6',
+            },
+            {
+                src: "../img/07.jpg",
+                info: '美丽的星空7',
+            },
+            {
+                src: "../img/08.jpg",
+                info: '美丽的星空8',
+            },
+            {
+                src: "../img/09.jpg",
+                info: '美丽的星空9',
+            },
+            {
+                src: "../img/010.jpg",
+                info: '美丽的星空10',
+            }
+
+        ]
+
+        //向页面中添加元素
+    let str = "";
+    lisImgs.forEach((e)=>{
+        str+='<li><img src="' + e.src + '" alt=""><div class="marsk"></div></li>';
+    });
+    document.querySelector(".list").innerHTML=str;
+        //获取元素
+        let topImg = document.querySelector(".top img");
+        let picInfo = document.querySelector(".info .left");
+        let picNum = document.querySelector(".info .right");
+        let prev = document.querySelector(".prev");
+        let next = document.querySelector(".next");
+        let lisImg = document.querySelectorAll(".list li");
+        let marsk = document.querySelectorAll(".marsk");
+        let now = 0;
+        let imgsBox = document.querySelector('.list')
+        let listBox = document.querySelector(".list_box");
+        marsk[0].style.display = 'none';
+
+        //点击图片的时候
+        lisImg.forEach((e, i) => {
+            e.onclick = function () {
+                topImg.src = lisImgs[i].src;
+                picInfo.innerHTML = lisImgs[i].info;
+                picNum.innerHTML = (i + 1) + "/" + lisImgs.length;
+                marsk[now].style.display = "block";
+                now = i;
+                marsk[now].style.display = "none";
+            };
+        });
+        //点击下一张
+        next.onclick = () => {
+            marsk[now].style.display = "block";
+            now++;
+            if (now > lisImgs.length - 1) {
+                now = 0;
+            };
+            topImg.src = lisImgs[now].src;
+            picInfo.innerHTML = lisImgs[now].info;
+            picNum.innerHTML = (now + 1) + "/" + lisImgs.length;
+            imgsBox.scrollLeft = now*118;
+            marsk[now].style.display = "none";
+        };
+        //点击上一张
+        prev.onclick = () => {
+            marsk[now].style.display = "block";
+            now--;
+            if (now <0 ) {
+                now = lisImgs.length - 1;
+            };
+            topImg.src = lisImgs[now].src;
+            picInfo.innerHTML = lisImgs[now].info;
+            picNum.innerHTML = (now + 1) + "/" + lisImgs.length;
+            imgsBox.scrollLeft = now*118;
+            marsk[now].style.display = "none";
+        };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //点击图片的时候
+        // lisImg.forEach((e, i) => {
+        //     e.onclick = function () {
+        //         // 修改index
+        //         marsk[now].style.display = 'block';
+        //         now = i
+        //         marsk[now].style.display = 'none';
+        //         // 换图片
+        //         topImg.src = lisImgs[now].src;
+        //         picInfo.innerHTML = lisImgs[now].info;
+        //         picNum.innerHTML = now + 1 + '/' + lisImgs.length;
+        //     }
+        // })
+
+        // next.onclick = function () {
+        //     marsk[now].style.display = 'block';
+        //     now++;
+        //     if (now > lisImgs.length - 1) {
+        //         now = 0;
+        //         imgsBox.style.transition = '0s';
+        //         imgsBox.style.transform = 'translate3d(0px, 0px, 0px)';
+        //         setTimeout(function () {
+        //             imgsBox.style.transition = '.5s';
+        //         }, 0)
+        //     }
+        //     marsk[now].style.display = 'none';
+        //     topImg.src = lisImgs[now].src;
+        //     picInfo.innerHTML = lisImgs[now].info;
+        //     picNum.innerHTML = now + 1 + '/' + lisImgs.length;
+        //     if (!(now > lisImgs.length - 5)) {
+        //         imgsBox.style.transform = 'translate3d(' + 118 * -now + 'px, 0px, 0px)';
+        //     } else {
+        //         imgsBox.style.transform = 'translate3d(' + (lisImgs.length - 5) * -118 + 'px, 0px, 0px)';
+        //     }
+        // }
+        // prev.onclick = function () {
+        //     marsk[now].style.display = 'block';
+        //     now--;
+        //     if (now < 0) {
+        //         now = lisImgs.length - 1;
+        //         imgsBox.style.transition = '0s';
+        //         imgsBox.style.transform = 'translate3d(' + (now - 4) * -118 + 'px, 0px, 0px)';
+        //         setTimeout(function () {
+        //             imgsBox.style.transition = '.5s';
+        //         }, 0)
+        //     }
+        //     marsk[now].style.display = 'none';
+        //     topImg.src = lisImgs[now].src;
+        //     picInfo.innerHTML = lisImgs[now].info;
+        //     picNum.innerHTML = now + 1 + '/' + lisImgs.length;
+        //     if (now > 3) {
+        //         imgsBox.style.transform = 'translate3d(' + 118 * -(now - 4) + 'px, 0px, 0px)';
+        //     } else {
+        //         imgsBox.style.transform = 'translate3d(0px, 0px, 0px)';
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

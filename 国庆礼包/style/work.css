@@ -1,0 +1,85 @@
+.box {
+  width: 638px;
+  height: 435px;
+  border: 1px solid #ebeaea;
+}
+.box .top {
+  width: 625px;
+  height: 350px;
+  margin: 5px auto;
+  position: relative;
+}
+.box .top img {
+  width: 625px;
+  height: 350px;
+}
+.box .top .info {
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font: 17px/39px "宋体";
+  color: #fff;
+  background: rgba(200, 200, 200, 0.4);
+}
+.box .top .info .left {
+  float: left;
+  margin-left: 16px;
+}
+.box .top .info .right {
+  float: right;
+  margin-right: 11px;
+}
+.box .bottom {
+  overflow: hidden;
+  width: 625px;
+  height: 350px;
+  margin: 0 auto;
+}
+.box .bottom .prev {
+  width: 11px;
+  height: 62px;
+  border: 1px solid #c7c7c7;
+  margin-right: 6px;
+  float: left;
+  font-size: 12px;
+}
+.box .bottom .list_box {
+  float: left;
+  width: 590px;
+  overflow: hidden;
+}
+.box .bottom .list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 590px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.box .bottom .list li {
+  display: inline-block;
+  position: relative;
+}
+.box .bottom .list li img {
+  width: 115px;
+  height: 64px;
+  margin-right: 3px;
+}
+.box .bottom .list li .marsk {
+  width: 115px;
+  height: 64px;
+  background: rgba(96, 76, 73, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.box .bottom .next {
+  width: 11px;
+  height: 62px;
+  border: 1px solid #c7c7c7;
+  float: left;
+  font-size: 12px;
+}
