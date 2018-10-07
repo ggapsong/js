@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/banner.css">
+</head>
+
+<body>
+    <div class="bg">
+        <div class="box">
+            <div class="befor"><</div>
+            <ul>
+                <li>
+                    <img src="../img/1.jpeg" alt="">
+                </li>
+                <!-- <li>
+                    <img src="../img/2.jpeg" alt="">
+                </li>
+                <li>
+                    <img src="../img/3.jpeg" alt="">
+                </li>
+                <li>
+                    <img src="../img/4.jpeg" alt="">
+                </li>
+                <li>
+                    <img src="../img/5.jpeg" alt="">
+                </li> -->
+            </ul>
+            <div class="next">></div>
+                   
+        </div>
+            <div class="banner">
+                <span class="active span">
+                    <span>
+                        <img src="../img/" alt="">
+                    </span>
+                </span>
+                <span class="span">
+                    <span>
+                        <img src="../img/2.jpeg" alt="">
+                    </span>
+                </span>
+                <span class="span">
+                    <span><img src="../img/3.jpeg" alt=""></span>
+                </span>
+                <span class="span">
+                    <span>
+                        <img src="../img/4.jpeg" alt="">
+                    </span>
+                </span>
+                <span class="span">
+                    <span>
+                        <img src="../img/5.jpeg" alt="">
+                    </span>
+                </span>
+            </div>
+        </div>
+<script>
+    var imgs=[
+        '../img/1.jpeg',
+        '../img/2.jpeg',
+        '../img/3.jpeg',
+        '../img/4.jpeg',
+        '../img/5.jpeg'
+    ];
+    var num = 0;
+    var left = document.querySelector('.befor');
+    var right = document.querySelector('.next');
+    var img = document.querySelector('.box img');
+    var spans = document.querySelectorAll('.span');
+    var t = null;
+    //点击下面的span
+    for (let i = 0; i < spans.length; i++) {
+        spans[i].onclick = function(){
+            spans[num].classList.remove('active');
+            num = i;
+            spans[num].classList.add('active');
+            img.src = imgs[num];
+        }
+    }
+    //点击下一页
+    right.onclick = function(){
+        add(1)
+    }
+    //点击上一页
+    left.onclick = function(){
+        add(-1)
+    }
+
+    //添加定时器
+    t = setInterval(function(){
+        add(1)
+    },1000);
+
+
+    //当鼠标移入的时候清除定时器
+    document.querySelector('.box').onmouseover = function(){
+        clearInterval(t);
+    };
+    //当鼠标移出的时候加上定时器
+    document.querySelector('.box').onmouseout = function(){
+        t = setInterval(function(){
+            add(1)
+        },1000)
+    };
+    //函数封装
+    function add(n){
+        spans[num].classList.remove('active');
+        num += n;
+        if(num>=imgs.length){
+            num = 0;
+        };
+        if(num<0){
+            num = imgs.length-1;
+        };
+        spans[num].classList.add('active');
+        img.src = imgs[num];
+    }
+</script>
+</body>
+
+</html>

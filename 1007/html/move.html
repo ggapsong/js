@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+        width: 100px;
+        height: 100px;
+        background-color: #000;
+        margin-top:10px;
+    }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="按钮">
+    <div></div>
+    <script>
+        let input = document.querySelector("input");
+        let div = document.querySelector("div");
+        let timer = null;
+        input.onclick = function () { //当按钮点击的时候；
+            clearInterval(timer);//清除上一个定时器
+            timer = setInterval(function () {
+                let speed = parseInt(getStyle(div, 'margin-left')) + 10
+                div.style.marginLeft = speed + "px";
+                if(speed>=800){//如果margin-left超过800的话清除定时器；
+                speed=800;
+                clearInterval(timer)
+            }
+            }, 10);
+        };
+        //计算后的样式
+        function getStyle(el, attr) {
+            if (el.currentStyle) {
+                return el.currentStyle[attr];
+            }
+            return getComputedStyle(el)[attr];
+        }
+    </script>
+</body>
+
+</html>

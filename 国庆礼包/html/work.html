@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="../style/work.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
 <body>
@@ -73,13 +74,14 @@
             }
 
         ]
-
+        
         //向页面中添加元素
-    let str = "";
-    lisImgs.forEach((e)=>{
-        str+='<li><img src="' + e.src + '" alt=""><div class="marsk"></div></li>';
-    });
-    document.querySelector(".list").innerHTML=str;
+        let str = "";
+        lisImgs.forEach((e)=>{
+            str+='<li class="lis"><img src="' + e.src + '" alt=""><div class="marsk"></div></li>';
+        });
+        
+        document.querySelector(".list").innerHTML=str;
         //获取元素
         let topImg = document.querySelector(".top img");
         let picInfo = document.querySelector(".info .left");
@@ -104,45 +106,35 @@
                 marsk[now].style.display = "none";
             };
         });
+        
+        
         //点击下一张
         next.onclick = () => {
-            marsk[now].style.display = "block";
-            now++;
-            if (now > lisImgs.length - 1) {
-                now = 0;
-            };
-            topImg.src = lisImgs[now].src;
-            picInfo.innerHTML = lisImgs[now].info;
-            picNum.innerHTML = (now + 1) + "/" + lisImgs.length;
-            imgsBox.scrollLeft = now*118;
-            marsk[now].style.display = "none";
+            change(1)
         };
         //点击上一张
         prev.onclick = () => {
+            change(-1)
+        };
+
+        function change(num){
             marsk[now].style.display = "block";
-            now--;
+            now += num;
+
             if (now <0 ) {
                 now = lisImgs.length - 1;
-            };
+            }
+            if(now > lisImgs.length - 1){
+                now = 0
+            }
             topImg.src = lisImgs[now].src;
             picInfo.innerHTML = lisImgs[now].info;
             picNum.innerHTML = (now + 1) + "/" + lisImgs.length;
-            imgsBox.scrollLeft = now*118;
+            imgsBox.scrollLeft = 118*now;
             marsk[now].style.display = "none";
-        };
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+        
+        
 
         //点击图片的时候
         // lisImg.forEach((e, i) => {

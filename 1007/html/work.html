@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/work.css">
+</head>
+
+<body>
+    <div class="nav clearfix">
+        <div class="first_box">
+            <div class="first">首页</div>
+            <div class="content">
+                <div>js教程</div>
+                <div>js教程</div>
+                <div>js教程</div>
+                <div>js教程</div>
+            </div>
+        </div>
+        <div class="first_box">
+            <div class="first">访客</div>
+            <div class="content">
+                <div>js教程</div>
+                <div>js教程</div>
+                <div>js教程</div>
+                <div>js教程</div>
+            </div>
+        </div>
+        <div class="first_box">
+            <div class="first">关于我们</div>
+            <div class="content">
+                <div>js教程</div>
+                <div>js教程</div>
+                <div>js教程</div>
+                <div>js教程</div>
+            </div>
+        </div>
+        <div class="first_box">
+            <div class="first">作品</div>
+            <div class="content">
+                <div>js教程</div>
+                <div>js教程</div>
+                <div>js教程</div>
+                <div>js教程</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let navs = document.querySelectorAll(".first_box");
+        let contents = document.querySelectorAll(".content");
+        let num = 0;
+        let timer = null;
+        navs.forEach((e, i) => {
+            e.onmouseover = function () {
+                contents[num].style.display = "none";
+                num = i;
+                contents[i].style.display = "block";
+                clearInterval(timer);
+            }
+            e.onmouseout = function () {
+                timer = setTimeout(function () {
+                    contents[i].style.display = "none";
+                },200);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+.clearfix:after{
+    content: "";
+    clear: both;
+    display: block;
+}
+.nav {
+  width: 420px;
+  height: 30px;
+  background-color: #215a8c;
+  .first_box {
+    float: left;
+    position: relative;
+    .first {
+      font: 16px/30px "宋体";
+      color: #fff;
+      padding:0 20px;
+    }
+    .content {
+      overflow: hidden;
+      position: absolute;
+      width: 200px;
+      height: 30px;
+      background-color: #ccc;
+      top:40px;
+      left:0;
+      display: none;
+      div {
+        font: 16px/30px "宋体";
+        color: #000;
+        float: left;
+      }
+    }
+  }
+}

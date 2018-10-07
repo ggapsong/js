@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box img{
+        width: 500px;
+        height: 500px;
+        margin-top:100px;
+    }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="换背景">
+    <input type="button" value="停">
+    <div class="box">
+        <img src="../img/01.jpg" alt="">
+    </div>
+    <script>
+        let input = document.querySelectorAll("input");
+        let boxImg = document.querySelector(".box img");
+        let num = 0;
+        var t = 0;
+        let arr = [
+            "../img/01.jpg",
+            "../img/02.jpg",
+            "../img/03.jpg",
+            "../img/04.jpg"
+        ];
+        // input[0].onclick = function () {
+        //     clearInterval(t);
+        //     t = setInterval(time, 1000);
+        // };
+        // function time() {
+        //     num++;
+        //     num = num % arr.length;
+        //     boxImg.src = arr[num];
+        // };
+        // input[1].onclick = function () {
+        //     clearInterval(t);
+        // };
+
+
+        input[0].onclick = function () {
+            clearInterval(t);
+            t = setInterval(function () {
+                num++;
+                num = num % arr.length;
+                boxImg.src = arr[num];
+            }, 1000);
+        };
+        input[1].onclick = function () {
+            clearInterval(t);
+        };
+    </script>
+</body>
+
+</html>

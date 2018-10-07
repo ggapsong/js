@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闫慧玲傻吊</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        box.onclick = function(){
+            move(this,300,1,'margin-top')
+        }
+        function move(el,s,t,attr){
+            var tt = null;
+            t = t*1000;
+            var v = s/t*20;
+            tt = setInterval(()=>{
+                var num = parseInt(getStyle(el,attr)) + v
+                if(Math.abs(num)>=Math.abs(s)){
+                    clearInterval(tt);
+                    num=s;
+                }
+                el.style[attr] = num + 'px';
+            },20)
+        }
+        function getStyle(el,attr){
+            if(el.currentStyle){
+                return el.currentStyle[attr];
+            }
+            return getComputedStyle(el)[attr];
+        }
+
+    </script>
+</body>
+</html>
