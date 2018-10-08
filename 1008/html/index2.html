@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/index.css">
+    <script src="../style/data.js"></script>
+
+</head>
+
+<body>
+    <div class="box">
+        <!-- <div class="img">
+            <img src="../img/01.jpg" alt="">
+        </div>
+        <div class="info">
+            <div class="title">大碗居</div>
+            <div class="place">11</div>
+            <div class="label">11</div>
+            <div class="specific">11</div>
+            <div class="shopHours">11</div>
+            <div class="classify">11</div>
+        </div> -->
+    </div>
+    <script>
+        let box = document.querySelector(".box");
+        for (let i = 0; i < data.length; i++) {
+            box.innerHTML +=
+            `<div class="img">
+            <img src="https://data.miaov.com${data[i].image_path}" />
+        </div>
+        <div class="info">
+            <div class="title">${data[i].title}</div>
+            <div class="place">${data[i].place}</div>
+            <div class="label">${data[i].specific}</div>
+            <div class="specific">${data[i].shopHours}</div>
+            <div class="shopHours">${data[i].classify}</div>
+            <div class="classify">${data[i].title}</div>
+        </div>`
+        }
+    </script>
+</body>
+
+</html>

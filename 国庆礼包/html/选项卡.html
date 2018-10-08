@@ -192,21 +192,20 @@
     var secondList = document.querySelectorAll('.second');
     var thirdList = document.querySelectorAll('.third');
 
-    listBox.onmouseover = function () {//鼠标移入第一级菜单的时候
+    listBox.onmouseover = function () { //鼠标移入第一级菜单的时候
         sp.classList.add('sp_active');
         list.style.display = 'block';
     }
-    listBox.onmouseout = function () {//鼠标移出第一级菜单的时候
+    listBox.onmouseout = function () { //鼠标移出第一级菜单的时候
         sp.classList.remove('sp_active');
         list.style.display = 'none';
     }
-
     secondList.forEach((e, i) => {
-        e.onmouseover = function () {//鼠标移入第二级菜单的时候
+        e.onmouseover = function () { //鼠标移入第二级菜单的时候
             e.getElementsByTagName('h5')[0].classList.add('h5_active');
             thirdList[i].style.display = 'block';
         }
-        e.onmouseout = function () {//鼠标移出第二级菜单的时候
+        e.onmouseout = function () { //鼠标移出第二级菜单的时候
             e.getElementsByTagName('h5')[0].classList.remove('h5_active');
             thirdList[i].style.display = 'none';
         }

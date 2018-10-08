@@ -71,15 +71,13 @@
                 src: "../img/010.jpg",
                 info: '美丽的星空10',
             }
-
         ]
-        
         //向页面中添加元素
         let str = "";
-        lisImgs.forEach((e)=>{
-            str+='<li class="lis"><img src="' + e.src + '" alt=""><div class="marsk"></div></li>';
+        lisImgs.forEach((e) => {
+            str += '<li class="lis"><img src="' + e.src + '" alt=""><div class="marsk"></div></li>';
         });
-        document.querySelector(".list").innerHTML=str;
+        document.querySelector(".list").innerHTML = str;
         //获取元素
         let topImg = document.querySelector(".top img");
         let picInfo = document.querySelector(".info .left");
@@ -91,7 +89,7 @@
         let now = 0;
         let imgsBox = document.querySelector('.list')
         let listBox = document.querySelector(".list_box");
-        marsk[0].style.display = 'none';
+        marsk[0].style.display = 'none';//默认第0个没有遮罩
         //点击图片的时候
         lisImg.forEach((e, i) => {
             e.onclick = function () {
@@ -101,6 +99,7 @@
                 marsk[now].style.display = "block";
                 now = i;
                 marsk[now].style.display = "none";
+                
             };
         });
         //点击下一张
@@ -112,23 +111,23 @@
             change(-1)
         };
         //封装函数
-        function change(num){
+        function change(num) {
             marsk[now].style.display = "block";
             now += num;
-            if (now <0 ) {
+            if (now < 0) {
                 now = lisImgs.length - 1;
             }
-            if(now > lisImgs.length - 1){
+            if (now > lisImgs.length - 1) {
                 now = 0
             }
             topImg.src = lisImgs[now].src;
             picInfo.innerHTML = lisImgs[now].info;
             picNum.innerHTML = (now + 1) + "/" + lisImgs.length;
-            imgsBox.scrollLeft = 118*now;
+            imgsBox.scrollLeft = 118 * now;
             marsk[now].style.display = "none";
         }
-        
-        
+
+
 
         //点击图片的时候
         // lisImg.forEach((e, i) => {

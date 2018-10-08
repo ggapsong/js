@@ -1,0 +1,15 @@
+.box .img {
+  float: left;
+  margin-right: 17px;
+  padding-top: 50px;
+}
+.box .img img {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #999;
+}
+.box .info {
+  padding-top: 50px;
+  font: 12px/18px "宋体";
+  color: #131313;
+}

@@ -58,7 +58,7 @@
                 contents[num].style.display = "none";
                 num = i;
                 contents[i].style.display = "block";
-                clearInterval(timer);
+                clearTimeout(timer);
             }
             e.onmouseout = function () {
                 timer = setTimeout(function () {
