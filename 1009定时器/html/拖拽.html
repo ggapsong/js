@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        let el = document.querySelector('.box');
+        el.style.position = 'relative';
+        el.onmousedown = function(ev){
+            var c_x = ev.clientX;
+            var c_y = ev.clientY;
+            var c_l = getStyle(this,'left');
+            var c_t = getStyle(this,'top');
+            document.onmousemove = function(ev){
+                console.log(1);
+                var x = ev.clientX;
+                var y = ev.clientY;
+                el.style.left = c_l + x - c_x + 'px';
+                el.style.top = c_t + y - c_y + 'px';
+            };
+            this.onmouseup = function(){
+                this.onmouseup = document.onmousemove = null;
+            }
+        }
+        function getStyle(el,attr){
+            return parseInt(getComputedStyle(el)[attr]);
+        }
+    </script>
+</body>
+</html>

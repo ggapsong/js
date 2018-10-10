@@ -157,58 +157,72 @@
     </nav>
     </div>
     <script>
-        let bottomlis = document.querySelectorAll(".subpics li");
+        let bottomlis = document.querySelectorAll(".subpics li"); //下面图片的li
         let num = 0;
-        let btns = document.querySelectorAll(".btn");
-        
-        let w = parseInt(getStyle(document.querySelector(".pics li"),'width'));
-        let w1 = parseInt(getStyle(document.querySelector(".subpics li"),'width'));
-        let w2 =  parseInt(getStyle(document.querySelector(".subPic"),'width'))- parseInt(getStyle(document.querySelector(".subpics"),'width'));
+        let btns = document.querySelectorAll(".btn"); //按钮
 
-        bottomlis.forEach((e,i)=>{
-            e.onclick = function () { 
+        let w = parseInt(getStyle(document.querySelector(".pics li"), 'width')); //上面一个li的宽度
+        let w1 = parseInt(getStyle(document.querySelector(".subpics li"), 'width')); //下面一个li的宽度
+        let w2 = parseInt(getStyle(document.querySelector(".subPic"), 'width')) - parseInt(getStyle(document.querySelector(
+            ".subpics"), 'width')); //下面div的宽度减去ul的宽度
+        let timer = 0;
+        let wrap = document.querySelector(".wrap")
+        bottomlis.forEach((e, i) => {
+            e.onclick = function () {
                 bottomlis[num].className = "";
                 num = i;
                 move()
                 bottomlis[num].className = "active";
-             }
+            }
         });
-        btns[0].onclick = function(){
+        btns[0].onclick = function () {
             bottomlis[num].className = "";
             num--;
-            if(num<0){
-                num = bottomlis.length-1;
+            if (num < 0) {
+                num = bottomlis.length - 1;
             }
             move()
             bottomlis[num].className = "active";
-            
+
         };
-        btns[1].onclick = function(){
+        btns[1].onclick = function () {
             bottomlis[num].className = "";
             num++;
-            if(num>bottomlis.length-1){
+            if (num > bottomlis.length - 1) {
                 num = 0;
             }
             move()
             bottomlis[num].className = "active";
         };
-        
-        function move(){
-            document.querySelector(".pics").style.transform="translate3d("+-num*w+"px,0,0)";
-            let s = -(num-2)*w1;
-            //pan
-            if(s<w2){
+
+        function move() {
+            document.querySelector(".pics").style.transform = "translate3d(" + -num * w + "px,0,0)";
+            let s = -(num - 2) * w1; //选中图片位置在中间
+            if (s < w2) {
                 s = w2;
             }
-            if(s>0){
-                s=0;
+            if (s > 0) {
+                s = 0;
             }
-            document.querySelector(".subpics").style.transform="translate3d("+s+"px,0,0)";
-        }
-        function getStyle(el, attr) {
-           return getComputedStyle(el)[attr];
+            document.querySelector(".subpics").style.transform = "translate3d(" + s + "px,0,0)";
         }
 
+        function getStyle(el, attr) {
+            return getComputedStyle(el)[attr];
+        }
+
+        function auto() {//添加定时器
+            timer = setInterval(function () {
+                btns[1].onclick()
+            }, 1000)
+        };
+        auto()
+        wrap.onmouseover = function () {//清除定时器
+            clearInterval(timer);
+        }
+        wrap.onmouseout = function () {//添加定时器
+            auto()
+        }
 
 
 
