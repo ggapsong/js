@@ -1,33 +1,16 @@
-function move(el,attr,target,time){
-    let delay = 20; //定时器的执行间隔
-    let t = 0;//当前次
-    let b = css(el,attr);//初始值
-    let c = target - b; // 动画运动的距离 初始值 和 目标的差值
-    let d = Math.ceil(time/delay);//动画总次数
-    clearInterval(timer);
-    timer = setInterval(()=>{
-        t++;//当前次数增加1
-        if(t > d){//如果当前次大于动画的总次数
-            clearInterval(timer);//清除定时器
-        } else {
-            let val = c/d*t + b;// 差值/动画总次数*当前次+初始值     当前元素所在的位置
-            css(el,attr,val);//元素 属性 属性值
-        }
-    },delay)
-}
 let Tween = {
-	linear: function (t, b, c, d){//匀速运动：
-		return c*t/d + b;//返回值：差值*当前次/总次数+初始值
+	linear: function (t, b, c, d){
+		return c*t/d + b;
 	},
 	easeIn: function(t, b, c, d){
-		return c*(t/=d)*t + b;//返回值 差值  乘以 （当前次  除等于  动画的总次数） 乘 当前次加初始值
+		return c*(t/=d)*t + b;
 	},
 	easeOut: function(t, b, c, d){
-		return -c *(t/=d)*(t-2) + b;//-差值乘（当前次除等于总次数）乘（当前次减2）加初始值
+		return -c *(t/=d)*(t-2) + b;
 	},
 	easeBoth: function(t, b, c, d){
-		if ((t/=d/2) < 1) {//（当前次除等总次数/2）<1
-			return c/2*t*t + b;  //返回值 差值/2*当前次*当前次+初始值
+		if ((t/=d/2) < 1) {
+			return c/2*t*t + b;
 		}
 		return -c/2 * ((--t)*(t-2) - 1) + b;
 	},
@@ -144,26 +127,62 @@ let Tween = {
 		return Tween['bounceOut'](t*2-d, 0, c, d) * 0.5 + c*0.5 + b;
 	}
 };
-
-// css方法 用来获取 或者 设置样式
-/*
-    el, 获取样式的元素
-    attr, 对应的样式
-    value 对应的值
-*/
 function css(el,attr,val){
-    if(val === undefined){//如果val没有传，说明想要获取样式
-        return el.currentStyle?parseFloat(el.currentStyle[attr]):parseFloat(getComputedStyle(el)[attr]);
-        //如果是IE浏览器执行parseFloat(el.currentStyle[attr])；其他浏览器执行parseFloat(getComputedStyle(el)[attr]);
-    }  
-    // 没有走就说明想要设置样式
-    switch(attr){//switch判断
-        case "opacity"://如果是opacity
-            el.style.filter = "alpha(opacity="+(val*100)+")";
+    if(val === undefined){
+        return parseFloat(getComputedStyle(el)[attr]);
+    }
+    switch(attr){
         case "zIndex":
+        case "opacity":
             el.style[attr] = val;
             break;
         default:
-            el.style[attr] = val + "px";
+            el.style[attr] = val + "px";    
     }
+}
+/*
+op:{
+	el: 动画的元素,
+	attr: {
+		样式：值,
+		样式：值
+	}[,
+		time: 动画时间,
+		type: 动画形式,
+		cb: function(){
+			动画执行完成之后要做的事情
+		}
+	]
+}	
+*/
+function mTween(op){
+    let init = {
+        time: 400,
+        type: "easeBothStrong"
+    };
+    for(let s in op){
+        init[s] = op[s];
+    }
+    let delay = 1000/60; 
+    let t = 0;
+    let b = {};
+    let c = {};
+    let d = Math.ceil(init.time/delay);
+    for(let s in init.attr){
+        b[s] = css(init.el,s); 
+        c[s] = init.attr[s] - b[s];
+    }
+    clearInterval(init.el.timer);
+    init.el.timer = setInterval(()=>{
+        t++;
+        if(t > d){
+			clearInterval(init.el.timer);
+			init.cb&&init.cb();
+        } else {
+            for(let s in b){
+                let val = Tween[init.type](t,b[s],c[s],d);
+                css(init.el,s,val); 
+            }
+        }
+    },delay);
 }

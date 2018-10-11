@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap {
+            width: 500px;
+            height: 500px;
+            border: 2px solid #000;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <script src="../../global.js/global.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="box"></div>
+    </div>
+    <script>
+        function n() {
+            // let speedX = 0;
+            // let speedY = 0;
+            // let timer = setInterval(function () {
+            //     let box = document.querySelector(".box");
+            //     let t = css(box, "top");
+            //     let l = css(box, "left");
+            //     if (l == 0 && t == 0) {
+            //         speedX = 10
+            //         speedY = 0
+            //     } 
+            //     else if (l == 400 && t == 0) {
+            //         speedX = 0
+            //         speedY = 10
+            //     } else if (l == 400 && t == 400) {
+            //         speedX = -10
+            //         speedY = 0
+            //     } else if (l == 0 && t == 400) {
+            //         speedX = 0
+            //         speedY = -10
+            //     }
+            //     css(box, "left", l + speedX),
+            //     css(box, "top", t + speedY)
+            // }, 20)
+            let speedX = 0;
+            let speedY = 0
+            let box = document.querySelector(".box")
+            let timer = setInterval(function () {
+                let l = css(box, "left")
+                let t = css(box, "top")
+                if (l == 0 && t == 0) {
+                    speedX = 10,
+                    speedY = 0
+                } else if (l == 400 && t == 0) {
+                    speedX = 0,
+                    speedY = 10
+                } else if (l == 400 && t == 400) {
+                    speedX = -10,
+                    speedY = 0
+                } else if (l == 0 && t == 400) {
+                    speedX = 0,
+                    speedY = -10
+                }
+                css(box, "left", l + speedX)
+                css(box, "top", t + speedY)
+            }, 20)
+        }
+        n()
+    </script>
+</body>
+
+</html>

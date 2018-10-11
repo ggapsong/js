@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap {
+            width: 500px;
+            height: 500px;
+            border: 2px solid #000;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <script src="../../global.js/global.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="box"></div>
+    </div>
+    <script>
+        let box = document.querySelector(".box");
+        box.onclick = function () {
+            movel()
+        }
+
+        function movel() {
+            mTween({
+                el: box,
+                attr: {
+                    left: 400
+                },
+                type:"bounceOut",
+                time:1000,
+                cb: movet
+            });
+        }
+
+        function movet() {
+            mTween({
+                el: box,
+                attr: {
+                    top: 400
+                },
+                type:"bounceOut",
+                time:1000,
+                cb: mover
+            });
+        }
+
+        function mover() {
+            mTween({
+                el: box,
+                attr: {
+                    left: 0
+                },
+                type:"bounceOut",
+                time:1000,
+                cb: moveb
+            });
+        }
+
+        function moveb() {
+            mTween({
+                el: box,
+                attr: {
+                    top: 0
+                },
+                type:"bounceOut",
+                time:1000,
+                cb: movel
+            });
+        }
+    </script>
+</body>
+
+</html>
