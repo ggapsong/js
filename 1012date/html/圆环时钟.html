@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/clock.css">
+    <script src="../../global.js/miaov.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="line"></ul>
+        <ul class = "num">
+            <li><span>1</span></li>
+        </ul>
+        <div class="center"></div>
+        <div class="hour"></div>
+        <div class="min"></div>
+        <div class="s"></div>
+        <!-- <div class="line"></div> -->
+    </div>
+
+    <script>
+        let hour = document.querySelector(".hour"); //时针
+        let min = document.querySelector(".min"); //分针
+        let ss = document.querySelector(".s"); //秒针
+        css(hour, "rotate")
+        //秒针每次旋转60/360度
+        //分针
+        clock()
+        setInterval(clock, 1000)
+
+        function clock() {
+            let date = new Date();
+            let s = date.getSeconds();
+            let m = date.getMinutes() + s / 60;
+            let h = date.getHours() + m / 60;
+            css(hour, "rotate", 30 * h)
+            css(min, "rotate", 6 * m)
+            css(ss, "rotate", 6 * s)
+        }
+
+        lines()
+        function lines() {
+            let line = document.querySelector(".line");
+            let num = document.querySelector(".num")
+            let str = ""; 
+            let num1 = "";
+            for (let i = 0; i < 60; i++) {
+                str += `<li style="transform:rotate(${6*i}deg)"></li>`
+            }
+            for(let n=0;n<12;n++){
+                num1+=`<li style="transform:rotate(${30*n}deg)"><span >${n?n:12}</span></li>`
+            }
+            line.innerHTML = str;
+            num.innerHTML = num1;
+            let span = document.querySelectorAll(".num span")
+            span.forEach((item,index) => {
+                css(item,"rotate",-30*index);
+            });
+        }
+
+
+
+
+        // css(line,"top");
+        // for(let i=0;i<12;i++){
+        //     box.innerHTML+=`<div class="line"></div>`;
+        //     //改变line的top值
+        //     mTween({
+        //         el:line,
+        //         attr:{
+
+        //         }
+        //     })
+        // };
+    </script>
+</body>
+
+</html>

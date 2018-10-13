@@ -1,0 +1,100 @@
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.box{
+    width: 400px;
+    height: 400px;
+    background-color: #fff;
+    border:1px solid #000;
+    border-radius: 50%;
+    margin:50px auto;
+    position: relative ;
+    .line{
+        position:absolute;
+        li{
+            width: 1px;
+            height: 10px;
+            background-color: #ccc;
+            position: absolute;
+            top:0px;
+            left: 200px;
+            transform-origin:center 200px;
+        }
+        li:nth-of-type(5n+1){
+            height: 15px;
+            background-color: #000;
+        }
+    }
+    .num{
+        position:relative;
+        height: 400px;
+        width: 400px;
+        li{
+            
+            position: absolute;
+            height: 30px;
+            width: 30px;
+            transform-origin:center 185px;
+            top:15px;
+                left:185px;
+            span{
+                font:30px/30px "宋体";
+                width: 30px;
+                color:#000;
+                // top:15px;
+                // left:185px;
+                position: absolute;
+                // transform-origin:center 185px;
+                text-align: center;
+                display: inline-block;
+            }
+           
+        }
+    }
+    .center{
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #f00;
+        position: absolute;
+        top:190px;
+        left: 195px;
+        z-index: 4;
+    }
+    .hour{
+        width:10px;
+        height: 120px;
+        background-color: #000;
+        position: absolute;
+        top:80px;
+        left:195px;
+        z-index: 1;
+        transform: rotate(0);
+        transform-origin: bottom;
+    }
+    .min{
+        width:10px;
+        height: 150px;
+        background-color: #ccc;
+        position: absolute;
+        top:50px;
+        left:195px;
+        z-index: 2;
+        transform: rotate(0);
+        transform-origin: bottom;
+    }
+    .s{
+        width:10px;
+        height: 150px;
+        background-color: #333;
+        position: absolute;
+        top:50px;
+        left:195px;
+        z-index: 3;
+        transform: rotate(0);
+        transform-origin: bottom;
+    }
+   
+}

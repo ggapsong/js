@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            background-color: #ffaf31;
+            width: 450px;
+        }
+
+        nav {
+            overflow: hidden;
+        }
+
+        nav div {
+            float: left;
+            width: 146px;
+            height: 40px;
+            margin: 0 1px;
+            text-align: center;
+            line-height: 40px;
+            background-color: #fff;
+        }
+
+        nav .active {
+            background-color: #ffaf31;
+            color: #fff;
+        }
+
+        .img_box {
+            vertical-align: top;
+            display: inline-block;
+            width: 182px;
+            height: 182px;
+        }
+
+        .img_box img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .news {
+            display: inline-block;
+            vertical-align: top;
+            width: 225px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .news li {
+            height: 60px;
+            text-align: left;
+            text-indent: 28px;
+        }
+
+        .news li div {
+            line-height: 30px;
+        }
+
+        .news li.active {
+            background-color: #fff;
+        }
+        .content{
+            display: none;
+        }
+        .c_active{
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <nav>
+            <!-- <div class="tabItems active">专题</div>
+            <div class="tabItems">视频</div>
+            <div class="tabItems">图片</div> -->
+        </nav>
+        <div align="center" style="margin-top:18px;" class="c_active content">
+            <div class="img_box">
+                <img src="../img/01.jpg" alt="">
+            </div>
+            <ul class="news">
+                
+            </ul>
+        </div>
+        <div align="center" style="margin-top:18px;" class="content">
+            <div class="img_box">
+                <img src="../img/01.jpg" alt="">
+            </div>
+            <ul class="news">
+                
+            </ul>
+        </div>
+        <div align="center" style="margin-top:18px;" class="content">
+            <div class="img_box">
+                <img src="../img/01.jpg" alt="">
+            </div>
+            <ul class="news">
+               
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+let data = [
+    {
+        title: '专题',
+        content: [
+            {
+                src:'../img/01.jpg',
+                itemTitle:'我是标题0-0',
+                time:'2012-10-12'
+            },
+            {
+                src:'../img/02.jpg',
+                itemTitle:'我是标题0-1',
+                time:'2012-10-12'
+            },
+            {
+                src:'../img/03.jpg',
+                itemTitle:'我是标题0-2',
+                time:'2012-10-12'
+            }
+        ]
+    },
+    {
+        title: '视频',
+        content: [
+            {
+                src:'../img/01.jpg',
+                itemTitle:'我是标题1-0',
+                time:'2012-10-12'
+            },
+            {
+                src:'../img/02.jpg',
+                itemTitle:'我是标题1-1',
+                time:'2012-10-12'
+            },
+            {
+                src:'../img/03.jpg',
+                itemTitle:'我是标题1-2',
+                time:'2012-10-12'
+            }
+        ]
+    },
+    {
+        title: '图片',
+        content: [
+            {
+                src:'../img/01.jpg',
+                itemTitle:'我是标题2-0',
+                time:'2012-10-12'
+            },
+            {
+                src:'../img/02.jpg',
+                itemTitle:'我是标题2-1',
+                time:'2012-10-12'
+            },
+            {
+                src:'../img/03.jpg',
+                itemTitle:'我是标题2-2',
+                time:'2012-10-12'
+            }
+        ]
+    }
+];
+//向页面中添加元素
+let contents = document.querySelectorAll('.content');
+let navstr = '';
+data.forEach((e,i)=>{
+    navstr += `<div class="tabItems ${i==0?'active':''}">${e.title}</div>`;
+    e.content.forEach((e1,i1)=>{
+        contents[i].querySelector('.news').innerHTML += `<li class="${i1==0?'active':""}">
+                                                        <div class="title">${e1.itemTitle}</div>
+                                                        <div class="time">${e1.time}</div>
+                                                    </li>`
+    })
+})
+document.querySelector('nav').innerHTML = navstr;
+
+let navs = document.querySelectorAll("nav .tabItems")//所有的nav
+let news = document.querySelectorAll(".news li");//所有的内容项
+let img = document.querySelectorAll('img');//获取所有的img
+let num = news.length / navs.length;//
+let navsNum = 0;//记录标题和内容
+let lisNum = 0;//记录lis
+let timer = 0;
+
+navs.forEach((e,i)=>{
+    e.onmouseover = function(){
+        navs[navsNum].classList.remove('active');
+        contents[navsNum].classList.remove('c_active');
+        news[lisNum].className = '';
+        navsNum = i;
+        // lisNum = i*num;
+        news[lisNum].className = 'active';
+        navs[navsNum].classList.add('active');
+        contents[navsNum].classList.add('c_active');
+    }
+})
+news.forEach((e,i)=>{
+    e.onmouseover = function(){
+        news[lisNum].className = '';
+        lisNum = i;
+        news[lisNum].className = 'active';
+        img[navsNum].src = data[navsNum].content[lisNum%num].src;
+    }
+})
+
+timer = setInterval(timerChange,1000);
+
+document.querySelector('.box').onmouseover = function(){
+    clearInterval(timer);
+}
+document.querySelector('.box').onmouseout = function(){
+    timer = setInterval(timerChange,1000);
+}
+
+function timerChange(){
+    news[lisNum].className = '';
+    lisNum++;
+    if(lisNum%num==0){
+        navs[navsNum].classList.remove('active');
+        contents[navsNum].classList.remove('c_active');
+        navsNum++;
+        if(navsNum>=navs.length){
+            navsNum=0;
+            lisNum=0;
+        }
+        navs[navsNum].classList.add('active');
+        contents[navsNum].classList.add('c_active');
+    }
+    news[lisNum].className = 'active';
+    img[navsNum].src = data[navsNum].content[lisNum%3].src;
+}
+</script>
+</html>
