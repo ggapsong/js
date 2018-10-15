@@ -34,7 +34,7 @@
             <img class="num" src="../img/0.png" alt="0" longdesc="http://www.miaov.com" />
             <img class="num" src="../img/0.png" alt="0" longdesc="http://www.miaov.com" />
             <img class="pos2" src="../img/week.png" alt="week" longdesc="http://www.miaov.com" />
-            <img class="num2" src="../img/one.png" alt="1" longdesc="http://www.miaov.com" />
+            <img class="num2" src="../img/two.png" alt="1" longdesc="http://www.miaov.com" />
         </div>
         <div class="url" title="妙味课堂-超酷时钟"><a href="http://www.miaov.com/"><img src="../img/miaov.png" alt="妙味课堂"
                     longdesc="http://www.miaov.com" /></a></div>
@@ -42,7 +42,8 @@
 </body>
 <script src="../../global.js/miaov.js"></script>
 <script>
-    let pic = [
+    timer = 0;
+    let arrNum = [
         "../img/0.png",
         "../img/1.png",
         "../img/2.png",
@@ -54,39 +55,56 @@
         "../img/8.png",
         "../img/9.png"
     ]
-    let nums = document.querySelectorAll(".num");
-    toTab();
-    setInterval(toTab,1000);
-    function toTab(){
-        //时间切换
-        let date = new Date();
-        let time = date.getFullYear() + toDB(date.getMonth()+1) + toDB(date.getDate()) + toDB(date.getHours())+toDB(date.getMinutes())+toDB(date.getSeconds())      
-        nums.forEach((item,index)=>{
-            if(nums[index].alt == time[index]){
-                return;
-            }
-            nums[index].alt = time[index]
-            css(item,"rotateX",0);
+    let arrweek = [
+        "../img/seven.png",
+        "../img/one.png",
+        "../img/two.png",
+        "../img/three.png",
+        "../img/four.png",
+        "../img/five.png",
+        "../img/six.png"
+    ]
+    //以上是获取元素
+    clock();
+    timer = setInterval(clock, 1000);
+    function clock() {
+        let time = new Date();
+        let year = time.getFullYear();
+        let month = time.getMonth();
+        let date = time.getDate();
+        let hour = time.getHours();
+        let Minutes = time.getMinutes();
+        let Seconds = time.getSeconds();
+        let day = time.getDay();
+        let num = document.querySelectorAll(".num");
+        let num2 = document.querySelector(".num2");
+        let now = year + ToDuble(month + 1) + ToDuble(date) + ToDuble(hour) + ToDuble(Minutes) + ToDuble(Seconds)
+
+        //图片和时间对应
+        num.forEach((e, i) => {
+            // e.src = arrNum[now[i]];图片和时间对应
+            css(e,"rotate",0)
             mTween({
-                el: item,
-                attr: {
-                    rotateX: 90,
+                el:e,
+                attr:{
+                    rotate:"90",
                 },
-                cb:function(){
-                    nums[index].src = pic[time[index]];
-                    css(item,"rotateX",270);
-                    mTween({
-                        el: item,
-                        attr: {
-                            rotateX: 360,
-                        }
-                    });
-                }
-            });
-        });
+                type:"linear",
+                time:200
+                
+            })
+        })
+        //week
+        num2.src = arrweek[day];
     }
-    function toDB(nub){
-        return nub < 10?"0"+nub:""+nub;
+
+
+
+
+
+    //ToDuble
+    function ToDuble(num) {
+        return num < 10 ? "0" + num : "" + num;
     }
 </script>
 

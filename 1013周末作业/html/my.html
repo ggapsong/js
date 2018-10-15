@@ -182,61 +182,96 @@
         })
     })
     document.querySelector('nav').innerHTML = navstr;
-    let navs = document.querySelectorAll("nav .tabItems") //所有的nav
-    let news = document.querySelectorAll(".news li"); //所有的内容项
-    let img = document.querySelectorAll('img'); //获取所有的img
-    let navsNum = 0; //记录标题和内容
-    let lisNum = 0; //记录lis
-    let timer = 0;
-    let box = document.querySelector(".box");
+    //以上是往页面中添加元素
+    let navs = document.querySelectorAll(".tabItems"); //所有的nav
+    let img = document.querySelectorAll("img");
+    let navnum = 0;
+    let lisnum = 0;
+    // let list = contents.querySelectorAll("li");
+    //nav切换
+    data[0].content[0].src
+    navchange();
 
-    navs.forEach((item, index) => {
-        item.onmouseover = function () {
-            navs[navsNum].classList.remove("active");
-            contents[navsNum].classList.remove("c_active");
-            news[lisNum].classList.remove("active");
-            navsNum = index;
-            lisNum = index * 3;
-            img[navsNum].src = data[navsNum].content[0].src;
-            navs[navsNum].classList.add("active");
-            contents[navsNum].classList.add("c_active");
-            news[lisNum].classList.add("active");
-        }
-    })
-    news.forEach((item, index) => { //0-8
-        item.onmouseover = function () {
-            news[lisNum].classList.remove("active")
-            lisNum = index;
-            img[navsNum].src = data[navsNum].content[index % 3].src
-            news[lisNum].classList.add("active")
-        }
-    })
-    //定时器
-    box.onmouseover = function () { //移入清除定时器
+    function navchange() {
+        navs.forEach((item, index) => {
+            lichange(index);
+            item.onmouseover = function () {
+                navs.forEach((i, l) => {
+                    i.classList.remove("active");
+                    contents[l].classList.remove("c_active");
+                })
+                item.classList.add("active");
+                contents[index].classList.add("c_active");
+                navnum = index;
+                // let lis = contents[index].querySelectorAll("li");
+                // lis.forEach((i, l) => {
+                //     i.classList.remove("active");
+                // })
+                // lis[0].classList.add("active");
+               
+                lis = contents[navnum].querySelectorAll("li");
+                lis.forEach((item,index =>{
+                    if(lis[item].className == "active"){
+                        lisnum = index;
+                    }
+                }))
+                img[navnum].src = data[navnum].content[lisnum].src
+
+            }
+        })
+    }
+    //li切换
+    function lichange(n) {
+        let lis = contents[n].querySelectorAll("li");
+        lis.forEach((e, i) => {
+            e.onmouseover = function () {
+                lis.forEach((item, index) => {
+                    item.classList.remove("active");
+                })
+                e.classList.add("active");
+               
+                lisnum = i;
+                img[navnum].src = data[navnum].content[lisnum].src
+                
+            }
+        })
+    }
+    // 定时器
+    let box = document.querySelector(".box");
+    box.onmouseover = function () {
         clearInterval(timer);
     }
-    box.onmouseout = function () { //加定时器
-        settimer()
+    box.onmouseout = function () {
+        timerchange()
     }
-    settimer()
 
-    function settimer() {
+    let timer = 0;
+    timerchange()
+
+    function timerchange() {
         timer = setInterval(function () {
-            news[lisNum].classList.remove("active")
-            lisNum++;
-            if (lisNum % 3 == 0) {
-                navs[navsNum].classList.remove("active");
-                contents[navsNum].classList.remove("c_active");
-                navsNum++;
-                if (navsNum >= navs.length) {
-                    navsNum = 0;
-                    lisNum = 0;
+            let lis = contents[navnum].querySelectorAll("li");
+            // lis[lisnum].classList.remove("active");
+            lisnum++;
+            if (lisnum > lis.length - 1) {
+                lisnum = 0;
+                navnum++;
+                if (navnum > navs.length - 1) {
+                    navnum = 0;
                 }
-                navs[navsNum].classList.add("active");
-                contents[navsNum].classList.add("c_active");
+                lis = contents[navnum].querySelectorAll("li");
+                navs.forEach((i, l) => {
+                    i.classList.remove("active");
+                    contents[l].classList.remove("c_active");
+                })
+                navs[navnum].classList.add("active");
+                contents[navnum].classList.add("c_active");
             }
-            img[navsNum].src = data[navsNum].content[lisNum % 3].src
-            news[lisNum].classList.add("active")
+            lis.forEach((item, index) => {
+                item.classList.remove("active");
+            })
+            lis[lisnum].classList.add("active");
+            img[navnum].src = data[navnum].content[lisnum].src
         }, 1000)
     }
 </script>

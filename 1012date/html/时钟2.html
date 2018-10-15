@@ -87,32 +87,52 @@
         </div>
     </div>
     <script>
-        //小点闪动
         let dot = document.querySelectorAll(".dot");
-        dotmove()
-        setInterval(dotmove,1000)
+        timer = 0;
+        timer = setInterval(dotmove, 1000)
+        let nub = document.querySelectorAll(".nub")
+        dotmove();
+
         function dotmove() {
-            dot.forEach((item) => {
+            dot.forEach((item, index) => {
                 mTween({
                     el: item,
                     attr: {
-                        opacity: 0,
+                        opacity: 0
                     },
-                    time: 200,
                     type: "linear",
+                    time: 200,
                     cb: function () {
                         mTween({
                             el: item,
                             attr: {
                                 opacity: 1,
-                            },
-                            time: 200,
-                            type: "linear",
+                            }
                         })
                     }
-
                 })
             })
+            let date = new Date();
+            let nowtime = toduble(date.getHours()) + toduble(date.getMinutes()) + toduble(date.getSeconds());
+            nub.forEach((item, index) => {
+                let spans = item.querySelectorAll("span");
+                //151515
+                if (spans[1].innerHTML == nowtime[index]){
+                    return false
+                };
+                spans[0].innerHTML = spans[1].innerHTML;
+                spans[1].innerHTML = nowtime[index];
+                css(item, "translateY", 0);
+                mTween({
+                    el: item,
+                    attr: {
+                        translateY: -100,
+                    },
+                });
+            })
+        }
+        function toduble(num) {
+            return num < 10 ? "0" + num : "" + num;
         }
     </script>
 </body>

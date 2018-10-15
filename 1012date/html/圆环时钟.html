@@ -32,7 +32,6 @@
         //分针
         clock()
         setInterval(clock, 1000)
-
         function clock() {
             let date = new Date();
             let s = date.getSeconds();
@@ -42,7 +41,6 @@
             css(min, "rotate", 6 * m)
             css(ss, "rotate", 6 * s)
         }
-
         lines()
         function lines() {
             let line = document.querySelector(".line");
@@ -62,21 +60,6 @@
                 css(item,"rotate",-30*index);
             });
         }
-
-
-
-
-        // css(line,"top");
-        // for(let i=0;i<12;i++){
-        //     box.innerHTML+=`<div class="line"></div>`;
-        //     //改变line的top值
-        //     mTween({
-        //         el:line,
-        //         attr:{
-
-        //         }
-        //     })
-        // };
     </script>
 </body>
 
