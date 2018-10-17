@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap {
+            width: 520px;
+            height: 140px;
+            margin: 200px auto;
+            background-color: #ccc;
+        }
+
+        .box {
+            width: 500px;
+            height: 95px;
+            margin: 0 auto;
+            padding-top: 7px;
+        }
+
+        .img {
+            width: 95px;
+            height: 95px;
+            margin-right: 6px;
+            float: left;
+        }
+
+        .img5 {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<script src="../../global.js/miaov.js"></script>
+
+<body>
+    <div class="wrap">
+        <div class="box">
+            
+        </div>
+        <button>
+            <<</button> <button>>>
+        </button>
+    </div>
+    <script>
+        let box = document.querySelector(".box");
+        let button = document.querySelectorAll("button");
+        let imgsrc = [
+            "../img/1_03.png",
+            "../img/1_05.png",
+            "../img/1_07.png",
+            "../img/1_09.png",
+            "../img/1_11.png"
+        ];
+        render()
+        button[0].onclick = function () {
+            imgsrc.push(imgsrc.shift());
+            render();
+        }
+        button[1].onclick = function () {
+            imgsrc.unshift(imgsrc.pop());
+            render();
+        }
+
+        function render() {
+            let str = '';
+            imgsrc.forEach((e, i) => {
+                if (i == imgsrc.length - 1) {
+                    str +=`<div class="img img5">
+                            <img src=${imgsrc[i]} alt="">
+                        </div>`;
+                } else {
+                    str +=
+                        `<div class="img">
+                            <img src=${imgsrc[i]} alt="">
+                        </div>`;
+                }
+            })
+            box.innerHTML = str;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap {
+            width: 1000px;
+            height: 1200px;
+            /* border: 1px solid #000; */
+            margin: 50px auto;
+        }
+
+        .bottom {
+            overflow: hidden;
+            width: 950px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 0 auto;
+        }
+
+        .bottom .box {
+            width: 200px;
+            height: 200px;
+            background-color: #fff;
+            border: 1px solid #000;
+            font: 30px/200px "宋体";
+            color: #fff;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .num {
+            font: 24px/30px "宋体";
+            color: #000;
+            width: 150px;
+            height: 40px;
+            background-color: #fff;
+            border: 1px solid #000;
+            margin: -25px auto 0;
+            border-radius: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="top">
+            <button>从小到大</button>
+            <button>打乱数据</button>
+        </div>
+        <div class="bottom">
+            <div class="box">
+                <div class="english">one</div>
+                <div class="num">1</div>
+            </div>
+            <div class="box">
+                <div class="english">two</div>
+                <div class="num">2</div>
+            </div>
+            <div class="box">
+                <div class="english">three</div>
+                <div class="num">3</div>
+            </div>
+            <div class="box">
+                <div class="english">four</div>
+                <div class="num">4</div>
+            </div>
+            <div class="box">
+                <div class="english">five</div>
+                <div class="num">5</div>
+            </div>
+            <div class="box">
+                <div class="english">six</div>
+                <div class="num">6</div>
+            </div>
+            <div class="box">
+                <div class="english">seven</div>
+                <div class="num">7</div>
+            </div>
+            <div class="box">
+                <div class="english">eight</div>
+                <div class="num">8</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let num = document.querySelectorAll(".num");
+        let button = document.querySelectorAll("button");
+        let english = document.querySelectorAll(".english")
+        let box = document.querySelectorAll(".box");
+        let arr = ["1","2","3","4","5","6","7","8"]//num的内容
+        let arrnum = [0,1,2,3,4,5,6,7];//用来排序
+        let arrenglish = [//box里面的内容
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+        ]
+        let arrcolor = [//box的颜色
+            "red",
+            "#000",
+            "yellow",
+            "green",
+            "Blue",
+            "#ccc",
+            "purple",
+            "pink"
+        ]
+        box.forEach(function(item,index){
+                item.style.background = arrcolor[arrnum[index]];
+            })
+        button[0].onclick = function(){
+            arrnum.sort(function(n1,n2){
+                return n1-n2;
+            })
+            num.forEach((item,index)=>{
+                item.innerHTML = arr[arrnum[index]];
+            })
+            english.forEach(function(item,index){
+                item.innerHTML = arrenglish[arrnum[index]];
+            })
+            box.forEach(function(item,index){
+                item.style.background = arrcolor[arrnum[index]];
+            })
+        }
+        button[1].onclick = function () {  
+            arrnum.sort(()=>Math.random()-.5);
+            num.forEach((item,index)=>{
+                item.innerHTML = arr[arrnum[index]];
+            })
+            english.forEach(function(item,index){
+                item.innerHTML = arrenglish[arrnum[index]];
+            })
+            box.forEach(function(item,index){
+                item.style.background = arrcolor[arrnum[index]];
+            })
+        }   
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+.box{
+    width: 300px;
+    height: 300px;
+    border: 1px solid #000;
+}
+</style>
+
+<body>
+    <div class="box">作为朋友，你要学会倾听。当你的朋友遇到挫折、碰上烦恼，他便要找一个发泄情感的对象，而你作为朋友能够真诚、耐心地倾听对方的诉说，就是为朋友开了一个情感的发泄口。朋友在向你诉说的过程中</div>
+    <input type="text">
+    <button>查找</button>
+    <input type="text">
+    <button>替换</button>
+    <script>
+    let box = document.querySelector(".box");
+    let input = document.querySelectorAll("input");
+    let button = document.querySelectorAll("button");
+    let text = box.innerHTML;
+    
+    console.log(text);
+    //数据的查找
+    button[0].onclick = function(){
+        box.innerHTML = text.split(input[0].value).join('<mark>'+input[0].value+'</mark>');
+    };
+     //数据的替换
+     //把input0里面的内容替换成input1里面的内容
+    button[1].onclick = function(){
+        box.innerHTML = text.split(input[1].value).splice(input[0].value.index,input[1].value.length,input[1].value).join('<mark>'+input[1].value+'</mark>');
+    };
+
+   // splice 替换数组
+// - 语法: arr.splice(index,length[,newData,newData2...])
+// - 参数: 
+//     index: 从第几位开始替换
+//     length: 替换掉几位
+//     newData: 要替换进去的新数据
+// - 返回值：
+//     被替换掉的数据，组成新数组
+// - 指定位删除: arr.splice(1,1); 不写需要替换进去的新数据
+// - 指定位添加: arr.splice(index,0,newData);
+// - 指定位替换: arr.splice(index,length,newData); 
+
+    </script>
+</body>
+
+</html>
+<script>
+// let info = text.split(input.value);
+// console.log(info);
+// let arr = "";
+// info.forEach((e,i) => {
+//     arr += e;
+//     if(i<info.length-1){
+//         arr+=`<mark>${input.value}<mark>`
+//     } 
+// });
+// box.innerHTML = arr;
+</script>
