@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .left {
+            width: 500px;
+            height: 500px;
+        }
+
+        .right {
+            width: 500px;
+            height: 500px;
+        }
+
+        p {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea class="left"></textarea>
+    <button>向右移动</button>
+    <button>向左移动</button>
+    <p>0/0</p>
+    <textarea class="right"></textarea>
+    <script>
+        let textarea = document.querySelectorAll("textarea");
+        let button = document.querySelectorAll("button");
+        let p = document.querySelector("p")
+        let timer = 0;
+        let index = 0;
+        button[0].onclick = function () {
+            index = 0;
+            let l = textarea[0].value;
+            clearInterval(timer)
+            timer = setInterval(function () {
+                index++;
+                if (index > l.length) {
+                    clearInterval(timer);
+                } else {
+                    let l1 = l.substr(0, index);
+                    let l2 = l.substr(index);
+                    p.innerHTML = `${l2.length}/${l.length}`
+                    textarea[1].value = l1;
+                    textarea[0].value = l2;
+                }
+            }, 20)
+        }
+        // button[1].onclick = function () {
+        //     index = 0;
+        //     let r = textarea[1].value;
+        //     clearInterval(timer);
+        //     timer = setInterval(function(){
+        //         index++
+        //         if(index>=r.length){
+        //             clearInterval(timer);
+        //         }
+        //         let r1 = r.substr(0,r.length-index);
+        //         let r2 = r.substr(r.length-index);
+        //         p.innerHTML = `${r2.length}/${r.length}`
+        //         textarea[1].value = r1;
+        //         textarea[0].value = r2;
+        //     },200)
+        // }
+        button[1].onclick = function () {
+            index = 0;
+            let r = textarea[1].value;
+            clearInterval(timer)
+            timer = setInterval(function () {
+                index--;
+                if (index > 0) {
+                    clearInterval(timer);
+                } else {
+                    let r1 = r.substr(0, index);
+                    let r2 = r.substr(index);
+                    p.innerHTML = `${r2.length}/${r.length}`
+                    textarea[1].value = r1;
+                    textarea[0].value = r2;
+                }
+            }, 20)
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // button[0].onclick = function () {
+        //     index = 0;
+        //     let l = textarea[0].value; //左边输入框的内容
+        //     // let r = textarea[1].value;//右边输入框的内容
+        //     clearInterval(timer)
+        //     timer = setInterval(function () {
+        //         let l1 = l.substr(0, index); //左边输入框内容截取的第一部分
+        //         let l2 = l.substr(index); //左边输入框内容截取的第二部分
+        //         p.innerHTML = `${l2.length}/${l.length}`
+        //         index++;
+        //         if (index > l.length) {
+        //             clearInterval(timer)
+        //         }
+        //         textarea[1].value = l1;
+        //         textarea[0].value = l2;
+        //     }, 20)
+        // }
+        // button[1].onclick = function () {
+        //     index = 0;
+        //     let r = textarea[1].value; //左边输入框的内容
+        //     // let r = textarea[1].value;//右边输入框的内容
+        //     clearInterval(timer)
+        //     timer = setInterval(function () {
+        //         let r1 = r.substr(0, r.length-index); //左边输入框内容截取的第一部分
+        //         let r2 = r.substr(r.length-index); //左边输入框内容截取的第二部分
+        //         p.innerHTML = `${r2.length}/${r.length}`
+        //         index++;
+        //         if (index > r.length) {
+        //             clearInterval(timer)
+        //         }
+        //         textarea[1].value = r1;
+        //         textarea[0].value = r2;
+        //     }, 200)
+        // }
+    </script>
+</body>
+
+</html>

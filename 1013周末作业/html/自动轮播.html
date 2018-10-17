@@ -187,7 +187,7 @@ document.querySelector('nav').innerHTML = navstr;
 let navs = document.querySelectorAll("nav .tabItems")//所有的nav
 let news = document.querySelectorAll(".news li");//所有的内容项
 let img = document.querySelectorAll('img');//获取所有的img
-let num = news.length / navs.length;//
+let num = news.length / navs.length;
 let navsNum = 0;//记录标题和内容
 let lisNum = 0;//记录lis
 let timer = 0;
@@ -198,7 +198,7 @@ navs.forEach((e,i)=>{
         contents[navsNum].classList.remove('c_active');
         news[lisNum].className = '';
         navsNum = i;
-        // lisNum = i*num;
+        lisNum = i*num;
         news[lisNum].className = 'active';
         navs[navsNum].classList.add('active');
         contents[navsNum].classList.add('c_active');

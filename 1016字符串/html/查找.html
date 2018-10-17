@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+.box{
+    width: 300px;
+    height: 300px;
+    border: 1px solid #000;
+}
+</style>
+
+<body>
+    <div class="box">作为朋友，你要学会倾听。当你的朋友遇到挫折、碰上烦恼，他便要找一个发泄情感的对象，而你作为朋友能够真诚、耐心地倾听对方的诉说，就是为朋友开了一个情感的发泄口。朋友在向你诉说的过程中</div>
+    <input type="text">
+    <button>查找</button>
+    <script>
+    let box = document.querySelector(".box");
+    let input = document.querySelector("input");
+    let button = document.querySelector("button");
+    let text = box.innerHTML;
+    
+    button.onclick = function(){
+        
+        let info = text.split(input.value);
+        console.log(info);
+        let arr = "";
+        info.forEach((e,i) => {
+            arr += e;
+            if(i<info.length-1){
+                arr+=`<mark>${input.value}<mark>`
+            } 
+        });
+        box.innerHTML = arr;
+        // box.innerHTML = text.split(input.value).join('<mark>'+input.value+'</mark>');
+        
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    // box.innerHTML.split("朋友")
+    // console.log(box.innerHTML);
+
+
+
+
+
+    </script>
+</body>
+
+</html>

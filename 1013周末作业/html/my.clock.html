@@ -67,6 +67,7 @@
     //以上是获取元素
     clock();
     timer = setInterval(clock, 1000);
+
     function clock() {
         let time = new Date();
         let year = time.getFullYear();
@@ -83,16 +84,31 @@
         //图片和时间对应
         num.forEach((e, i) => {
             // e.src = arrNum[now[i]];图片和时间对应
-            css(e,"rotate",0)
+            css(e, "rotateX", 0)
+            if(e.index == now[i]){
+                return ;
+            }
             mTween({
-                el:e,
-                attr:{
-                    rotate:"90",
+                el: e,
+                attr: {
+                    rotateX: "90",
                 },
-                type:"linear",
-                time:200
-                
+                type: "linear",
+                time: 200,
+                cb: function () {
+                    e.src = arrNum[now[i]];
+                    css(e, "rotateX", 270)
+                    mTween({
+                        el: e,
+                        attr: {
+                            rotateX: "360",
+                        },
+                        type: "linear",
+                        time: 200,
+                    })
+                }
             })
+            e.index = now[i];
         })
         //week
         num2.src = arrweek[day];
