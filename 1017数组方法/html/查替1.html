@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+        width: 300px;
+        height: 300px;
+        border: 1px solid #000;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="box">作为朋友，你要学会倾听。当你的朋友遇到挫折、碰上烦恼，他便要找一个发泄情感的对象，而你作为朋友能够真诚、耐心地倾听对方的诉说，就是为朋友开了一个情感的发泄口。朋友在向你诉说的过程中</div>
+    <input type="real">
+    <button>查找</button>
+    <input type="real">
+    <button>替换</button>
+    <script>
+        let box = document.querySelector(".box");
+        let input = document.querySelectorAll("input");
+        let button = document.querySelectorAll("button");
+        let content = box.innerHTML;
+        // 查找 
+       button[0].onclick = function () {  
+           if(input[0].value.trim()==""||content.indexOf(input[0].value)==-1){
+               alert("请输入内容");
+           }
+           box.innerHTML = content.split(input[0].value).join(`<mark>${input[0].value}</mark>`);
+       }
+       button[1].onclick = function () {  
+           if(input[0].value.trim()==""||content.indexOf(input[0].value)==-1){
+            alert("请输入内容");
+           }else if(input[1].value==""){
+            alert("请输入要替换的内容");
+           }else{
+            box.innerHTML = content.split(input[0].value).join(`<mark>${input[1].value}</mark>`);
+            content = content.split(input[0].value).join(input[1].value);
+           }
+       }
+    </script>
+</body>
+
+</html>

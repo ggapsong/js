@@ -35,11 +35,13 @@
         let p = document.querySelector("p")
         let timer = 0;
         let index = 0;
+        let isture = false;
         button[0].onclick = function () {
+           
             index = 0;
             let l = textarea[0].value;
-            clearInterval(timer)
             timer = setInterval(function () {
+                
                 index++;
                 if (index > l.length) {
                     clearInterval(timer);
@@ -51,6 +53,7 @@
                     textarea[0].value = l2;
                 }
             }, 20)
+            
         }
         // button[1].onclick = function () {
         //     index = 0;
@@ -71,7 +74,6 @@
         button[1].onclick = function () {
             index = 0;
             let r = textarea[1].value;
-            clearInterval(timer)
             timer = setInterval(function () {
                 index--;
                 if (index > 0) {
@@ -79,7 +81,7 @@
                 } else {
                     let r1 = r.substr(0, index);
                     let r2 = r.substr(index);
-                    p.innerHTML = `${r2.length}/${r.length}`
+                    p.innerHTML = `${r2.length}/${r.length}`;
                     textarea[1].value = r1;
                     textarea[0].value = r2;
                 }

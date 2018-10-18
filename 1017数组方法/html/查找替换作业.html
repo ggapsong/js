@@ -22,43 +22,32 @@
     <input type="real">
     <button>替换</button>
     <script>
-    let box = document.querySelector(".box");
-    let input = document.querySelectorAll("input");
-    let button = document.querySelectorAll("button");
+    let box = document.querySelector(".box");//找到box
+    let input = document.querySelectorAll("input");//所有的input
+    let button = document.querySelectorAll("button");//所有的按钮
     let real = box.innerHTML;
     // console.log(real);
     //数据的查找
-    button[0].onclick = function(){
-        if(real.indexOf(input[0].value)==-1||real.indexOf(input[0].value)==""){
-            alert("请输入正确的内容")
-        }else{
+    button[0].onclick = function(){//当查找按钮点击的时候
+        if(real.indexOf(input[0].value)==-1||input[0].value==""){//如果输入的内容在box里找不到或者没有输入内容
+            alert("请输入正确的内容")//弹框提示
+        }else{//box里面的内容=以input[0].value为分割符把box里面的内容分割成数组+以'<mark>'+input[0].value+'</mark>'为分割符把数组分割成字符串；
             box.innerHTML = real.split(input[0].value).join('<mark>'+input[0].value+'</mark>');
         } 
-        console.log(real);
     };
      //数据的替换
-     //把input0里面的内容替换成input1里面的内容
+     //当替换按钮点击的时候
     button[1].onclick = function(){
-        if(real.indexOf(input[0].value)==-1||real.indexOf(input[0].value)==""||real.indexOf(input[1].value)==""){
+        //如果input[0]里面输入的内容在box里面找不到||
+        if(real.indexOf(input[0].value)==-1||input[0].value==""||input[1].value==""){
             alert("请输入正确的内容")
         }else{
             box.innerHTML = real.split(input[0].value).join('<mark>'+input[1].value+'</mark>');
             real = real.split(input[0].value).join(input[1].value);
-         } 
-          
+        } 
     };
 console.log(real);
-   // splice 替换数组
-// - 语法: arr.splice(index,length[,newData,newData2...])
-// - 参数: 
-//     index: 从第几位开始替换
-//     length: 替换掉几位
-//     newData: 要替换进去的新数据
-// - 返回值：
-//     被替换掉的数据，组成新数组
-// - 指定位删除: arr.splice(1,1); 不写需要替换进去的新数据
-// - 指定位添加: arr.splice(index,0,newData);
-// - 指定位替换: arr.splice(index,length,newData); 
+
 
     </script>
 </body>

@@ -94,9 +94,9 @@
         let button = document.querySelectorAll("button");
         let english = document.querySelectorAll(".english")
         let box = document.querySelectorAll(".box");
-        let arr = ["1","2","3","4","5","6","7","8"]//num的内容
-        let arrnum = [0,1,2,3,4,5,6,7];//用来排序
-        let arrenglish = [//box里面的内容
+        let arr = ["1", "2", "3", "4", "5", "6", "7", "8"] //num的内容
+        let arrnum = [0, 1, 2, 3, 4, 5, 6, 7]; //用来排序
+        let arrenglish = [ //box里面的内容
             "one",
             "two",
             "three",
@@ -106,7 +106,7 @@
             "seven",
             "eight",
         ]
-        let arrcolor = [//box的颜色
+        let arrcolor = [ //box的颜色
             "red",
             "#000",
             "yellow",
@@ -115,36 +115,36 @@
             "#ccc",
             "purple",
             "pink"
-        ]
-        box.forEach(function(item,index){
-                item.style.background = arrcolor[arrnum[index]];
-            })
-        button[0].onclick = function(){
-            arrnum.sort(function(n1,n2){
-                return n1-n2;
-            })
-            num.forEach((item,index)=>{
-                item.innerHTML = arr[arrnum[index]];
-            })
-            english.forEach(function(item,index){
+        ];
+        box.forEach((item, index) => {
+            item.style.background = arrcolor[arrnum[index]];
+        })
+        button[0].onclick = function () {
+            arrnum.sort();
+            english.forEach((item, index) => {
                 item.innerHTML = arrenglish[arrnum[index]];
             })
-            box.forEach(function(item,index){
+            num.forEach((item, index) => {
+                item.innerHTML = arr[arrnum[index]];
+            })
+            box.forEach((item, index) => {
                 item.style.background = arrcolor[arrnum[index]];
             })
+
         }
-        button[1].onclick = function () {  
-            arrnum.sort(()=>Math.random()-.5);
-            num.forEach((item,index)=>{
-                item.innerHTML = arr[arrnum[index]];
-            })
-            english.forEach(function(item,index){
+        button[1].onclick = function () {
+            arrnum.sort(() => Math.random() - .5);
+            english.forEach((item, index) => {
                 item.innerHTML = arrenglish[arrnum[index]];
             })
-            box.forEach(function(item,index){
+            num.forEach((item, index) => {
+                item.innerHTML = arr[arrnum[index]];
+            })
+            box.forEach((item, index) => {
                 item.style.background = arrcolor[arrnum[index]];
             })
-        }   
+
+        }
     </script>
 </body>
 

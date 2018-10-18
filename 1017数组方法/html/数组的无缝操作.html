@@ -40,9 +40,8 @@
         <div class="box">
             
         </div>
-        <button>
-            <<</button> <button>>>
-        </button>
+        <button><<</button> 
+        <button>>></button>
     </div>
     <script>
         let box = document.querySelector(".box");
@@ -56,11 +55,12 @@
         ];
         render()
         button[0].onclick = function () {
-            imgsrc.push(imgsrc.shift());
+            imgsrc.unshift(imgsrc.pop());
             render();
         }
         button[1].onclick = function () {
-            imgsrc.unshift(imgsrc.pop());
+            imgsrc.push(imgsrc.shift());
+            
             render();
         }
 
