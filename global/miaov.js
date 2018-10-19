@@ -1,7 +1,7 @@
 (function() {
-    let lastTime = 0;
-    let vendors = ['webkit', 'moz'];
-    for(let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+    var lastTime = 0;
+    var vendors = ['webkit', 'moz'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
         window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] ||    // Webkit中此取消方法的名字变了
                                       window[vendors[x] + 'CancelRequestAnimationFrame'];
@@ -9,9 +9,9 @@
 
     if (!window.requestAnimationFrame) {
         window.requestAnimationFrame = function(callback, element) {
-            let currTime = new Date().getTime();
-            let timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
-            let id = window.setTimeout(function() {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+            var id = window.setTimeout(function() {
                 callback(currTime + timeToCall);
             }, timeToCall);
             lastTime = currTime + timeToCall;
@@ -24,7 +24,7 @@
         };
     }
 }());
-let Tween = {
+var Tween = {
 	linear: function (t, b, c, d){
 		return c*t/d + b;
 	},
@@ -64,9 +64,9 @@ let Tween = {
 		}
 		if (!a || a < Math.abs(c)) {
 			a = c; 
-			let s = p/4;
+			var s = p/4;
 		} else {
-			let s = p/(2*Math.PI) * Math.asin (c/a);
+			var s = p/(2*Math.PI) * Math.asin (c/a);
 		}
 		return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
 	},
@@ -82,9 +82,9 @@ let Tween = {
 		}
 		if (!a || a < Math.abs(c)) {
 			a = c;
-			let s = p / 4;
+			var  s = p / 4;
 		} else {
-			let s = p/(2*Math.PI) * Math.asin (c/a);
+			var s = p/(2*Math.PI) * Math.asin (c/a);
 		}
 		return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
 	},    
@@ -100,10 +100,10 @@ let Tween = {
 		}
 		if ( !a || a < Math.abs(c) ) {
 			a = c; 
-			let s = p/4;
+			var s = p/4;
 		}
 		else {
-			let s = p/(2*Math.PI) * Math.asin (c/a);
+			var s = p/(2*Math.PI) * Math.asin (c/a);
 		}
 		if (t < 1) {
 			return - 0.5*(a*Math.pow(2,10*(t-=1)) * 
@@ -163,8 +163,8 @@ function cssTransform(el,attr,val){
         return el.transform[attr];  
     }
     el.transform[attr] = val;
-    let transformVal = "";
-    for(let s in el.transform){
+    var transformVal = "";
+    for(var s in el.transform){
         switch(s){
             case "scale":
             case "scaleX":
@@ -184,7 +184,7 @@ function cssTransform(el,attr,val){
 }
 function css(el,attr,val){
     const TRANSFORM = ["scale","scaleX","scaleY","rotate","rotateX","rotateY","rotateZ","skewX","skewY","translateX","translateY","translateZ"];
-    for(let i = 0; i < TRANSFORM.length; i++){
+    for(var i = 0; i < TRANSFORM.length; i++){
         if(attr == TRANSFORM[i]){
             return cssTransform(el,attr,val);
         } 
@@ -193,7 +193,9 @@ function css(el,attr,val){
         return parseFloat(getComputedStyle(el)[attr]);
     }
     switch(attr){
-        case "zIndex":
+		case "zIndex":
+			el.style[attr] = Math.round(val);
+			break;
         case "opacity":
             el.style[attr] = val;
             break;
@@ -217,19 +219,19 @@ op:{
 }	
 */
 function mTween(op){
-    let init = {
+    var init = {
         time: 400,
         type: "easeBothStrong"
     };
-    for(let s in op){
+    for(var s in op){
         init[s] = op[s];
     }
-    let delay = 1000/60; 
-    let t = 0;
-    let b = {};
-    let c = {};
-    let d = Math.ceil(init.time/delay);
-    for(let s in init.attr){
+    var delay = 1000/60; 
+    var t = 0;
+    var b = {};
+    var c = {};
+    var d = Math.ceil(init.time/delay);
+    for(var s in init.attr){
         b[s] = css(init.el,s); 
         c[s] = init.attr[s] - b[s];
     }
@@ -241,8 +243,8 @@ function mTween(op){
 			cancelAnimationFrame(init.el.timer);
 			init.cb&&init.cb();
         } else {
-            for(let s in b){
-                let val = Tween[init.type](t,b[s],c[s],d);
+            for(var s in b){
+                var val = Tween[init.type](t,b[s],c[s],d);
                 css(init.el,s,val); 
 			}
 			init.el.timer = requestAnimationFrame(move);

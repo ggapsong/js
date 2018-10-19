@@ -1,0 +1,101 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>韩雪冬网站效果 - 妙味课堂 - www.miaov.com</title>
+    <link href="../style/style.css" rel="stylesheet" />
+    <script src="../../global/miaov.js"></script>
+</head>
+
+<body>
+
+    <div id="automatic">
+
+        <div class="prev_div"></div>
+        <a class="prev" href="###">
+            <span class="ico1"></span>
+            <span class="ico"></span>
+            <span class="txt"></span>
+        </a>
+
+        <div class="next_div"></div>
+        <a class="next" href="###">
+            <span class="ico1"></span>
+            <span class="ico"></span>
+            <span class="txt"></span>
+        </a>
+
+        <div class="line"></div>
+
+        <ul>
+            <li class="pos_0"><a href="http://www.miaov.com"><img src="../img/1.jpg" width="100" alt="妙味课堂 www.miaov.com"
+                        longdesc="http://www.miaov.com" /></a></li>
+            <li class="pos_1"><a href="http://www.miaov.com"><img src="../img/2.jpg" width="270" alt="妙味课堂 www.miaov.com"
+                        longdesc="http://www.miaov.com" /></a></li>
+            <li class="pos_2"><a href="http://www.miaov.com"><img src="../img/3.jpg" width="510" alt="妙味课堂 www.miaov.com"
+                        longdesc="http://www.miaov.com" /></a></li>
+            <li class="pos_3"><a href="http://www.miaov.com"><img src="../img/4.jpg" width="680" alt="妙味课堂 www.miaov.com"
+                        longdesc="http://www.miaov.com" /></a></li>
+            <li class="pos_4"><a href="http://www.miaov.com"><img src="../img/5.jpg" width="510" alt="妙味课堂 www.miaov.com"
+                        longdesc="http://www.miaov.com" /></a></li>
+            <li class="pos_5"><a href="http://www.miaov.com"><img src="../img/6.jpg" width="270" alt="妙味课堂 www.miaov.com"
+                        longdesc="http://www.miaov.com" /></a></li>
+            <li class="pos_6"><a href="http://www.miaov.com"><img src="../img/7.jpg" width="270" alt="妙味课堂 www.miaov.com"
+                        longdesc="http://www.miaov.com" /></a></li>
+            <li class="pos_6"><a href="http://www.miaov.com"><img src="../img/8.jpg" width="270" alt="妙味课堂 www.miaov.com"
+                        longdesc="http://www.miaov.com" /></a></li>
+        </ul>
+
+    </div>
+    <p id="footer"><a href="http://www.miaov.com">妙味课堂 - www.miaov.com</a></p>
+    <script>
+        let prev_div = document.querySelector(".prev_div"); //左边按钮
+        let next_div = document.querySelector(".next_div"); //右边按钮
+        let list = document.querySelectorAll("ul li"); //所有的li
+        let line = document.querySelector(".line"); //边框
+        let liStyle = [];
+        list.forEach((e, i) => {
+            let img = document.querySelector("img");
+            let style = {
+                li: {
+                    left: css(e, "left"),
+                    top: css(e, "top"),
+                    opacity: css(e, "opacity"),
+                    zIndex: css(e, "zIndex")
+                },
+                img: {
+                    width: css(img, "width"),
+                    height: css(img, "height")
+                }
+            };
+            liStyle.push(style);
+            console.log(liStyle);
+        })
+        prev_div.onclick = function () {
+            liStyle.unshift((liStyle.pop()))
+            move()
+        };
+        next_div.onclick = function(){
+            liStyle.push(liStyle.shift())
+            move()
+        }
+
+        function move() {
+            let img = document.querySelector("img");
+            list.forEach((item,index)=>{
+                mTween({
+                el: item,
+                attr: liStyle[index].li
+            })
+            mTween({
+                el: img,
+                attr: liStyle[index].img
+            })
+            })
+           
+        };
+    </script>
+</body>
+
+</html>

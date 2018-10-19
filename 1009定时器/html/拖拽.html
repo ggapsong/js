@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        .box{
+        .box {
             width: 100px;
             height: 100px;
             background-color: red;
+            position: relative;
         }
     </style>
 </head>
+
 <body>
     <div class="box"></div>
     <script>
-        let el = document.querySelector('.box');
-        el.style.position = 'relative';
-        el.onmousedown = function(ev){
-            var c_x = ev.clientX;
-            var c_y = ev.clientY;
-            var c_l = getStyle(this,'left');
-            var c_t = getStyle(this,'top');
-            document.onmousemove = function(ev){
-                console.log(1);
-                var x = ev.clientX;
-                var y = ev.clientY;
-                el.style.left = c_l + x - c_x + 'px';
-                el.style.top = c_t + y - c_y + 'px';
-            };
-            this.onmouseup = function(){
-                this.onmouseup = document.onmousemove = null;
-            }
-        }
-        function getStyle(el,attr){
+        function getStyle(el, attr) {
             return parseInt(getComputedStyle(el)[attr]);
+        }
+        let el = document.querySelector('.box');
+        el.onmousedown = function (ev) {
+            var e_x = ev.clientX; //记录鼠标按下时的水平位置
+            var e_y = ev.clientY; //记录鼠标按下时的垂直位置
+            var l = getStyle(el, 'left'); //获取box元素被按下时的left值
+            var t = getStyle(el, 'top'); //获取box元素被按下时的top值
+            document.onmousemove = function (ev) {
+                var nowx = ev.clientX; //记录现在鼠标的水平位置
+                var nowy = ev.clientY; //记录现在鼠标的垂直位置
+                var movex = nowx - e_x;
+                var movey = nowy - e_y;
+                el.style.left = l + movex + 'px';
+                el.style.top = t + movey + 'px';
+            };
+            el.onmouseup = function(){
+                document.onmousemove = el.onmouseup = null;
+            }
         }
     </script>
 </body>
+
 </html>

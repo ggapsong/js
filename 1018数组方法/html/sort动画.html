@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../global.js/miaov.js"></script>
+    <style>
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    #wrap {
+        margin: 50px auto;
+        width: 800px;
+    }
+
+    #wrap ul {
+        position: relative;
+    }
+    #wrap li {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+    }
+    img {
+        width: 200px;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div>
+            <button>从小到大</button>
+            <button>随机排序</button>
+        </div>
+        <ul id="list">
+
+        </ul>
+    </div>
+    <script>
+        let data = [{
+            img: "../img/img (1).jpg",
+            txt: "1-图片"
+        }, {
+            img: "../img/img (2).jpg",
+            txt: "2-图片"
+        }, {
+            img: "../img/img (3).jpg",
+            txt: "3-图片"
+        }, {
+            img: "../img/img (4).jpg",
+            txt: "4-图片"
+        }, {
+            img: "../img/img (5).jpg",
+            txt: "5-图片"
+        }, {
+            img: "../img/img (6).jpg",
+            txt: "6-图片"
+        }, {
+            img: "../img/img (7).jpg",
+            txt: "7-图片"
+        }, {
+            img: "../img/img (8).jpg",
+            txt: "8-图片"
+        }];
+        let list = document.querySelector("#list"); //ul
+        let row = 4; //一行排四个
+        let w = 200; //一张图片的宽度
+        let h = 200; //一张图片的高度
+        let position = []; //用来存放所有数据的数组
+        let str = "";
+        data.forEach((item, index) => {
+            let l = (index % row) * w; //left值
+            let t = parseInt(index / row) * h; //top值
+            //向数组里添加东西
+            position.push({
+                index: index, //索引
+                l: l, //left值
+                t: t //top值
+            })
+            //生成li
+            str +=
+                `<li style="top:${t}px;left:${l}px;">
+                    <img src="${item.img}" />
+                    <p>${item.txt}</p>
+                </li>`
+        });
+        console.log(data,position);
+    
+        list.innerHTML = str;
+
+
+        let lis = document.querySelectorAll("li");//获取所有的li
+        let button = document.querySelectorAll("button"); //按钮
+        button[0].onclick = function () {
+            position.sort((n1,n2) => {//从小到大
+                return n1.index - n2.index;
+            })
+            lis.forEach((item,index) => {
+                mTween({
+                    el: item,
+                    attr: {
+                        left: position[index].l,
+                        top: position[index].t
+                    },
+                    type: "linear",
+                    time: 200
+                })
+            })
+        }
+        console.log(1);
+        button[1].onclick = function () {
+            position.sort(()=>{
+              return Math.random()-0.5//随机
+            })
+            lis.forEach((item,index) => {  
+                mTween({
+                    el: item,
+                    attr: {
+                        left: position[index].l,
+                        top: position[index].t
+                    },
+                    type: "linear",
+                    time: 200
+                })
+            })
+        }
+        console.log(1);
+    </script>
+    
+</body>
+
+</html>
