@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let obj = {
+        //     a: 0,
+        //     b: 1,
+        //     c: 2
+        // }
+        // // let a = obj.a;
+        // // let b = obj.b;
+        // // console.log(a, b);
+
+        // let {a,b} = obj;
+        // console.log(a,b);
+
+
+
+
+// let n = "name";
+// let obj = {
+//     [n]:"哈哈哈",
+   
+// }
+// console.log(obj);
+let a = [0,1,2,3];
+let b = [5,6,...a];
+console.log(b);
+
+let obj = {
+    a:1,
+    b:2
+};
+let obj2 = {
+    c:3,
+    d:4,
+    ...obj
+}
+console.log(obj2);
+    </script>
+</body>
+
+</html>

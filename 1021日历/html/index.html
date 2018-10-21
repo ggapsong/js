@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/index.css">
+    <script src="../../global/miaov.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="top">
+        </div>
+        <div class="middle">
+            <div class="left">
+                <div class="select">
+                    <div class="prev">
+                        <img src="../img/pic_03.png" alt="">
+                    </div>
+                    <div class="date">
+                        
+                    </div>
+                    <div class="next">
+                        <img src="../img/pic_05.png" alt="">
+                    </div>
+                </div>
+                <div class="title">
+                    <span>日</span>
+                    <span>一</span>
+                    <span>二</span>
+                    <span>三</span>
+                    <span>四</span>
+                    <span>五</span>
+                    <span>六</span>
+                </div>
+                <div class="calendar">
+                    <!-- <div class="inactivity">30</div> -->
+                </div>
+            </div>
+            <div class="right">
+                <div class="circular">
+                    <div class="H"></div>
+                    <div class="M"></div>
+                    <div class="S"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="time">
+                    <span class="APM"></span>
+                    <span class="NTime"></span>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div>更改日期和时间设置...</div>
+        </div>
+    </div>
+</body>
+<script>
+{
+    let topTime = document.querySelector('.top');//最大的日期  带星期 格式 ： 2018年10月21日 星期一
+    let time = document.querySelector('.date');//格式 ： 2018年10月
+    let dataBox = document.querySelector('.calendar');
+    let yearMon = document.querySelector(".date");
+    let nowTime = new Date();
+    let year = nowTime.getFullYear();
+    let month = nowTime.getMonth()+1;
+    let day = nowTime.getDate();
+    topTime.innerHTML = year + '年' + toTwo(month) + '月' + toTwo(day) + '日 ' + handleWeek(nowTime.getDay());
+    yearMon.innerHTML = year + '年' + toTwo(month) + '月';//日历上面的年月;
+    nowTime.setDate(1);
+    show(nowTime);
+    function show(date){
+        let nowMonthNum = getLastDay(date.getFullYear(),date.getMonth()+1);//当前月多少天
+        let beforeMonthNum = getLastDay(date.getFullYear(),date.getMonth());//上个月多少天
+        if(date.getMonth()==0){//如果当前月是1月  那么我要获取上一年的12月
+            beforeMonthNum = getLastDay(date.getFullYear()-1,12);
+        };
+        let week = date.getDate();//周几  获取的是数字 
+        let beforeMonthFirst = beforeMonthNum - week + 1;//当前日历显示的上一个月的第一个
+        let str = '';
+        for (let i = 0; i < 42; i++) {
+            let have = false;
+            if(date.getFullYear()==year&&date.getMonth()+1==month){//年月相同，会有active的div
+                have = true;
+            }
+            if(i<week){//上个月
+                str += `<div class="inactivity">${beforeMonthFirst+i}</div>`
+            }else if(i>=week&&(i-week+1)<=nowMonthNum){//当前月
+                if(have&&i-week+1==day){
+                    str += `<div class='active'>${i-week+1}</div>`
+                }else{
+                    str += `<div>${i-week+1}</div>`
+                }
+            }else{//下一月
+                str += `<div class="inactivity">${i-week+1-nowMonthNum}</div>`
+            }
+        }
+        dataBox.innerHTML = str;
+    }
+
+    function getLastDay(y,m){
+        var dt = new Date(y,m,1);
+        cdt = new Date(dt.getTime()-1000*60*60*24);
+        return cdt.getDate();
+    }
+    function handleWeek(num){
+        return ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'][num]
+    }
+    function toTwo(num){
+        return num<10?'0'+num:''+num;
+    }
+    
+    //表盘
+    clock()
+        setInterval(clock, 1000)
+        function clock() {
+            let H = document.querySelector(".H");
+            let M = document.querySelector(".M");
+            let S = document.querySelector(".S");
+            let date = new Date();
+            let s = date.getSeconds();
+            let m = date.getMinutes() + s / 60;
+            let h = date.getHours() + m / 60;
+            css(H, "rotate", 30 * h)
+            css(M, "rotate", 6 * m)
+            css(S, "rotate", 6 * s)
+        }
+
+    //表盘下的时间
+    setInterval(timing,1000);
+    timing()
+    function timing(){
+        let nowTime = new Date();
+        let APM = document.querySelector(".APM");//上午下午
+        let NTime = document.querySelector(".NTime");//具体时间
+        let Hours = nowTime.getHours();
+        let Minutes = nowTime.getMinutes();
+        let Seconds = nowTime.getSeconds();
+        if(Hours<=12){
+            APM.innerHTML = "上午";
+        }else{
+            APM.innerHTML = "下午";
+        }
+        NTime.innerHTML = Hours+ ':' + toTwo(Minutes)+ ':' + toTwo(Seconds);
+    }
+
+
+
+
+
+
+
+}
+</script>
+</html>

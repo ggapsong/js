@@ -29,22 +29,46 @@
         <div class="line"></div>
 
         <ul>
-            <li class="pos_0"><a href="http://www.miaov.com"><img src="../img/1.jpg" width="100" alt="妙味课堂 www.miaov.com"
-                        longdesc="http://www.miaov.com" /></a></li>
-            <li class="pos_1"><a href="http://www.miaov.com"><img src="../img/2.jpg" width="270" alt="妙味课堂 www.miaov.com"
-                        longdesc="http://www.miaov.com" /></a></li>
-            <li class="pos_2"><a href="http://www.miaov.com"><img src="../img/3.jpg" width="510" alt="妙味课堂 www.miaov.com"
-                        longdesc="http://www.miaov.com" /></a></li>
-            <li class="pos_3"><a href="http://www.miaov.com"><img src="../img/4.jpg" width="680" alt="妙味课堂 www.miaov.com"
-                        longdesc="http://www.miaov.com" /></a></li>
-            <li class="pos_4"><a href="http://www.miaov.com"><img src="../img/5.jpg" width="510" alt="妙味课堂 www.miaov.com"
-                        longdesc="http://www.miaov.com" /></a></li>
-            <li class="pos_5"><a href="http://www.miaov.com"><img src="../img/6.jpg" width="270" alt="妙味课堂 www.miaov.com"
-                        longdesc="http://www.miaov.com" /></a></li>
-            <li class="pos_6"><a href="http://www.miaov.com"><img src="../img/7.jpg" width="270" alt="妙味课堂 www.miaov.com"
-                        longdesc="http://www.miaov.com" /></a></li>
-            <li class="pos_6"><a href="http://www.miaov.com"><img src="../img/8.jpg" width="270" alt="妙味课堂 www.miaov.com"
-                        longdesc="http://www.miaov.com" /></a></li>
+            <li class="pos_0">
+                <a href="http://www.miaov.com">
+                    <img src="../img/1.jpg" width="100" height="50"/>
+                </a>
+            </li>
+            <li class="pos_1">
+                <a href="http://www.miaov.com">
+                    <img src="../img/2.jpg" width="270" height="140"/>
+                </a>
+            </li>
+            <li class="pos_2">
+                <a href="http://www.miaov.com">
+                    <img src="../img/3.jpg" width="510" height="260"/>
+                </a>
+            </li>
+            <li class="pos_3">
+                <a href="http://www.miaov.com">
+                    <img src="../img/4.jpg" width="680" height="348"/>
+                </a>
+            </li>
+            <li class="pos_4">
+                <a href="http://www.miaov.com">
+                    <img src="../img/5.jpg" width="510" height="260"/>
+                </a>
+            </li>
+            <li class="pos_5">
+                <a href="http://www.miaov.com">
+                    <img src="../img/6.jpg" width="270" height="140"/>
+                </a>
+            </li>
+            <li class="pos_6">
+                <a href="http://www.miaov.com">
+                    <img src="../img/7.jpg" width="100" height="50"/>
+                </a>
+            </li>
+            <li class="pos_6">
+                <a href="http://www.miaov.com">
+                    <img src="../img/8.jpg" width="100" height="50"/>
+                </a>
+            </li>
         </ul>
 
     </div>
@@ -52,11 +76,12 @@
     <script>
         let prev_div = document.querySelector(".prev_div"); //左边按钮
         let next_div = document.querySelector(".next_div"); //右边按钮
-        let list = document.querySelectorAll("ul li"); //所有的li
+        let l = document.querySelectorAll("ul li");
+        var list = [...l];
         let line = document.querySelector(".line"); //边框
         let liStyle = [];
         list.forEach((e, i) => {
-            let img = document.querySelector("img");
+            let img = e.querySelector("img");
             let style = {
                 li: {
                     left: css(e, "left"),
@@ -70,30 +95,30 @@
                 }
             };
             liStyle.push(style);
-            console.log(liStyle);
         })
+
         prev_div.onclick = function () {
-            liStyle.unshift((liStyle.pop()))
+            list.unshift(list.pop())
             move()
         };
-        next_div.onclick = function(){
-            liStyle.push(liStyle.shift())
+        next_div.onclick = function () {
+            list.push(list.shift())
             move()
         }
 
         function move() {
-            let img = document.querySelector("img");
-            list.forEach((item,index)=>{
+            list.forEach((item, index) => {
+                let img = item.querySelector("img");
                 mTween({
-                el: item,
-                attr: liStyle[index].li
+                    el: item,
+                    attr: liStyle[index].li
+                })
+                mTween({
+                    el: img,
+                    attr: liStyle[index].img
+                })
             })
-            mTween({
-                el: img,
-                attr: liStyle[index].img
-            })
-            })
-           
+
         };
     </script>
 </body>
