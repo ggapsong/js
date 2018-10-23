@@ -27,7 +27,7 @@
                         <img src="../img/pic_05.png" alt="">
                     </div>
                 </div>
-                <div class="days">
+                <div class="big_box">
                     <div class="title">
                         <span>日</span>
                         <span>一</span>
@@ -38,7 +38,7 @@
                         <span>六</span>
                     </div>
                     <div class="calendar">
-                        
+                        <div class="inactivity">30</div>
                     </div>
                 </div>
                 <div class="Month_box">
@@ -55,9 +55,7 @@
                     <div>十一月</div>
                     <div>十二月</div>
                 </div>
-                <div class="year_box">
-                    
-                </div>
+                <div class="year_box"></div>
             </div>
             <div class="right">
                 <div class="circular">
@@ -78,9 +76,12 @@
     </div>
 </body>
 <script>
+    let type = "days";
+
+
     //日历本历
-    Calendar(2018, 10);
-    let type = 'days';
+    Calendar(2018, 10)
+
     function Calendar(year, month) {
         let calendar = document.querySelector(".calendar");
         let firstDay = new Date(year, month - 1, 1).getDay(); //当月1号是周几
@@ -90,12 +91,21 @@
         let str = "";
         let nowMonthFirst = 1;
         let nextMonthFirst = 1;
+        let data = new Date();
+        let nowyear = data.getFullYear();
+        let nowmon = data.getMonth() + 1;
+        console.log(nowmon);
+        let nowdata = data.getDate();
         for (let i = 0; i < 42; i++) {
             if (i < firstDay) { //显示上一个月
                 str += `<div class="inactivity">${lastMonthFirst}</div>`;
                 lastMonthFirst++
             } else if (nowMonthFirst <= totle) { //显示当前月
-                str += `<div>${nowMonthFirst}</div>`;
+                if (nowyear == year && nowmon == month && nowdata == nowMonthFirst) {
+                    str += `<div class="active">${nowMonthFirst}</div>`;
+                } else {
+                    str += `<div>${nowMonthFirst}</div>`;
+                }
                 nowMonthFirst++
             } else {
                 str += `<div class="inactivity">${nextMonthFirst}</div>`;
@@ -104,25 +114,27 @@
         }
         calendar.innerHTML = str;
     };
-    
-    //各种切换
+    //点击下一张
+
     next()
+
     function next() {
+        let big_box = document.querySelector(".big_box");
+        let Month_box = document.querySelector(".Month_box");
+        let year_box = document.querySelector(".year_box");
+        let div = Month_box.querySelectorAll("div");
         let date = document.querySelector(".date");
         let next = document.querySelector(".next");
         let prev = document.querySelector(".prev");
         let nowTime = new Date();
-        let year = nowTime.getFullYear();
-        let mon = twoDouble(nowTime.getMonth() + 1);
+        year = nowTime.getFullYear();
+        mon = twoDouble(nowTime.getMonth() + 1);
         let calendar = document.querySelector(".calendar");
-        let days = document.querySelector(".days");
-        let Month_box = document.querySelector(".Month_box");
-        let year_box = document.querySelector('.year_box');
-        let div = document.querySelectorAll(".Month_box div");
+        let everyDay = calendar.querySelectorAll("div"); //每一天
         date.innerHTML = nowTime.getFullYear() + "年" + twoDouble(nowTime.getMonth() + 1) + "月"
-        //点击要看下一月
+        //点击下一个月
         next.onclick = function () {
-            if(type=='days'){
+            if (type == "days") {
                 mon++
                 if (mon > 12) {
                     year++;
@@ -130,17 +142,17 @@
                 }
                 date.innerHTML = year + "年" + mon + "月";
                 Calendar(year, mon);
-            }else if(type=='month'){
-                if(year>=2099){
-                    return false;
+            } else if (type == "month") {
+                if (year == 2099) {
+                    return
                 }
-                year++;
+                year++
                 date.innerHTML = year + "年";
             }
-        }
-        //点击要看上一月
+            donghua(-210);
+        };
         prev.onclick = function () {
-            if(type=='days'){
+            if (type == "days") {
                 mon--;
                 if (mon < 1) {
                     year--
@@ -148,47 +160,85 @@
                 }
                 date.innerHTML = year + "年" + mon + "月";
                 Calendar(year, mon);
-            }else if(type=='month'){
-                if(year<=1900){
-                    return false;
-                }
-                year--;
+            } else if (type == "month") {
+                if (year == 1900) {
+                    return
+                };
+                year--
                 date.innerHTML = year + "年";
-            }
-        }
-        //date
-        date.onclick = function(){
-            handleDateChange();
-            if(type=='month'){
-                days.style.display = "none";
+            };
+            donghua(210);
+        };
+        date.onclick = function () {
+            typechange();
+            if (type == "month") {
+                big_box.style.display = "none";
                 Month_box.style.display = "block";
                 date.innerHTML = year + "年";
-            }else if(type=='year'){
+            } else if (type == "year") {
                 Month_box.style.display = "none";
-                year_box.style.display = 'block';
-                yearRender(year_box,year);
-            }
+                year_box.style.display = "block";
+                yearRender(year_box, year);
+            };
         }
-        div.forEach((e,i)=>{
-            e.onclick = function(){
+        div.forEach((e, i) => {
+            e.onclick = function () {
                 mon = i + 1;
-                days.style.display = "block";
+                big_box.style.display = "block";
                 Month_box.style.display = 'none';
-                Calendar(year,mon);
+                Calendar(year, mon);
                 date.innerHTML = year + "年" + mon + "月";
                 type = 'days';
-            }
-        })
-        year_box.onclick = function(ev){
-            var el = ev.target;
-            year = Number(el.innerText);
-            Month_box.style.display = 'block';
-            year_box.style.display = 'none';
-            date.innerHTML = year + "年";
-            type = 'month';
+            };
+        });
+
+        function donghua(num) {
+            mTween({
+                el: Month_box,
+                attr: {
+                    left: num,
+                },
+                time: 100,
+                cb: function () {
+                    mTween({
+                        el: Month_box,
+                        attr: {
+                            left: 0,
+                        },
+                        time: 100,
+                    })
+                }
+            });
+        };
+        //当点击哪一年的时侯
+
+        year_box.onclick = function () {
+            let everyYear = document.querySelectorAll(".year_box div");
+            console.log(everyYear);
+            everyYear.forEach(item => {
+                item.onclick = function () {
+                    year_box.style.display = "none";
+                    Month_box.style.display = 'block';
+                    date.innerHTML = item.innerHTML + "年";
+                    type = 'month';
+                }
+            })
         }
     }
-   
+
+    function typechange() {
+        switch (type) {
+            case "days":
+                type = "month";
+                break;
+            case "month":
+                type = "year";
+                break;
+            case "year":
+                type = "years";
+                break;
+        }
+    }
 
     toptime()
 
@@ -203,8 +253,7 @@
     function handleWeek(num) {
         return ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][num]
     }
-    
-    //表盘和表盘下的时间
+    //表盘
     clock()
     setInterval(clock, 1000)
 
@@ -212,6 +261,7 @@
         let H = document.querySelector(".H");
         let M = document.querySelector(".M");
         let S = document.querySelector(".S");
+        let NTime = document.querySelector(".NTime"); //具体时间
         let date = new Date();
         let s = date.getSeconds();
         let m = date.getMinutes() + s / 60;
@@ -219,40 +269,36 @@
         css(H, "rotate", 30 * h);
         css(M, "rotate", 6 * m);
         css(S, "rotate", 6 * s);
-         //具体时间
-        let NTime = document.querySelector(".NTime"); //具体时间
-        let APM = document.querySelector(".APM"); 
-        APM.innerHTML = handleWeek(date.getDay());
-        NTime.innerHTML = date.getHours() + ':' + twoDouble(date.getMinutes()) + ':' + twoDouble(date.getSeconds());
     }
+    //表盘下的时间
+    setInterval(timing, 1000);
+    timing()
+
+    function timing() {
+        let nowTime = new Date();
+        let APM = document.querySelector(".APM"); //
+        let NTime = document.querySelector(".NTime"); //具体时间
+        let Hours = nowTime.getHours();
+        let Minutes = nowTime.getMinutes();
+        let Seconds = nowTime.getSeconds();
+        NTime.innerHTML = Hours + ':' + twoDouble(Minutes) + ':' + twoDouble(Seconds);
+        APM.innerHTML = handleWeek(nowTime.getDay());
+    }
+    //补0
     function twoDouble(num) {
         return num < 10 ? "0" + num : "" + num;
     }
-    function handleDateChange(){
-        switch(type){
-            case "days":
-                type = 'month';
-                break;
-            case "month":
-                type = 'year';
-                break;
-            case "year":
-                type = 'years';
-                break;
-            default:
-                break;
-        }
-    }
-    function yearRender(el,year){
-        year = Number((year+'').slice(0,3)+'0');
-        var str = '<div style="color:#ccc;">'+(year-1)+'</div>';
+    //年份的生成
+    function yearRender(el, year) {
+        year = Number((year + '').slice(0, 3) + '0');
+        var str = '<div style="color:#ccc;">' + (year - 1) + '</div>';
         for (let i = 0; i < 10; i++) {
-            str += '<div>'+(year+i)+'</div>';
+            str += '<div>' + (year + i) + '</div>';
         };
-        str += '<div style="color:#ccc;">'+(year+10)+'</div>';
+        str += '<div style="color:#ccc;">' + (year + 10) + '</div>';
         el.innerHTML = str;
-        document.querySelector('.date').innerHTML = year+'-'+(year+10);
-        
+        document.querySelector('.date').innerHTML = year + '-' + (year + 10);
+
     }
 </script>
 

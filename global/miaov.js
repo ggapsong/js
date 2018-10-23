@@ -226,7 +226,7 @@ function mTween(op){
     for(var s in op){
         init[s] = op[s];
     }
-    var delay = 1000/60; 
+    var delay = 100/60; 
     var t = 0;
     var b = {};
     var c = {};

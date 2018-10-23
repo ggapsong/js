@@ -27,7 +27,7 @@
                         <img src="../img/pic_05.png" alt="">
                     </div>
                 </div>
-                <div class="days">
+                <div class="big_box">
                     <div class="title">
                         <span>日</span>
                         <span>一</span>
@@ -38,7 +38,7 @@
                         <span>六</span>
                     </div>
                     <div class="calendar">
-                        
+                        <div class="inactivity">30</div>
                     </div>
                 </div>
                 <div class="Month_box">
@@ -55,9 +55,7 @@
                     <div>十一月</div>
                     <div>十二月</div>
                 </div>
-                <div class="year_box">
-                    
-                </div>
+                <div class="year_box"></div>
             </div>
             <div class="right">
                 <div class="circular">
@@ -77,10 +75,113 @@
         </div>
     </div>
 </body>
+<script src="../../global/miaov.js"></script>
 <script>
-    //日历本历
-    Calendar(2018, 10);
     let type = 'days';
+    let date = document.querySelector(".date");
+    let nowTime = new Date();
+    let year = nowTime.getFullYear();
+    let mon = twoDouble(nowTime.getMonth() + 1);
+    let calendar = document.querySelector(".calendar");
+    let days = document.querySelector(".big_box");
+    let Month_box = document.querySelector(".Month_box");
+    let year_box = document.querySelector('.year_box');
+    let div = document.querySelectorAll(".Month_box div");
+    let l = null;
+    let t = null;
+    let r = null;
+    let b = null;
+    date.innerHTML = nowTime.getFullYear() + "年" + twoDouble(nowTime.getMonth() + 1) + "月";
+    document.querySelector(".next").onclick = function () {
+        if (type == 'days') {
+            mon++
+            if (mon > 12) {
+                year++;
+                mon = 1;
+            }
+            date.innerHTML = year + "年" + mon + "月";
+            Calendar(year, mon);
+        } else if (type == 'month') {
+            if (year >= 2099) {
+                return false;
+            }
+            year++;
+            date.innerHTML = year + "年";
+        }
+    }
+    //点击要看上一月
+    document.querySelector(".prev").onclick = function () {
+        if (type == 'days') {
+            mon--;
+            if (mon < 1) {
+                year--
+                mon = 12;
+            }
+            date.innerHTML = year + "年" + mon + "月";
+            Calendar(year, mon);
+        } else if (type == 'month') {
+            if (year <= 1900) {
+                return false;
+            }
+            year--;
+            date.innerHTML = year + "年";
+        }
+    }
+    //date
+    date.onclick = function () {
+        handleDateChange();
+        if (type == 'month') {
+            Month_box.style.display = "block";
+            div.forEach((e,i)=>{
+                e.style = '';
+                if(i+1==mon){
+                    e.style = 'color: #0066cd;border-color: #0066cd;background: linear-gradient(#f2f8ff, #d0e5ff);';
+
+                    t = parseInt( i / 4 ) * (css(e,'height')+2) + css(Month_box,'top');
+                    b = (3 - (parseInt( i / 4 ) + 1)) * (css(e,'height')+2) + 34;
+                    l = i % 4 * (css(e,'width')+2);
+                    r = (4 - (i % 4 + 1)) * (css(e,'width')+2);
+                }
+            })
+            
+            mTween({
+                el:days,
+                attr:{
+                    top:t,
+                    right:r,
+                    bottom:b,
+                    left:l,
+                    opacity:0
+                }
+            })
+            date.innerHTML = year + "年";
+        } else if (type == 'year') {
+            Month_box.style.display = "none";
+            year_box.style.display = 'block';
+            yearRender();
+        }
+    }
+    div.forEach((e, i) => {
+        e.onclick = function () {
+            mon = i + 1;
+            days.style.display = "block";
+            Month_box.style.display = 'none';
+            Calendar(year, mon);
+            date.innerHTML = year + "年" + mon + "月";
+            type = 'days';
+        }
+    })
+    //初始化
+    init();
+
+    //函数
+    function init() {
+        toptime();
+        clock();
+        setInterval(clock, 1000);
+        Calendar(year, mon);
+    }
+
     function Calendar(year, month) {
         let calendar = document.querySelector(".calendar");
         let firstDay = new Date(year, month - 1, 1).getDay(); //当月1号是周几
@@ -90,12 +191,21 @@
         let str = "";
         let nowMonthFirst = 1;
         let nextMonthFirst = 1;
+        let data = new Date();
+        let nowyear = data.getFullYear();
+        let nowmon = data.getMonth() + 1;
+        console.log(nowmon);
+        let nowdata = data.getDate();
         for (let i = 0; i < 42; i++) {
             if (i < firstDay) { //显示上一个月
                 str += `<div class="inactivity">${lastMonthFirst}</div>`;
                 lastMonthFirst++
             } else if (nowMonthFirst <= totle) { //显示当前月
-                str += `<div>${nowMonthFirst}</div>`;
+                if (nowyear == year && nowmon == month && nowdata == nowMonthFirst) {
+                    str += `<div class="active">${nowMonthFirst}</div>`;
+                } else {
+                    str += `<div>${nowMonthFirst}</div>`;
+                }
                 nowMonthFirst++
             } else {
                 str += `<div class="inactivity">${nextMonthFirst}</div>`;
@@ -104,93 +214,6 @@
         }
         calendar.innerHTML = str;
     };
-    
-    //各种切换
-    next()
-    function next() {
-        let date = document.querySelector(".date");
-        let next = document.querySelector(".next");
-        let prev = document.querySelector(".prev");
-        let nowTime = new Date();
-        let year = nowTime.getFullYear();
-        let mon = twoDouble(nowTime.getMonth() + 1);
-        let calendar = document.querySelector(".calendar");
-        let days = document.querySelector(".days");
-        let Month_box = document.querySelector(".Month_box");
-        let year_box = document.querySelector('.year_box');
-        let div = document.querySelectorAll(".Month_box div");
-        date.innerHTML = nowTime.getFullYear() + "年" + twoDouble(nowTime.getMonth() + 1) + "月"
-        //点击要看下一月
-        next.onclick = function () {
-            if(type=='days'){
-                mon++
-                if (mon > 12) {
-                    year++;
-                    mon = 1;
-                }
-                date.innerHTML = year + "年" + mon + "月";
-                Calendar(year, mon);
-            }else if(type=='month'){
-                if(year>=2099){
-                    return false;
-                }
-                year++;
-                date.innerHTML = year + "年";
-            }
-        }
-        //点击要看上一月
-        prev.onclick = function () {
-            if(type=='days'){
-                mon--;
-                if (mon < 1) {
-                    year--
-                    mon = 12;
-                }
-                date.innerHTML = year + "年" + mon + "月";
-                Calendar(year, mon);
-            }else if(type=='month'){
-                if(year<=1900){
-                    return false;
-                }
-                year--;
-                date.innerHTML = year + "年";
-            }
-        }
-        //date
-        date.onclick = function(){
-            handleDateChange();
-            if(type=='month'){
-                days.style.display = "none";
-                Month_box.style.display = "block";
-                date.innerHTML = year + "年";
-            }else if(type=='year'){
-                Month_box.style.display = "none";
-                year_box.style.display = 'block';
-                yearRender(year_box,year);
-            }
-        }
-        div.forEach((e,i)=>{
-            e.onclick = function(){
-                mon = i + 1;
-                days.style.display = "block";
-                Month_box.style.display = 'none';
-                Calendar(year,mon);
-                date.innerHTML = year + "年" + mon + "月";
-                type = 'days';
-            }
-        })
-        year_box.onclick = function(ev){
-            var el = ev.target;
-            year = Number(el.innerText);
-            Month_box.style.display = 'block';
-            year_box.style.display = 'none';
-            date.innerHTML = year + "年";
-            type = 'month';
-        }
-    }
-   
-
-    toptime()
 
     function toptime() {
         //最上面的年月日周
@@ -203,10 +226,6 @@
     function handleWeek(num) {
         return ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][num]
     }
-    
-    //表盘和表盘下的时间
-    clock()
-    setInterval(clock, 1000)
 
     function clock() {
         let H = document.querySelector(".H");
@@ -219,17 +238,19 @@
         css(H, "rotate", 30 * h);
         css(M, "rotate", 6 * m);
         css(S, "rotate", 6 * s);
-         //具体时间
+        //具体时间
         let NTime = document.querySelector(".NTime"); //具体时间
-        let APM = document.querySelector(".APM"); 
+        let APM = document.querySelector(".APM");
         APM.innerHTML = handleWeek(date.getDay());
         NTime.innerHTML = date.getHours() + ':' + twoDouble(date.getMinutes()) + ':' + twoDouble(date.getSeconds());
     }
+
     function twoDouble(num) {
         return num < 10 ? "0" + num : "" + num;
     }
-    function handleDateChange(){
-        switch(type){
+
+    function handleDateChange() {
+        switch (type) {
             case "days":
                 type = 'month';
                 break;
@@ -243,16 +264,29 @@
                 break;
         }
     }
-    function yearRender(el,year){
-        year = Number((year+'').slice(0,3)+'0');
-        var str = '<div style="color:#ccc;">'+(year-1)+'</div>';
+    function yearRender() {
+        var y = Number((year + '').slice(0, 3) + '0');
+        var str = '<div style="color:#ccc;">' + (y - 1) + '</div>';
         for (let i = 0; i < 10; i++) {
-            str += '<div>'+(year+i)+'</div>';
+            if(y + i==year){
+                str += '<div style="color: #0066cd;border-color: #0066cd;background: linear-gradient(#f2f8ff, #d0e5ff);">' + (y + i) + '</div>';
+            }else{
+                str += '<div>' + (y + i) + '</div>';
+            }
         };
-        str += '<div style="color:#ccc;">'+(year+10)+'</div>';
-        el.innerHTML = str;
-        document.querySelector('.date').innerHTML = year+'-'+(year+10);
-        
+        str += '<div style="color:#ccc;">' + (y + 10) + '</div>';
+        year_box.innerHTML = str;
+        document.querySelector('.date').innerHTML = y + '-' + (y + 10);
+        let everyYear = document.querySelectorAll(".year_box div");
+        everyYear.forEach(item => {
+            item.onclick = function () {
+                year = Number(item.innerHTML);
+                year_box.style.display = "none";
+                Month_box.style.display = 'block';
+                date.innerHTML = item.innerHTML + "年";
+                type = 'month';
+            }
+        })
     }
 </script>
 

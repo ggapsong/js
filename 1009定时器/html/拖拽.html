@@ -19,15 +19,13 @@
 <body>
     <div class="box"></div>
     <script>
-        function getStyle(el, attr) {
-            return parseInt(getComputedStyle(el)[attr]);
-        }
+        
         let el = document.querySelector('.box');
         el.onmousedown = function (ev) {
             var e_x = ev.clientX; //记录鼠标按下时的水平位置
             var e_y = ev.clientY; //记录鼠标按下时的垂直位置
-            var l = getStyle(el, 'left'); //获取box元素被按下时的left值
-            var t = getStyle(el, 'top'); //获取box元素被按下时的top值
+            var l = getStyle(el, 'left'); 
+            var t = getStyle(el, 'top'); 
             document.onmousemove = function (ev) {
                 var nowx = ev.clientX; //记录现在鼠标的水平位置
                 var nowy = ev.clientY; //记录现在鼠标的垂直位置
@@ -39,6 +37,9 @@
             el.onmouseup = function(){
                 document.onmousemove = el.onmouseup = null;
             }
+        }
+        function getStyle(el, attr) {
+            return parseInt(getComputedStyle(el)[attr]);
         }
     </script>
 </body>
