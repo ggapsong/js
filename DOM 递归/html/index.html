@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        } */
+    </style>
+</head>
+
+<body>
+    <ul class="list">
+        <!-- <li>
+            <p>一级菜单</p>
+            <ul>
+                <li>
+                    <p>二级菜单</p>
+                    <ul>
+                        <li>
+                            <p>三级菜单</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li> -->
+    </ul>
+    <script src="../js/date.js"></script>
+    <script>
+        let list = document.querySelector(".list");
+        list.innerHTML = createMenu(data)
+
+        function createMenu(data) {
+            let inner = "<ul>";
+            data.forEach((item) => {
+                inner +=
+                    `<li>
+                    <p>${item.title}</p>   
+                    ${item.child?createMenu(item.child):""}
+                </li>`
+            });
+            inner += "</ul>"
+            return inner
+        }
+    </script>
+</body>
+
+</html>

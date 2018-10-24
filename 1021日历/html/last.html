@@ -87,6 +87,7 @@
     let year_box = document.querySelector('.year_box');
     let div = document.querySelectorAll(".Month_box div");
     date.innerHTML = nowTime.getFullYear() + "年" + twoDouble(nowTime.getMonth() + 1) + "月";
+    //点击下一月
     document.querySelector(".next").onclick = function () {
         if (type == 'days') {
             mon++
@@ -122,16 +123,17 @@
             date.innerHTML = year + "年";
         }
     }
-    //date
+    //date点击事件
     date.onclick = function () {
         handleDateChange();
         if (type == 'month') {
             days.style.display = 'none';
             Month_box.style.display = "block";
-            div.forEach((e,i)=>{
+            div.forEach((e, i) => {
                 e.style = '';
-                if(i+1==mon){
-                    e.style = 'color: #0066cd;border-color: #0066cd;background: linear-gradient(#f2f8ff, #d0e5ff);';
+                if (i + 1 == mon) {
+                    e.style =
+                        'color: #0066cd;border-color: #0066cd;background: linear-gradient(#f2f8ff, #d0e5ff);';
                 }
             })
             date.innerHTML = year + "年";
@@ -140,7 +142,7 @@
             year_box.style.display = 'block';
             yearRender();
         }
-    }
+    } //点击每一月
     div.forEach((e, i) => {
         e.onclick = function () {
             mon = i + 1;
@@ -161,7 +163,7 @@
         setInterval(clock, 1000);
         Calendar(year, mon);
     }
-
+    //日历的生成
     function Calendar(year, month) {
         let calendar = document.querySelector(".calendar");
         let firstDay = new Date(year, month - 1, 1).getDay(); //当月1号是周几
@@ -174,7 +176,6 @@
         let data = new Date();
         let nowyear = data.getFullYear();
         let nowmon = data.getMonth() + 1;
-        console.log(nowmon);
         let nowdata = data.getDate();
         for (let i = 0; i < 42; i++) {
             if (i < firstDay) { //显示上一个月
@@ -194,19 +195,30 @@
         }
         calendar.innerHTML = str;
     };
-
+    //最上面的年月日周
     function toptime() {
-        //最上面的年月日周
         let top = document.querySelector(".top");
         let nowTime = new Date();
         top.innerHTML = nowTime.getFullYear() + "年" + twoDouble(nowTime.getMonth() + 1) + "月" + twoDouble(nowTime.getDate()) +
             "日" + "  " + handleWeek(nowTime.getDay());
+        top.onclick = function () {
+            let nowTime = new Date();
+            year = nowTime.getFullYear();
+            mon = nowTime.getMonth() + 1
+            days.style.display = "block";
+            Month_box.style.display = "none";
+            year_box.style.display = "none";
+            Calendar(year, mon);
+            date.innerHTML = year + "年" + mon + "月";
+            type = "days";
+
+        }
     }
     //星期
     function handleWeek(num) {
         return ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][num]
     }
-
+    //钟表事件
     function clock() {
         let H = document.querySelector(".H");
         let M = document.querySelector(".M");
@@ -224,11 +236,11 @@
         APM.innerHTML = handleWeek(date.getDay());
         NTime.innerHTML = date.getHours() + ':' + twoDouble(date.getMinutes()) + ':' + twoDouble(date.getSeconds());
     }
-
+    //补0
     function twoDouble(num) {
         return num < 10 ? "0" + num : "" + num;
     }
-
+    //type类型的判断
     function handleDateChange() {
         switch (type) {
             case "days":
@@ -244,19 +256,23 @@
                 break;
         }
     }
+    //生成每一年
     function yearRender() {
         var y = Number((year + '').slice(0, 3) + '0');
         var str = '<div style="color:#ccc;">' + (y - 1) + '</div>';
         for (let i = 0; i < 10; i++) {
-            if(y + i==year){
-                str += '<div style="color: #0066cd;border-color: #0066cd;background: linear-gradient(#f2f8ff, #d0e5ff);">' + (y + i) + '</div>';
-            }else{
+            if (y + i == year) {
+                str +=
+                    '<div style="color: #0066cd;border-color: #0066cd;background: linear-gradient(#f2f8ff, #d0e5ff);">' +
+                    (y + i) + '</div>';
+            } else {
                 str += '<div>' + (y + i) + '</div>';
             }
         };
         str += '<div style="color:#ccc;">' + (y + 10) + '</div>';
         year_box.innerHTML = str;
         document.querySelector('.date').innerHTML = y + '-' + (y + 10);
+        //点击每一年
         let everyYear = document.querySelectorAll(".year_box div");
         everyYear.forEach(item => {
             item.onclick = function () {

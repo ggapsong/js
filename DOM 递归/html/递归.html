@@ -9,14 +9,15 @@
 </head>
 
 <body>
-
+    <script>
+        function fn(nub) {
+            if (nub > 0) {
+                fn(nub - 1);
+            }
+            console.log(nub);
+        }
+        fn(5);
+    </script>
 </body>
-<script>
-    let time1 = new Date();
-    let tear = time1.getFullYear();
-    let mon = time1.getMonth() + 1;
-    let nn = 
-    console.log(mon);
-</script>
 
 </html>

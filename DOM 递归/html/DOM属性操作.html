@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    /* .box{
+        width: 100px;
+        height: 100px;
+        background-color: #f00;
+    } */
+    </style>
+</head>
+<body>
+    <ul class="box">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+
+    <script>
+    let box = document.querySelector(".box");
+
+    //以下是DOM的属性操作
+
+
+    box.setAttribute("miaov","妙味");//增加属性
+    box.setAttribute("miaov","哈哈哈哈");//改属性
+    box.setAttribute("ages","10");//增加属性
+    console.log(box.getAttribute("miaov"));
+    console.log(box.hasAttribute("miaov"));//有没有这个属性
+    box.removeAttribute("miaov")//删除属性
+    console.log(box.attributes);//所有的属性
+
+    let lists = box.children;
+    console.log(lists);
+    for(let i=0;i<lists.length;i++){
+        lists[i].setAttribute("index",i);
+        lists[i].setAttribute("onclick","alert(this.getAttribute('index'));");
+    }
+    box.innerHTML +=`<li>4</li>`
+    </script>
+</body>
+</html>
