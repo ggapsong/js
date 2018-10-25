@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .wrap {
+            overflow: hidden;
+        }
+
+        .left {
+            width: 300px;
+            height: 500px;
+            border: 1px solid #000;
+            float: left;
+        }
+
+        li {
+            height: 30px;
+            text-indent: 50px;
+        }
+
+        button {
+            float: left;
+            margin-top: 250px;
+        }
+
+        .right {
+            width: 300px;
+            height: 500px;
+            border: 1px solid #000;
+            float: left;
+        }
+
+        .bg {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <ul class="left">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        <button>向右</button>
+        <button>向左</button>
+        <ul class="right">
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+        </ul>
+    </div>
+    <script>
+        let left = document.querySelector(".left"); //左边的框
+        let right = document.querySelector(".right"); //右边的框
+        let button = document.querySelectorAll("button"); //所有的按钮
+        let lis = document.querySelectorAll("li");
+        lis.forEach((item) => {
+            item.onclick = function () {
+                item.classList.toggle("bg");
+            }
+        })
+        button[0].onclick = function () {
+            let li = left.querySelectorAll("li");
+            for (let i = 0; i < li.length; i++) {
+                if (li[i].className == "bg") {
+                    right.insertBefore(li[i],right.children[0]);
+                    li[i].className ="";
+                } 
+            }
+        }
+        button[1].onclick = function () {
+            let li = right.querySelectorAll("li");
+            for (let i = 0; i < li.length; i++) {
+                if (li[i].className == "bg") {
+                    left.insertBefore(li[i],left.children[0]);
+                    li[i].className ="";
+                }
+            }
+        }
+
+        //  button[0].onclick = function () {
+        //     let li = left.querySelectorAll("li");
+        //     for (let i = 0; i < li.length; i++) {
+        //         if (li[i].className == "bg") {
+        //             right.appendChild(li[i])
+        //             li[i].className ="";
+        //         } 
+        //     }
+        // }
+        // button[1].onclick = function () {
+        //     let li = right.querySelectorAll("li");
+        //     for (let i = 0; i < li.length; i++) {
+        //         if (li[i].className == "bg") {
+        //             left.appendChild(li[i])
+        //             li[i].className ="";
+        //         }
+        //     }
+        // }
+    </script>
+</body>
+
+</html>
