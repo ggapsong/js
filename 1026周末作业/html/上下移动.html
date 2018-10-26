@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/4.css">
+    <script src="../../global/miaov.js"></script>
+    <style>
+        body {
+            background-color: #ccc;
+        }
+
+        .wrap {
+            width: 400px;
+            height: 500px;
+            margin: 50px auto;
+        }
+
+        li {
+            width: 100%;
+            height: 54px;
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .text {
+            font: 16px/54px "宋体";
+            color: #000;
+            float: left;
+            text-indent: 20px;
+        }
+
+        .move {
+            width: 130px;
+            float: right;
+            text-align: center;
+            margin-top: 14px;
+        }
+
+        .prev {
+            width: 48px;
+            height: 26px;
+            float: left;
+            color: #f48394;
+            border: 1px solid #f48394;
+
+        }
+
+        .next {
+            width: 48px;
+            height: 26px;
+            border: 1px solid #f48394;
+            color: #f48394;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="wrap">
+        <li>
+            <div class="text">jQuery</div>
+            <div class="move">
+                <div class="prev">上移</div>
+                <div class="next">下移</div>
+            </div>
+        </li>
+        <li>
+            <div class="text">AJAX</div>
+            <div class="move">
+                <div class="prev">上移</div>
+                <div class="next">下移</div>
+            </div>
+        </li>
+        <li>
+            <div class="text">js基础-2</div>
+            <div class="move">
+                <div class="prev">上移</div>
+                <div class="next">下移</div>
+            </div>
+        </li>
+        <li>
+            <div class="text">移动端实战</div>
+            <div class="move">
+                <div class="prev">上移</div>
+                <div class="next">下移</div>
+            </div>
+        </li>
+        <li>
+            <div class="text">canvas游戏</div>
+            <div class="move">
+                <div class="prev">上移</div>
+                <div class="next">下移</div>
+            </div>
+        </li>
+    </ul>
+</body>
+<script>
+    let prev = document.querySelectorAll(".prev"); //上移
+    let wrap = document.querySelector(".wrap"); //外框
+    //上移
+    prev.forEach((item) => {
+        item.onclick = function () {
+            let parent = item.parentNode.parentNode.previousElementSibling; //li的上一个兄弟元素
+            let li = item.parentNode.parentNode; //li
+            css(li, "translateY", 0);
+            if (parent) {
+                css(parent, "translateY", 0);
+                mTween({
+                        el: li,
+                        attr: {
+                            translateY: -64,
+                        },
+                        time: 80,
+                    }),
+                    mTween({
+                        el: parent,
+                        attr: {
+                            translateY: 64,
+                        },
+                        time: 80,
+                        cb: function () {
+                            wrap.insertBefore(li, parent);
+                            css(li, "translateY", 0);
+                            css(parent, "translateY", 0);
+                        }
+                    })
+            } else {
+                let parents = item.parentNode.parentNode.parentNode.children; //所有的li
+                mTween({
+                    el: li,
+                    attr: {
+                        "translateY": 256,
+                    },
+                    time: 80
+                })
+                for (let i = 1; i < parents.length; i++) {
+                    css(parents[i], "translateY", 0);
+                    mTween({
+                        el: parents[i],
+                        attr: {
+                            "translateY": -64
+                        },
+                        time: 80,
+                        cb: function () {
+                            wrap.appendChild(li);
+                            css(li, "translateY", 0);
+                            css(parents[i], "translateY", 0);
+                            css(parents[0], "translateY", 0)
+                        }
+                    })
+                }
+            }
+        }
+    })
+    //下移
+    let next = document.querySelectorAll(".next");
+    next.forEach((item) => {
+        item.onclick = function () {
+            let parent = item.parentNode.parentNode.nextElementSibling; //li的下一个兄弟元素
+            let li = item.parentNode.parentNode //li
+            css(li, "translateY", 0)
+            if (parent) {
+                css(parent, "translateY", 0)
+                mTween({
+                    el: li,
+                    attr: {
+                        translateY: 64
+                    },
+                    time: 80,
+                })
+                mTween({
+                    el: parent,
+                    attr: {
+                        translateY: -64
+                    },
+                    time: 80,
+                    cb: function () {
+                        wrap.insertBefore(parent, li);
+                        css(li, "translateY", 0);
+                        css(parent, "translateY", 0);
+                    }
+                })
+            } else {
+                let parents = item.parentNode.parentNode.parentNode.children; //所有的li
+                mTween({
+                    el: li,
+                    attr: {
+                        "translateY": -256,
+                    },
+                    time: 80
+                })
+                for (let i = 0; i < parents.length-1; i++) {
+                    css(parents[i], "translateY", 0);
+                    mTween({
+                        el: parents[i],
+                        attr: {
+                            "translateY": 64
+                        },
+                        time: 80,
+                        cb: function () {
+                            wrap.insertBefore(li, wrap.children[0]);
+                            css(li, "translateY", 0);
+                            css(parents[i], "translateY", 0);
+                            css(parents[parents.length-1] ,"translateY" , 0)
+                        }
+                    })
+                }
+            }
+        }
+    })
+</script>
+
+</html>
