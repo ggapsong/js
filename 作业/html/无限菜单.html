@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/data.js"></script>
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        li ul {
+            display: none;
+        }
+
+        .on {
+            line-height: 30px;
+            background: url("../img/2.png") no-repeat left 10px;
+            padding-left: 20px;
+        }
+
+        .active {
+            line-height: 30px;
+            background: url("../img/1.png") no-repeat left 10px;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tree-menu"></div>
+    <script>
+        let tree = document.querySelector("#tree-menu");
+        tree.innerHTML = Leaf(data);
+        let p = document.querySelectorAll("p");
+
+        function Leaf(data) {
+            let inner = "<ul>";
+            data.forEach((item) => {
+                inner +=
+                    `<li>
+                            <p>${item.title}</p>
+                            ${item.child?Leaf(item.child):""}
+                        </li>`
+
+            });
+            inner += "</ul>";
+            return inner;
+        };
+        //获取p标签的父级
+        //如果父级的兄弟元素有展开的就关闭
+        p.forEach((item) => {
+            let ul = item.nextElementSibling;
+            let lis = item.parentNode.parentNode.children;
+            console.log(lis);
+            
+            if (ul) {
+                    item.className = "active";
+                };
+            item.onclick = function () { //每一个p在点击的时候
+                if (ul) {
+                    item.className = (item.className == "active")?"on":"active";
+                    ul.style.display = (ul.style.display =="block")?"none":"block"; 
+                };
+                for(let i=0;i<lis.length;i++){
+                    if(lis[i]!==item.parentNode){//不等父级就是所有的叔叔级
+                        if(lis[i].querySelector("p").className=="on"){
+                            lis[i].querySelector("p").className ="active";
+                            lis[i].querySelector("ul").style.display="none";
+                        };
+                    };
+                };
+            };
+        });
+    </script>
+</body>
+
+</html>
