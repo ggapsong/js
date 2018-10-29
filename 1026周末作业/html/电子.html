@@ -52,7 +52,7 @@
                 <div class="product">5.0-5.5英寸</div>
                 <div class="product">6.0以上</div>
             </li>
-            <li class="parent"  data-type='sys'>
+            <li class="parent" data-type='sys'>
                 <span>系统:</span>
                 <div class="product">安卓</div>
                 <div class="product">苹果</div>
@@ -60,7 +60,7 @@
                 <div class="product">无</div>
                 <div class="product">其他</div>
             </li>
-            <li class="parent"  data-type='network'>
+            <li class="parent" data-type='network'>
                 <span>网络:</span>
                 <div class="product">联通3G</div>
                 <div class="product">双卡单4G</div>
@@ -72,7 +72,48 @@
         </ul>
     </div>
     <!-- <script src="../js/5.js"></script> -->
-    <script src="../js/5.1.js"></script>
+    <!-- <script src="../js/5.js"></script> -->
+    <script>
+        /*
+        1.点击下面的li里面的div创建到total里面
+        2.创建好之后点击img会删除这一项
+        */
+        let total = document.querySelector(".total"); //上面用来存放选择的ul;
+        let ele = document.querySelector(".ele"); //下面选择项的ul；
+        let eles = Array.from(ele.children); //所有的li
+        let arr = [];
+        eles.forEach((item, index) => {
+            let everyele = Array.from(item.children); //li里面所有的div     li里面的每一项
+            everyele.forEach((div) => {
+                div.onclick = function () {
+                    let li = document.createElement("li") //生成li
+                    //生成li的内容
+                    li.innerHTML = `
+                        <span>${this.innerHTML}</span>
+                        <img src="../img/1_03.png" alt="">`
+                    arr[index] = li; //把所有创建的东西放到数组里
+                    console.log(arr);
+                    creat()
+                    let img = li.querySelector("img");
+                    // console.log(img);
+                    img.onclick = function () {  
+                        arr[index] = null;
+                        creat()
+                    }
+                }
+            })
+        })
+        //把数组里的内容放到DOM中
+        function creat() {//过滤掉没有选择的选项  也就是把空的过滤掉
+            let inner = arr.filter((item) => {
+                return item
+            })
+            total.innerHTML = "";
+            inner.forEach((item) => {
+                total.appendChild(item)
+            })
+        }
+    </script>
 </body>
 
 </html>

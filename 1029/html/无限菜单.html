@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/data.js"></script>
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        li ul {
+            display: none;
+        }
+
+        .on {
+            line-height: 30px;
+            background: url("../img/2.png") no-repeat left 10px;
+            padding-left: 20px;
+        }
+
+        .active {
+            line-height: 30px;
+            background: url("../img/1.png") no-repeat left 10px;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tree-menu"></div>
+    <script>
+        let tree = document.querySelector("#tree-menu");
+        tree.innerHTML = Leaf(data)
+        function Leaf(data) {
+            let inner = "<ul>"
+            data.forEach((item) => {
+                inner +=
+                    `<li>
+                            <p class=${item.child?"active":""}>
+                                ${item.title}</p>
+                            ${item.child?Leaf(item.child):""}
+                        </li>`
+            });
+            inner += `</ul>`
+            return inner;
+        }
+        let p = document.querySelectorAll("p.active");
+        p.forEach((item) => {
+            item.onclick = function () {
+                //p 点击时判断自己的class==on（on为打开状态）
+                if(this.className=='on'){
+                    //关掉 就是把自己的class改为active 并且把自己的下一个元素也就是ul display none；
+                    this.className = 'active';
+                    this.nextElementSibling.style.display = '';
+                }else{
+                    // 打开当前
+                    this.className='on';
+                    this.nextElementSibling.style.display = 'block';
+                    //因为点击的是p标签 那么要关掉父级的兄弟们 也就是父级的父级的孩子们（老爸除外）
+                    let lis = Array.from(this.parentNode.parentNode.children);
+                    lis.forEach((li) => {
+                        // 如果不是我的老爸
+                        if (this.parentNode !== li) {
+                            //获取 这个叔叔下面的ul 看看有没有ul 有就代表需要关以下  否则就不能关
+                            // 1.没有ul代表 这个p是没有class（三角）；所以就不能给这个li下面的p加class 因为这样会加上三角符号 ， 并且也不能操作ul 因为ul不存在 所以直接写ul.style 会报错
+                            var ul = li.querySelector("ul");
+                            ul?li.querySelector("p").className ="active":'';
+                            ul?ul.style.display ="none":''
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <audio src=""></audio>
+    <textarea>大家好我是人工智能</textarea>
+    <button>朗读</button>
+    <script>
+        (function () {
+            let audio = document.getElementsByTagName("audio");
+            let textarea = document.getElementsByTagName("textarea");
+            let btn = document.getElementsByTagName("button");
+            btn.onclick = function () {
+                audio.src = "http://tts.baidu.com/text2audio?lan=zh&psd=5&ie=UTF-8&text=" + textarea.innerHTML;
+                audio.play();
+            }
+        })();
+    </script>
+</body>
+
+</html>
