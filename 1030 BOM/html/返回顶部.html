@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #000;
+            color: #fff;
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="../img/1.png" alt="">
+    <button>返回顶部</button>
+    <script>
+        (function () {
+            timer = 0;
+            let btn = document.querySelector("button"); //返回顶部按钮
+            window.onscroll = function () { //当滚动条滚动的时候
+                //如果滚动条滚动的距离大于页面的可视高度
+                if (document.documentElement.scrollTop > document.documentElement.clientHeight) {
+                    btn.style.display = "block"; //返回顶部按钮显示
+                } else {
+                    btn.style.display = "none"; //反之隐藏
+                }
+            }
+            btn.onclick = function () {//当返回顶部按钮的时候
+                cancelAnimationFrame(timer);//清除定时器  保证页面中只有一个定时器是开启的
+                timer = requestAnimationFrame(move);
+                function move() {
+                    let scrollY = document.documentElement.scrollTop; //获取距离顶部的距离
+                    if (scrollY > 0) {//如果距离顶部的距离大于0
+                        scrollY = scrollY*0.8;
+                        document.documentElement.scrollTop = scrollY;
+                        timer = requestAnimationFrame(move);
+                    }
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>

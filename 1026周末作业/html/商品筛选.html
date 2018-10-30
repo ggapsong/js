@@ -84,21 +84,19 @@
         let arr = [];
         eles.forEach((item, index) => {
             let everyele = Array.from(item.children); //li里面所有的div     li里面的每一项
-            everyele.forEach((div) => {
-                div.onclick = function () {
+            everyele.forEach((div) => {//循环li里的div
+                div.onclick = function () {//当div点击的时候
                     let li = document.createElement("li") //生成li
                     //生成li的内容
                     li.innerHTML = `
                         <span>${this.innerHTML}</span>
                         <img src="../img/1_03.png" alt="">`
-                    arr[index] = li; //把所有创建的东西放到数组里
-                    console.log(arr);
-                    creat()
-                    let img = li.querySelector("img");
-                    // console.log(img);
-                    img.onclick = function () {  
-                        arr[index] = null;
-                        creat()
+                    arr[index] = li; //把生成的li放到数组里
+                    creat()//把数组里面的内容渲染到页面中
+                    let img = li.querySelector("img");//获取删除按钮
+                    img.onclick = function () {  //当点击删除按钮的时候
+                        arr[index] = null;//arr数组里面被删掉对应位为空
+                        creat()//把数组里面的内容重新渲染到页面中
                     }
                 }
             })
@@ -108,7 +106,9 @@
             let inner = arr.filter((item) => {
                 return item
             })
+            //把上面的ul先清空
             total.innerHTML = "";
+            //把inner里面的内容添加到ul里面
             inner.forEach((item) => {
                 total.appendChild(item)
             })
