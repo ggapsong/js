@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" class="text" value="请输入内容">
+    <input type="button" value="全选" class="btn">
+    <script>
+    let text = document.querySelector(".text");
+    let btn = document.querySelector(".btn");
+    text.addEventListener("focus",function(){
+        if(text.value =="请输入内容"){
+            text.value = "";
+        }
+    });
+    text.addEventListener("blur",function () {  
+        if(text.value==""){
+            text.value = "请输入内容";
+        }
+    });
+    btn.addEventListener("click",function () {  
+        text.select();
+    })
+
+
+
+    // text.onfocus = function () {  
+    //     if(text.value =="请输入内容"){
+    //         text.value = ""
+    //     }
+    // };
+    // text.onblur = function () {  
+    //     if(text.value==""){
+    //         text.value = "请输入内容"
+    //     }
+    // };
+
+    // btn.onclick = function () {  
+    //     text.select()
+    // }
+   /* 
+    text.focus()
+    text.blur()
+    text.select()
+    */
+
+    </script>
+</body>
+</html>

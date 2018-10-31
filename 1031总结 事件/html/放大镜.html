@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .small {
+            width: 150px;
+            height: 225px;
+            position: relative;
+            float: left;
+        }
+
+        img {
+            width: 150px;
+            height: 225px;
+        }
+
+        .mask {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.6);
+            display: block;
+            border-radius: 50%;
+        }
+
+        .big {
+            width: 160px;
+            height: 160px;
+            margin-left: 300px;
+            border-radius: 50%;
+            background: url("../img/1.jpg") no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="small">
+            <img src="../img/1.jpg" alt="">
+            <span class="mask"></span>
+        </div>
+        <div class="big"></div>
+    </div>
+    <script>
+        let small = document.querySelector(".small");//大盒子
+        let mask = document.querySelector(".mask"); //遮罩
+        let big = document.querySelector(".big");//大图
+        document.addEventListener("mousemove",function(e){
+            let smallh = small.offsetHeight-(mask.offsetHeight)//大盒子的可视高度-遮罩的可视高度
+            let smallw = small.offsetWidth-(mask.offsetWidth);//大盒子的可视高度-遮罩的可视高度
+            let n = e.clientY - mask.offsetHeight/2//鼠标的垂直坐标-遮罩的可视高度的一半
+            let m = e.clientX - mask.offsetWidth/2 //鼠标的垂直坐标-遮罩的可视宽度的一半
+            if(n<0){
+               n=0
+            }
+            if(n>smallh){
+                n=smallh    
+            }
+            if(m<0){
+                m = 0
+            }
+            if(m>smallw){
+                m=smallw
+            }
+            mask.style.left = m + "px";
+            mask.style.top = n + "px";
+            big.style.backgroundPositionX = -(m)*4+"px"
+            big.style.backgroundPositionY = -(n)*4+"px"
+
+           
+        })
+    </script>
+</body>
+
+</html>

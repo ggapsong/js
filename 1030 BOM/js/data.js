@@ -11,7 +11,7 @@ var data = {
             eng:"campus"
         }
     ],
-    society: [  
+    society: [ 
         {
             num: 1,
             job: "社会招聘",

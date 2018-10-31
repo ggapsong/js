@@ -265,8 +265,8 @@
             hash = hash.substr(1).split("/") //把#截掉并用split分割成数组;
             switch (hash[0]) {
                 case 'details': //如果hash为details
-                    details.style.display = "block"; //就让details显示出来
-                    list.style.display = "none";
+                    detailsPage ()
+                    
                     break;
                 case 'list': //如果hash为list
                     listView()
@@ -286,8 +286,10 @@
                     leftinner += `<li class="${item.eng==hash[1]?"active":""}"><a href="#list/${item.eng}/1">${item.text}</span>${item.eng}</li>`
                 });
                 leftList.innerHTML = leftinner;
+
+                //生成右侧的内容
                 var str = '';
-                var start = (hash[2]-1)*4;
+                var start = (hash[2]-1)*4; 
                 for (let i = start; i < start+4; i++) {
                     if(i>data[hash[1]].length-1){
                         continue;
@@ -296,19 +298,32 @@
                                 <span class="num">${data[hash[1]][i].num}</span>
                                 <div class="list">
                                     <a href=""><span class="job">职位需求：前端开发工程师</span><span>需求人数：2名</span><time>${data[hash[1]][i].data}</time></a>
-                                    <p><span class="text">${data[hash[1]][i].ask}</span><a href="javascript:;">查看详情>></a></p>
+                                    <p><span class="text">${data[hash[1]][i].ask}</span><a href="#details/}">查看详情>></a></p>
                                 </div>
                             </li>`
                 }
                 rightList.innerHTML = str
             }
+
+            //生成页码
             let pageNum = Math.ceil(data[hash[1]].length/4);
             var str = '';
             for (let i = 0; i < pageNum; i++) {
                 str += `<a class="${i+1==hash[2]?'active':''}" href="#${hash[0]}/${hash[1]}/${i+1}">${i+1}</a>`
             }
             pagesBox.innerHTML = str
+
+            //生成详情页
+            function detailsPage (){
+                details.style.display = "block"; //就让details显示
+                list.style.display = "none";//让list隐藏出来
+                
+               
+            }
         };
+
+
+       
     </script>
 </body>
 
