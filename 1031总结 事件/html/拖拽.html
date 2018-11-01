@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        /* .wrap{
+        margin: 0 auto;
+        position: relative;
+        width: 800px;
+        height: 600px;
+        border:1px solid #000;
+    } */
+        .box {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            top: 0;
+            left: 0;
+            background-color: #f00;
+        }
+    </style>
+</head>
+
+<body>
+    <button>原路返回</button>
+    <div class="box"></div>
+    <script src="../../global/miaov.js"></script>
+    <script>
+        /*
+    按下：
+        1. 鼠标的位置
+        2. 元素初始位置
+
+    移动:
+        1. 鼠标移动后的位置  
+        2. 鼠标移动距离 = 鼠标移动后的位置 - 鼠标的位置
+        3. 元素当前位置 = 元素初始位置 + 鼠标移动距离
+
+
+
+
+        原路返回
+        1.声明两个空数组
+            1）一个放top
+            2）一个放left
+        2.把数值都放到数组里面
+            -加上定时器
+            -box的left/top值就等于被删除的数值
+            -如果数组.length为0，就清除定时器
+        
+*/
+        let box = document.querySelector(".box");
+        let btn = document.querySelector("button");
+        let startMouse = {};
+        let startBox = {};
+        let x = [] //用来记录x的坐标
+        let y = [] //用来记录y的坐标
+        let timer = 0;
+        let end = [];
+        box.addEventListener("mousedown", function (e) {//当鼠标按下的时候记录鼠标和box的初始位置
+            startMouse = {//鼠标的初始位置
+                x: e.clientX,
+                y: e.clientY
+            }
+            startBox = {//box的初始位置
+                l: css(box, "left"),
+                t: css(box, "top"),
+            }
+            x.push(startBox.l)//把box的left初始位置加到数组里
+            y.push(startBox.t)//把box的top初始位置加到数组里
+            document.addEventListener("mousemove", move)//当抚摸事件发生的时候
+            document.addEventListener("mouseup", function () {//鼠标抬起的时候清掉抚摸事件
+                document.removeEventListener("mousemove", move)
+            }, {
+                once: true
+            })
+        })
+
+        function move(e) {
+            end = {//鼠标移动过后的坐标
+                x: e.clientX - startMouse.x,
+                y: e.clientY - startMouse.y,
+            }
+            x.push(startBox.l + end.x)//把box的移动过后left的值加到数组里
+            y.push(startBox.t + end.y)//把box的移动过后top的值加到数组
+            box.style.left = startBox.l + end.x + "px";//box的left值
+            box.style.top = startBox.t + end.y + "px";//box的top值
+        }
+        btn.addEventListener("click", function () {//当返回按钮点击的时侯
+            clearInterval(timer)
+            timer = setInterval(function () {
+                if (x.length == 0) {
+                    clearInterval(timer)
+                }
+                css(box, "left", x.pop())//box的left值就等于数组删除的数字
+                css(box, "top", y.pop())//box的top值就等于数组删除的数字
+            }, 1)
+        })
+    </script>
+</body>
+
+</html>

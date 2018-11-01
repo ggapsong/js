@@ -251,3 +251,19 @@ function mTween(op){
         }
 	}
 }
+function scrollWheel(el,upEvent,downEvent){
+    el.addEventListener("mousewheel",function(e){
+        if(e.wheelDelta < 0){
+            downEvent&&downEvent.call(this,e);
+        } else {
+            upEvent&&upEvent.call(this,e);
+        }
+    });
+    el.addEventListener("DOMMouseScroll",function(e){
+        if(e.detail > 0){
+            downEvent&&downEvent.call(this,e);
+        } else {
+            upEvent&&upEvent.call(this,e);
+        }
+    });
+}

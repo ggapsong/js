@@ -32,6 +32,7 @@
             background: rgba(255, 255, 255, 0.6);
             display: block;
             border-radius: 50%;
+            display: none;
         }
 
         .big {
@@ -39,6 +40,7 @@
             height: 160px;
             margin-left: 300px;
             border-radius: 50%;
+            display: none;
             background: url("../img/1.jpg") no-repeat;
         }
     </style>
@@ -51,38 +53,34 @@
     </div>
     <div class="big"></div>
     <script>
-    /*
-    
-    */
-
         let small = document.querySelector(".small"); //大盒子
         let mask = document.querySelector(".mask"); //遮罩
         let big = document.querySelector(".big"); //大图
-        document.addEventListener("mousemove", function (e) {
-            let smallh = small.offsetHeight - (mask.offsetHeight) //大盒子的可视高度-遮罩的可视高度
-            let smallw = small.offsetWidth - (mask.offsetWidth); //大盒子的可视高度-遮罩的可视高度
-            //也就是遮罩可以活动的区域
-            let n = e.clientY - mask.offsetHeight / 2 //鼠标的垂直坐标-遮罩的可视高度的一半
-            let m = e.clientX - mask.offsetWidth / 2 //鼠标的水平坐标-遮罩的可视宽度的一半
-            //让鼠标处在遮罩的中心位置
-            if (n < 0) {
-                n = 0
+        small.addEventListener("mousemove", function (e) {
+            mask.style.display = "block";
+            big.style.display = "block";
+            let l = e.clientX - mask.offsetWidth / 2;
+            let t = e.clientY - mask.offsetHeight / 2;
+            if (t < 0) {
+                t = 0
             }
-            if (n > smallh) {
-                n = smallh
+            if (l < 0) {
+                l = 0
             }
-            if (m < 0) {
-                m = 0
+            if (t > small.offsetHeight - mask.offsetHeight) {
+                t = small.offsetHeight - mask.offsetHeight
             }
-            if (m > smallw) {
-                m = smallw
+            if (l > small.offsetWidth - mask.offsetWidth) {
+                l = small.offsetWidth - mask.offsetWidth
             }
-            mask.style.left = m + "px";
-            mask.style.top = n + "px";
-            big.style.backgroundPositionX = -(m) * 4 + "px"
-            big.style.backgroundPositionY = -(n) * 4 + "px"
-
-
+            mask.style.left = l + "px";
+            mask.style.top = t + "px";
+            big.style.backgroundPositionX = -(l * 4) + "px"
+            big.style.backgroundPositionY = -(t * 4) + "px"
+        })
+        small.addEventListener("mouseout",function () {  
+            mask.style.display = "none";
+            big.style.display = "none";
         })
     </script>
 </body>

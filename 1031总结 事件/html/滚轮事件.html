@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap {
+            width: 250px;
+            height: 60px;
+            background-color: #ccc;
+            margin: 0 auto;
+        }
+
+        .bg {
+            width: 205px;
+            margin: 0 auto;
+        }
+
+        .box {
+            display: inline-block;
+            height: 50px;
+            overflow: hidden;
+            margin-top: 5px;
+            border-radius: 5px;
+
+        }
+
+        span {
+            width: 30px;
+            height: 50px;
+            display: block;
+            background-color: gray;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="bg">
+            <div class="box">
+                <div class="sparent">
+                    <span>0</span>
+                    <span>0</span>
+                </div>
+
+            </div>
+            <div class="box">
+                <div class="sparent">
+                    <span>0</span>
+                    <span>0</span>
+                </div>
+            </div>
+            <div class="box">
+                <div class="sparent">
+                    <span>0</span>
+                    <span>0</span>
+                </div>
+            </div>
+            <div class="box">
+                <div class="sparent">
+                    <span>0</span>
+                    <span>0</span>
+                </div>
+            </div>
+            <div class="box">
+                <div class="sparent">
+                    <span>0</span>
+                    <span>0</span>
+                </div>
+            </div>
+            <div class="box">
+                <div class="sparent">
+                    <span>0</span>
+                    <span>0</span>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <script src="../../global/miaov.js"></script>
+    <script>
+        let boxs = document.querySelectorAll(".box");
+        let n = true;
+        boxs.forEach((box) => {
+            let sparents = box.querySelector(".sparent");
+            let spans = sparents.querySelectorAll("span");
+            scrollWheel(box, upEvent, downEvent);
+
+            function upEvent() {
+                css(sparents, "translateY", -50)
+                let val = spans[1].innerHTML
+                val--
+                if (val < 0) {
+                    val = 9
+                }
+                spans[0].innerHTML = val;
+                mTween({
+                    el: sparents,
+                    attr: {
+                        translateY: 0
+                    },
+                    time: 50,
+                    cb: function () {
+                        css(sparents, "translateY", -50)
+                        spans[1].innerHTML = val;
+                    }
+                })
+            }
+
+            function downEvent() {
+                if (n) {
+                    n = false
+                    css(sparents, "translateY", 0)
+                    let val = spans[0].innerHTML
+                    val++
+                    if (val == 10) {
+                        val = 0
+                    }
+                    spans[1].innerHTML = val;
+                    mTween({
+                        el: sparents,
+                        attr: {
+                            translateY: -50,
+                        },
+                        time: 50,
+                        cb: function () {
+                            css(sparents, "translateY", 0)
+                            spans[0].innerHTML = val;
+                            n = true
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
