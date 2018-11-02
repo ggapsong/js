@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .list {
+            width: 800px;
+            height: 600px;
+            margin: 50px auto;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .prev {
+            position: absolute;
+            font: 100px/150px "宋体";
+            color: gray;
+            top: 250px;
+            left: 0;
+            z-index: 2;
+        }
+
+        .next {
+            position: absolute;
+            font: 100px/150px "宋体";
+            color: gray;
+            top: 250px;
+            right: 0;
+            z-index: 2;
+        }
+
+        .prev:hover {
+            color: #ccc;
+        }
+
+        .next:hover {
+            color: #ccc;
+        }
+
+        .pic {
+            position: relative;
+        }
+
+        .pic img {
+            width: 800px;
+            height: 600px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .pic img:first-child {
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="list">
+        <li class="prev">
+            <</li> <li class="pic">
+                <img src="../img/1.jpg" alt="">
+                <img src="../img/2.jpg" alt="">
+        </li>
+        <li class="next">></li>
+    </ul>
+</body>
+<script src="../js/miaov.js"></script>
+<script>
+    let ul = document.querySelector("ul");
+    let prev = document.querySelector(".prev");
+    let next = document.querySelector(".next");
+    let imgs = document.querySelectorAll("img");
+    let num = 0;
+    let is = true;
+    let down = false;
+    let arr = [
+        "../img/1.jpg",
+        "../img/2.jpg",
+        "../img/3.jpg",
+        "../img/4.jpg",
+        "../img/5.jpg",
+        "../img/6.jpg",
+    ]
+    let start = {};
+    let now = {}
+    /////////////////////////////////////鼠标///////////////////////////////////////////////
+    css(imgs[0], "translateX", 0)
+    css(imgs[0], "translateY", 0)
+    //上一张
+    prev.onclick = function (e) {
+        move()
+    };
+    //下一张
+    next.onclick = function () {
+        move2()
+    }
+
+
+    ////////////////////////////////////////键盘/////////////////////////////////////////////
+    document.addEventListener("keydown", function (e) {
+        if (e.keyCode == 37) {
+            move()
+        }
+        if (e.keyCode == 39) {
+            move2()
+        }
+        if (e.keyCode == 38) {
+            move3()
+        }
+        if (e.keyCode == 40) {
+            move4()
+        }
+    })
+
+    ////////////////////////////////////////鼠标拖拽/////////////////////////////////////////
+    ul.addEventListener("mousedown", function (e) {
+        start = {
+            x: e.clientX,
+            y: e.clientY,
+        }
+        down = true;
+        e.preventDefault()
+    })
+    ul.addEventListener("mousemove", function (e) {
+        now = {
+            x: e.clientX,
+            y: e.clientY,
+        }
+    })
+    ul.addEventListener("mouseup", function (e) {
+        if (!down) {
+            return
+        }
+        //判断水平还是垂直
+        if (Math.abs(now.x - start.x) > Math.abs(now.y - start.y)) {
+            // 水平
+            if (now.x - start.x > 0) {
+                move()
+            } else {
+                move2()
+            }
+        } else {
+            //垂直
+            if (now.y - start.y > 0) {
+                move3()
+            } else {
+                move4()
+            }
+        }
+    });
+
+    function move() {
+        if (is) {
+            is = false
+            num--
+            if (num < 0) {
+                num = arr.length - 1;
+            }
+            imgs[1].src = arr[num]
+            mTween({
+                el: imgs[0],
+                attr: {
+                    translateX: 800,
+                },
+                time: 100,
+                cb: function () {
+                    imgs[0].src = arr[num]
+                    css(imgs[0], "translateX", 0)
+                    is = true
+                }
+            })
+        }
+
+    }
+
+    function move2() {
+        if (is) {
+            is = false;
+            num++;
+            if (num > arr.length - 1) {
+                num = 0;
+            }
+            imgs[1].src = arr[num];
+            mTween({
+                el: imgs[0],
+                attr: {
+                    translateX: -800,
+                },
+                time: 100,
+                cb: function () {
+                    imgs[0].src = arr[num];
+                    css(imgs[0], "translateX", 0);
+                    is = true;
+                }
+            })
+        }
+    }
+
+    function move3() {
+        if (is) {
+            is = false
+            num--
+            if (num < 0) {
+                num = arr.length - 1;
+            }
+            imgs[1].src = arr[num]
+            mTween({
+                el: imgs[0],
+                attr: {
+                    translateY: 800,
+                },
+                time: 100,
+                cb: function () {
+                    imgs[0].src = arr[num]
+                    css(imgs[0], "translateY", 0)
+                    is = true
+                }
+            })
+        }
+    }
+
+    function move4() {
+        if (is) {
+            is = false;
+            num++;
+            if (num > arr.length - 1) {
+                num = 0;
+            }
+            imgs[1].src = arr[num];
+            mTween({
+                el: imgs[0],
+                attr: {
+                    translateY: -800,
+                },
+                time: 100,
+                cb: function () {
+                    imgs[0].src = arr[num];
+                    css(imgs[0], "translateY", 0);
+                    is = true;
+                }
+            })
+        }
+    }
+</script>
+
+
+</html>

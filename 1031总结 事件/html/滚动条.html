@@ -55,37 +55,29 @@
     <script>
         let scrollWrap = document.querySelector("#scrollWrap"); //外框
         let scrollBar = document.querySelector("#scrollBar"); //滚动条
-        let WrapHeight = css(scrollWrap, "height");
-        let startBox = {};
-        let start = {}
-        
+        let WrapHeight = css(scrollWrap, "height");//滚动外框的高度
+        let startBox = 0;
+        let start = 0;
         scrollBar.addEventListener("mousedown", function (e) {
-            start = {
-                y: e.clientY,
-            }
-            startBar = {
-                t: css(scrollBar, "top"),
-            }
+            start = e.clientY,//初始的垂直位置
+            startBar = css(scrollBar, "top"),//初始top值
             document.addEventListener("mousemove", move)
             document.addEventListener("mouseup",function(){
-                document.removeEventListener("mousemove", move)
-            },{once:true,});
+            document.removeEventListener("mousemove", move)},{once:true,});
             e.preventDefault();
         });
 
         function move(e) {
-            let WrapH = scrollWrap.clientHeight - scrollBar.clientHeight;
-            let nowy = e.clientY;
-            let cha = {
-                y: nowy - start.y
-            };
-            let t = startBar.t + cha.y
+            let WrapH = scrollWrap.clientHeight - scrollBar.clientHeight;//startBar的可移动范围
+            let nowy = e.clientY;//现在鼠标的垂直位置
+            let cha = nowy - start //鼠标移动的距离
+            let t = startBar + cha//过界处理  如果scrollBar的top值小于0就等于0  大于可移动范围就等于可移动范围
             if (t < 0) {
                 t = 0
             } else if (t > WrapH) {
                 t = WrapH
             }
-            scrollBar.style.top = t + "px";
+            scrollBar.style.top = t + "px";//scrollBar的top值
         }
     </script>
 </body>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            position: relative;
+        }
+
+        .wrap {
+            width: 140px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            display: none;
+        }
+
+        li {
+            height: 40px;
+            font-size: 0;
+        }
+
+        li img {
+            width: 16px;
+            height: 16px;
+            vertical-align: top;
+            margin: 10px 20px 0 26px;
+        }
+
+        li span {
+            font: 12px/34px "宋体";
+            color: #000;
+            vertical-align: top;
+
+        }
+
+        li:hover {
+            background-color: #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="wrap">
+        <li>
+            <img src="../img/load.png" alt="">
+            <span>下载</span>
+        </li>
+        <li>
+            <img src="../img/delate.png" alt="">
+            <span>删除</span>
+        </li>
+        <li>
+            <img src="../img/add.png" alt="">
+            <span>移动到</span>
+        </li>
+        <li>
+            <img src="../img/name.png" alt="">
+            <span>重命名</span>
+        </li>
+    </ul>
+    <script src="../js/miaov.js"></script>
+    <script>
+        let wrap = document.querySelector(".wrap");
+        let innerW = document.documentElement.clientWidth//页面的宽度
+        let innerH = document.documentElement.clientHeight//页面的高度
+        
+        let start = {};
+        let isup = false;
+        css(wrap, "top", 0);
+        css(wrap, "left", 0)
+        let w = css(wrap, "width");
+        let h = css(wrap, "height");
+        document.addEventListener("contextmenu", function (e) {
+            
+            var t = 0,
+                l = 0;
+            if(innerW-e.clientX<w){
+                l = e.clientX - w - 1;
+            }else{
+                l = e.clientX + 1;
+            }
+            if(innerH-e.clientY<160){
+                t = e.clientY - 160 - 1
+            }else{
+                t = e.clientY + 1
+            }
+            wrap.style.left = l + "px";
+            wrap.style.top = t + "px";
+            wrap.style.display = "block";
+            e.preventDefault();
+        });
+        document.addEventListener("mousedown", function () {
+            wrap.style.display = "none";
+        });
+    </script>
+</body>
+
+</html>

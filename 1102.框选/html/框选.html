@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border: 1px solid transparent;
+            /* background-color: rgba(140, 163, 208, 0.5); */
+        }
+    </style>
+</head>
+
+<body>
+    <script src="../../global/miaov.js"></script>
+    <script>
+        /*
+        鼠标的初始位置就是box的top和left
+        变化后的值时box的宽高
+        */
+        let start = {};
+        let box = null;
+        document.addEventListener("mousedown", function (e) {
+                if(e.button != 0){
+                 return;
+             }
+            let div = document.createElement("div");
+            div.className = "box";
+            document.body.appendChild(div);
+
+            let box = document.querySelector(".box");
+            //鼠标初始坐标
+            start = {
+                x: e.clientX,
+                y: e.clientY
+            }
+            box.style.top = start.y + "px";
+            box.style.left = start.x + "px";
+            document.addEventListener("mousemove", move);
+            document.addEventListener("mouseup", function () {
+                document.removeEventListener("mousemove", move);
+            }, {
+                once: true
+            });
+
+            function move(e) {
+                //鼠标移动过后的坐标
+                let now = {
+                    x: Math.min(e.clientX, start.x),
+                    y: Math.min(e.clientY, start.y),
+                }
+                let cha = {
+                    x: Math.abs(e.clientX - start.x),
+                    y: Math.abs(e.clientY - start.y),
+                }
+                box.style.top = now.y + "px";
+                box.style.left = now.x + "px";
+                box.style.height = cha.y + "px";
+                box.style.width = cha.x + "px";
+                box.style.backgroundColor = "#000";
+            }
+        })
+    </script>
+</body>
+
+</html>
