@@ -102,12 +102,28 @@
     prev.onclick = function (e) {
         move()
     };
+    //取消冒泡
+    prev.onmousedown = function(e){
+        e.cancelBubble = true;
+        e.stopPropagation();
+    }
+    prev.onmouseup = function(e){
+        e.cancelBubble = true;
+        e.stopPropagation();
+    }
     //下一张
     next.onclick = function () {
         move2()
     }
-
-
+    //取消冒泡
+    next.onmousedown = function(e){
+        e.cancelBubble = true;
+        e.stopPropagation();
+    }
+    next.onmouseup = function(e){
+        e.cancelBubble = true;
+        e.stopPropagation();
+    }
     ////////////////////////////////////////键盘/////////////////////////////////////////////
     document.addEventListener("keydown", function (e) {
         if (e.keyCode == 37) {
@@ -131,35 +147,38 @@
             y: e.clientY,
         }
         down = true;
+        ul.addEventListener("mousemove", function (e) {
+            now = {
+                x: e.clientX,
+                y: e.clientY,
+            }
+        })
+        ul.addEventListener("mouseup", function (e) {
+            e.cancelBubble = true;
+            if (!down) {
+                return
+            }
+            //判断水平还是垂直
+            if (Math.abs(now.x - start.x) > Math.abs(now.y - start.y)) {
+                // 水平
+                e.cancelBubble
+                if (now.x - start.x > 0) {
+                    move()
+                } else {
+                    move2()
+                }
+            } else {
+                //垂直
+                if (now.y - start.y > 0) {
+                    move3()
+                } else {
+                    move4()
+                }
+            }
+        });
         e.preventDefault()
     })
-    ul.addEventListener("mousemove", function (e) {
-        now = {
-            x: e.clientX,
-            y: e.clientY,
-        }
-    })
-    ul.addEventListener("mouseup", function (e) {
-        if (!down) {
-            return
-        }
-        //判断水平还是垂直
-        if (Math.abs(now.x - start.x) > Math.abs(now.y - start.y)) {
-            // 水平
-            if (now.x - start.x > 0) {
-                move()
-            } else {
-                move2()
-            }
-        } else {
-            //垂直
-            if (now.y - start.y > 0) {
-                move3()
-            } else {
-                move4()
-            }
-        }
-    });
+
 
     function move() {
         if (is) {

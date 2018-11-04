@@ -164,14 +164,15 @@
                 });
                 if (newLis.length >= 5) {
                     showBar(-42);
-                }else{
+                } else {
                     hideBar();
                 }
             }
+            e.preventDefault();
         });
 
         //添加键点击的时候
-        btn.onclick = function () {
+        btn.onclick = function (e) {
             if (text.value == "") {
                 alert("请输入内容");
             } else {
@@ -204,12 +205,15 @@
                     showBar(42);
                 }
             }
+            e.preventDefault();
+            text.value = "";
         }
 
         function showBar(num) {
             scroll.style.display = "block";
             bar.style.height = parent.clientHeight / (list.clientHeight + num) * scroll.clientHeight + "px";
         }
+
         function hideBar() {
             scroll.style.display = "none";
         }

@@ -90,7 +90,6 @@
             let sparents = box.querySelector(".sparent");
             let spans = sparents.querySelectorAll("span");
             scrollWheel(box, upEvent, downEvent);
-
             function upEvent() {
                 css(sparents, "translateY", -50)
                 let val = spans[1].innerHTML
@@ -112,7 +111,7 @@
                 })
             }
 
-            function downEvent() {
+            function downEvent(e) {
                 if (n) {
                     n = false
                     css(sparents, "translateY", 0)
@@ -137,6 +136,7 @@
                 }
             }
         })
+
     </script>
 </body>
 

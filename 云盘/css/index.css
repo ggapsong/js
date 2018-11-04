@@ -1,0 +1,406 @@
+@font-face {
+  font-family: "iconfont";
+  src: url("iconfont.eot");
+  src: url("iconfont.eot?#iefix") format("embedded-opentype"), url("iconfont.woff") format("woff"), url("iconfont.ttf") format("truetype"), url("iconfont.svg#iconfont") format("svg");
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+html,
+body {
+  height: 100%;
+}
+.msg_box {
+  overflow: hidden;
+  height: 40px;
+  position: fixed;
+  top: 15px;
+  left: 0;
+  right: 0;
+}
+.delsuc_box {
+  border-radius: 15px;
+  position: absolute;
+  left: 50%;
+  top: -40px;
+  transform: translate3d(-50%, 0, 0);
+  margin-right: 53px;
+  font-size: 0;
+  transition: 0.5s;
+}
+.delsuc_box img {
+  width: 24px;
+  height: 24px;
+  margin: 8px 10px 0 19px;
+  vertical-align: top;
+}
+.delsuc_box span {
+  display: inline-block;
+  font: 13px/40px "宋体";
+  color: #fff;
+  margin-right: 31px;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 71px;
+  border-bottom: 1px solid #d0d9de;
+  padding-top: 17px;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 20;
+  background-color: #fff;
+}
+header h1 {
+  float: left;
+}
+header h1 img {
+  margin-left: 28px;
+}
+header .TM {
+  width: 369px;
+  margin: 0 auto;
+}
+header .deg_box {
+  background-color: #f3a960;
+  border-radius: 15px;
+  float: left;
+  font-size: 0;
+}
+header .deg_box img {
+  width: 24px;
+  height: 24px;
+  margin: 8px 10px 0 19px;
+  vertical-align: top;
+}
+header .deg_box span {
+  display: inline-block;
+  font: 13px/40px "宋体";
+  color: #fff;
+  margin-right: 31px;
+}
+header .fn_btns {
+  float: right;
+  width: 402px;
+}
+header .fn_btns li {
+  font-size: 0;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  margin-right: 14px;
+  float: left;
+  color: #79868f;
+  cursor: pointer;
+}
+header .fn_btns li:hover {
+  border-color: #55addc;
+  color: #55addc;
+}
+header .fn_btns li .iconfont {
+  font-size: 22px;
+  display: inline-block;
+  vertical-align: top;
+  width: 16px;
+  height: 16px;
+  margin: 8px 15px 0 10px;
+}
+header .fn_btns li span {
+  display: inline-block;
+  vertical-align: top;
+  font: 14px/36px "宋体";
+  padding-right: 23px;
+}
+main {
+  position: relative;
+  padding-top: 71px;
+  height: 100%;
+  box-sizing: border-box;
+}
+main .menu_list {
+  position: absolute;
+  width: 258px;
+  top: 71px;
+  left: 0;
+  bottom: 0;
+  padding-top: 12px;
+  font-size: 0;
+  margin-left: 20px;
+  overflow-y: auto;
+}
+main .menu_list li {
+  padding-left: 20px;
+}
+main .menu_list li img {
+  width: 16px;
+  height: 16px;
+}
+main .menu_list li span {
+  font: 15px/33px "宋体";
+  color: #66757f;
+  display: inline-block;
+  margin-left: 6px;
+}
+main .menu_list .active {
+  background: url("../img/active_03.png") no-repeat left 10px;
+}
+main .menu_list .on {
+  background: url("../img/on_03.png") no-repeat left 10px;
+}
+main .content {
+  border-left: 2px solid #e1e8ed;
+  height: 100%;
+  margin-left: 258px;
+  position: relative;
+}
+main .content .crumbs {
+  height: 48px;
+  border-bottom: 2px solid #e1e8ed;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+main .content .crumbs .checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #d0d9de;
+  margin: 15px 44px 0 15px;
+  float: left;
+}
+main .content .crumbs .detail {
+  float: left;
+  font: 12px/46px "宋体";
+  padding: 0 4px;
+  color: #000;
+  border-bottom: 2px solid transparent;
+}
+main .content .crumbs .active {
+  border-color: #55addc;
+}
+main .content .crumbs .img {
+  float: left;
+}
+main .content .crumbs .img img {
+  margin: 13px 16px 14px;
+}
+main .content .file_box {
+  height: 100%;
+  padding-top: 48px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+main .content .file_box .file_box_content {
+  height: 100%;
+  background-color: #f5f8fa;
+}
+main .content .file_box ul {
+  overflow: hidden;
+}
+main .content .file_box ul .lis {
+  float: left;
+  width: 178px;
+  height: 178px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  margin: 40px;
+  background-color: #ebeff0;
+}
+main .content .file_box ul .lis .select {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #d0d9de;
+  margin: 9px 0 9px 9px;
+}
+main .content .file_box ul .lis .fileimg {
+  text-align: center;
+}
+main .content .file_box ul .lis .name {
+  width: 118px;
+  margin: 0 auto;
+  font: 13px/61px "宋体";
+  color: #66757f;
+  text-align: center;
+}
+main .content .file_box ul .lis .changename {
+  width: 118px;
+  margin: 0 auto;
+  font: 13px/30px "宋体";
+  color: #66757f;
+  text-align: center;
+  background-color: #fff;
+  margin-top: 12px;
+  outline: none;
+  display: block;
+}
+main .content .file_box ul .lis:hover {
+  background-color: #fff;
+}
+main .content .file_box ul .ok {
+  background: url("../img/ok_03.png") no-repeat;
+}
+main .content .file_box ul .selected {
+  box-shadow: 0 0 3px 3px #d4e8f3;
+  border: 1px solid #55addc;
+  background-color: #fff;
+}
+main .content .file_box ul .none {
+  display: none !important;
+}
+main .content .file_box .delesure {
+  width: 316px;
+  height: 176px;
+  border: 2px solid #55addc;
+  border-radius: 7px;
+  background-color: #fff;
+  position: absolute;
+  top: 282px;
+  right: 70px;
+}
+main .content .file_box .delesure .close {
+  height: 42px;
+}
+main .content .file_box .delesure .close img {
+  float: right;
+  margin: 15px 15px 0 0;
+}
+main .content .file_box .delesure .middle {
+  width: 246px;
+  margin-left: 35px;
+  font-size: 0;
+  margin-bottom: 41px;
+}
+main .content .file_box .delesure .middle img {
+  width: 36px;
+  height: 36px;
+  vertical-align: top;
+}
+main .content .file_box .delesure .middle span {
+  font: 15px/36px "宋体";
+  color: #000;
+  display: inline-block;
+  margin-left: 15px;
+}
+main .content .file_box .delesure .btn {
+  width: 184px;
+  margin: 0 auto;
+  overflow: hidden;
+  font: 15px/30px "宋体";
+  text-align: center;
+}
+main .content .file_box .delesure .btn .yes {
+  width: 80px;
+  color: #fff;
+  background-color: #55addc;
+  float: left;
+  border-radius: 5px;
+}
+main .content .file_box .delesure .btn .no {
+  width: 80px;
+  color: #55addc;
+  background-color: #fff;
+  float: left;
+  margin-left: 22px;
+  border-radius: 5px;
+  border: 1px solid #55addc;
+}
+main .content .file_box .rightmenu {
+  width: 88px;
+  height: 94px;
+  border: 1px solid #d1dadf;
+  padding-top: 8px;
+  position: absolute;
+  display: none;
+}
+main .content .file_box .rightmenu .menu_box {
+  font-size: 0;
+  height: 30px;
+  background-color: #fff;
+}
+main .content .file_box .rightmenu .menu_box:hover {
+  background-color: #cae5f4;
+}
+main .content .file_box .rightmenu .menu_box i {
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+  vertical-align: top;
+  display: inline-block;
+  margin-left: 7px;
+}
+main .content .file_box .rightmenu .menu_box span {
+  font: 13px/25px "宋体";
+  color: #6f7d87;
+  margin-left: 10px;
+}
+main .content .file_box .movebox {
+  width: 406px;
+  height: 416px;
+  border: 2px solid #55addc;
+  box-sizing: border-box;
+  position: absolute;
+  top: 63px;
+  left: 138px;
+  background-color: #fff;
+}
+main .content .file_box .movebox .title_top {
+  font-size: 0;
+  margin-left: 20px;
+  overflow: hidden;
+  padding-top: 4px;
+}
+main .content .file_box .movebox .title_top span {
+  display: inline-block;
+  font: bold 16px/45px "宋体";
+  color: #3f3f3f;
+  float: left;
+}
+main .content .file_box .movebox .title_top img {
+  float: right;
+  padding: 11px 15px 0 0;
+}
+main .content .file_box .movebox .classify {
+  padding-top: 12px;
+  font-size: 0;
+  margin-left: 20px;
+  width: 358px;
+  height: 270px;
+  border: 1px solid #e1e8ed;
+  margin-left: 21px;
+  margin-bottom: 22px;
+  overflow: hidden;
+}
+main .content .file_box .movebox .classify .menu_list {
+  position: relative;
+  top: 0;
+}
+main .content .file_box .movebox .btns {
+  width: 184px;
+  margin: 0 auto;
+  overflow: hidden;
+  font: 15px/30px "宋体";
+  text-align: center;
+}
+main .content .file_box .movebox .btns .yes {
+  width: 80px;
+  color: #fff;
+  background-color: #55addc;
+  float: left;
+  border-radius: 5px;
+}
+main .content .file_box .movebox .btns .no {
+  width: 80px;
+  color: #55addc;
+  background-color: #fff;
+  float: left;
+  margin-left: 22px;
+  border-radius: 5px;
+  border: 1px solid #55addc;
+}

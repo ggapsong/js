@@ -53,31 +53,41 @@
     </div>
     <script src="../../global/miaov.js"></script>
     <script>
+        let wrap = document.querySelector("#wrap"); //外框
+        let scroll = document.querySelector("#scroll"); //内容
         let scrollWrap = document.querySelector("#scrollWrap"); //外框
         let scrollBar = document.querySelector("#scrollBar"); //滚动条
-        let WrapHeight = css(scrollWrap, "height");//滚动外框的高度
+        let WrapHeight = css(scrollWrap, "height"); //滚动外框的高度
         let startBox = 0;
         let start = 0;
+        scrollBar.style.height = wrap.clientHeight/scroll.clientHeight*scrollWrap.clientHeight + 'px';
         scrollBar.addEventListener("mousedown", function (e) {
-            start = e.clientY,//初始的垂直位置
-            startBar = css(scrollBar, "top"),//初始top值
-            document.addEventListener("mousemove", move)
-            document.addEventListener("mouseup",function(){
-            document.removeEventListener("mousemove", move)},{once:true,});
+                start = e.clientY, //初始的垂直位置
+                startBar = css(scrollBar,"top"), //初始top值
+                document.addEventListener("mousemove", move)
+                document.addEventListener("mouseup", function () {
+                document.removeEventListener("mousemove", move)
+            }, {
+                once: true,
+            });
             e.preventDefault();
         });
 
         function move(e) {
-            let WrapH = scrollWrap.clientHeight - scrollBar.clientHeight;//startBar的可移动范围
-            let nowy = e.clientY;//现在鼠标的垂直位置
+            let WrapH = scrollWrap.clientHeight - scrollBar.clientHeight; //startBar的可移动范围
+            let nowy = e.clientY; //现在鼠标的垂直位置
             let cha = nowy - start //鼠标移动的距离
-            let t = startBar + cha//过界处理  如果scrollBar的top值小于0就等于0  大于可移动范围就等于可移动范围
+            let t = startBar + cha //过界处理  如果scrollBar的top值小于0就等于0  大于可移动范围就等于可移动范围
             if (t < 0) {
                 t = 0
             } else if (t > WrapH) {
                 t = WrapH
-            }
-            scrollBar.style.top = t + "px";//scrollBar的top值
+            };
+
+            scrollBar.style.top = t + "px"; //scrollBar的top值
+            // scroll.style.transform = 'translate3d(0,'+( -t/scrollWrap.clientHeight*scroll.clientHeight) +'px,0)';
+            let y =-scroll.clientHeight*(t/ scrollWrap.clientHeight);
+            css(scroll,"translateY",y)
         }
     </script>
 </body>
