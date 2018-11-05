@@ -17,10 +17,11 @@ html,
 body {
   height: 100%;
 }
-.msg_box{
+.msg_box {
   overflow: hidden;
   height: 40px;
   position: fixed;
+  // z-index: 10;
   top: 15px;
   left: 0;
   right: 0;
@@ -29,8 +30,8 @@ body {
   border-radius: 15px;
   position: absolute;
   left: 50%;
-  top:-40px;
-  transform: translate3d(-50%,0,0);
+  top: -40px;
+  transform: translate3d(-50%, 0, 0);
   margin-right: 53px;
   font-size: 0;
   transition: 0.5s;
@@ -57,19 +58,19 @@ header {
   padding-top: 17px;
   box-sizing: border-box;
   overflow: hidden;
-  z-index: 20;
-  background-color: #fff;
+  z-index: 1;
+  // background-color: #fff;
   h1 {
     float: left;
     img {
       margin-left: 28px;
     }
   }
-  .TM {
-    width: 369px;
-    margin: 0 auto;
-  }
-  
+  // .TM {
+  //   width: 369px;
+  //   margin: 0 auto;
+  // }
+
   .deg_box {
     // width: 166px;
     background-color: #f3a960;
@@ -148,7 +149,6 @@ main {
         color: #66757f;
         display: inline-block;
         margin-left: 6px;
-
       }
     }
     .active {
@@ -201,10 +201,9 @@ main {
       overflow-y: auto;
       box-sizing: border-box;
       // position: relative;
-      .file_box_content{
+      .file_box_content {
         height: 100%;
-      background-color: #f5f8fa;
-
+        background-color: #f5f8fa;
       }
       ul {
         overflow: hidden;
@@ -212,16 +211,18 @@ main {
           float: left;
           width: 178px;
           height: 178px;
+          box-sizing: border-box;
           border: 1px solid transparent;
           border-radius: 3px;
           margin: 40px;
           background-color: #ebeff0;
+          padding-top: 34px;
           .select {
             width: 14px;
             height: 14px;
             border: 1px solid #d0d9de;
             margin: 9px 0 9px 9px;
-            // display: none;
+            display: none;
           }
           .fileimg {
             text-align: center;
@@ -247,6 +248,10 @@ main {
         }
         .lis:hover {
           background-color: #fff;
+          padding: 0;
+          .select {
+            display: block;
+          }
         }
         .ok {
           background: url("../img/ok_03.png") no-repeat;
@@ -255,12 +260,17 @@ main {
           box-shadow: 0 0 3px 3px #d4e8f3;
           border: 1px solid #55addc;
           background-color: #fff;
+          padding: 0;
+          .select {
+            display: block;
+          }
         }
         .none {
           display: none !important;
         }
       }
       .delesure {
+        display: none;
         width: 316px;
         height: 176px;
         border: 2px solid #55addc;
@@ -328,7 +338,7 @@ main {
           font-size: 0;
           height: 30px;
           background-color: #fff;
-          &:hover{
+          &:hover {
             background-color: #cae5f4;
           }
           i {
@@ -347,6 +357,7 @@ main {
         }
       }
       .movebox {
+        display: none;
         width: 406px;
         height: 416px;
         border: 2px solid #55addc;
@@ -378,14 +389,13 @@ main {
           margin-left: 20px;
           width: 358px;
           height: 270px;
-          border:1px solid #e1e8ed;
-          margin-left:21px;
+          border: 1px solid #e1e8ed;
+          margin-left: 21px;
           margin-bottom: 22px;
           overflow: hidden;
-          .menu_list{
+          .menu_list {
             position: relative;
             top: 0;
-
           }
         }
 

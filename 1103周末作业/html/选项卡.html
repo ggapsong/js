@@ -103,11 +103,11 @@
         move()
     };
     //取消冒泡
-    prev.onmousedown = function(e){
+    prev.onmousedown = function (e) {
         e.cancelBubble = true;
         e.stopPropagation();
     }
-    prev.onmouseup = function(e){
+    prev.onmouseup = function (e) {
         e.cancelBubble = true;
         e.stopPropagation();
     }
@@ -116,11 +116,11 @@
         move2()
     }
     //取消冒泡
-    next.onmousedown = function(e){
+    next.onmousedown = function (e) {
         e.cancelBubble = true;
         e.stopPropagation();
     }
-    next.onmouseup = function(e){
+    next.onmouseup = function (e) {
         e.cancelBubble = true;
         e.stopPropagation();
     }
@@ -249,7 +249,6 @@
             })
         }
     }
-
     function move4() {
         if (is) {
             is = false;

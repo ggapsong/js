@@ -132,8 +132,8 @@
         let list = document.querySelector(".list"); //下面的ul
         let del = document.querySelector(".delete");
         let scroll = document.querySelector('.scroll');
-        let bar = document.querySelector(".bar")
-        let parent = document.querySelector(".parent")
+        let bar = document.querySelector(".bar");
+        let parent = document.querySelector(".parent");
         //点击删除
         list.addEventListener("click", function (e) {
             if (e.target.className == "delete") {
@@ -206,7 +206,7 @@
                 }
             }
             e.preventDefault();
-            text.value = "";
+            // text.value = "";
         }
 
         function showBar(num) {

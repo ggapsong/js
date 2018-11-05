@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border: 1px solid transparent;
+            background-color: rgba(140, 163, 208, 0.5);
+            border: 1px solid blue;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow: hidden;
+        }
+
+        li {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            border: 1px solid #000;
+            float: left;
+            margin: 20px;
+        }
+    </style>
+</head>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
+<body>
+    <script src="../../global/miaov.js"></script>
+    <script>
+        /*
+        鼠标的初始位置就是box的top和left
+        变化后的值时box的宽高
+        */
+        let start = {};
+        let isDown = false;
+        let box = null;
+        let lis = document.querySelectorAll("li");
+        // console.log(lis);
+        document.addEventListener("mousedown", function (e) {
+            start = {
+                x: e.clientX,
+                y: e.clientY
+            };
+            let div = document.createElement("div");
+            div.className = "box";
+            document.body.appendChild(div);
+            box = document.querySelector(".box");
+            css(box, "top", start.y);
+            css(box, "left", start.x);
+            isDown = true
+            e.preventDefault();
+        })
+        document.addEventListener("mousemove", function (e) {
+            // if (!isDown) {
+            //     return;
+            // }
+            if (isDown == false) {
+                return;
+            }
+            //top值和left值
+            let now = {
+                x: Math.min(e.clientX, start.x),
+                y: Math.min(e.clientY, start.y),
+            }
+            //宽高
+            let cha = {
+                l: Math.abs(e.clientX - start.x),
+                t: Math.abs(e.clientY - start.y),
+            }
+            box.style.top = now.y + "px";
+            box.style.left = now.x + "px";
+            box.style.width = cha.l + "px";
+            box.style.height = cha.t + "px";
+            lis.forEach((item) => {
+                if (isBoon(item, box)) {
+                    item.style.background = "red";
+                } else {
+                    item.style.background = "#ccc";
+                }
+            });
+            e.preventDefault();
+            isDown = true;
+        })
+        document.addEventListener("mouseup", function (e) {
+            if (!isDown) {
+                return;
+            }
+            document.body.removeChild(box);
+            e.preventDefault();
+        })
+
+        function isBoon(el, el2) {
+            /*
+                碰撞不到的情况:
+                    el.left > el2.right
+                    el2.left > el.right
+                    el.top > el2.bottom
+                    el2.top > el.bottom
+            */
+            let elRect = el.getBoundingClientRect();
+            let el2Rect = el2.getBoundingClientRect();
+            if (elRect.left > el2Rect.right ||
+                el2Rect.left > elRect.right ||
+                elRect.top > el2Rect.bottom ||
+                el2Rect.top > elRect.bottom) {
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+
+</html>

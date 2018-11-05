@@ -73,17 +73,13 @@
     <script src="../js/miaov.js"></script>
     <script>
         let wrap = document.querySelector(".wrap");
-        let innerW = document.documentElement.clientWidth //页面的宽度
-        let innerH = document.documentElement.clientHeight //页面的高度
-
-        let start = {};
-        let isup = false;
+        let innerW = document.documentElement.clientWidth ;//页面的宽度
+        let innerH = document.documentElement.clientHeight; //页面的高度
         css(wrap, "top", 0);
-        css(wrap, "left", 0)
+        css(wrap, "left", 0);
         let w = css(wrap, "width");
         let h = css(wrap, "height");
         document.addEventListener("contextmenu", function (e) {
-
             var t = 0,
                 l = 0;
             if (innerW - e.clientX < w) {
@@ -91,8 +87,8 @@
             } else {
                 l = e.clientX + 1;
             }
-            if (innerH - e.clientY < 160) {
-                t = e.clientY - 160 - 1
+            if (innerH - e.clientY < 140) {
+                t = e.clientY - 140 - 1
             } else {
                 t = e.clientY + 1
             }

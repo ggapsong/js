@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul{
+        padding: 0;
+        margin: 100px auto;
+        list-style: none;
+        width: 300px;
+        border:1px solid #000;
+        position: relative;
+    }
+    .btn{
+        width: 100px;
+        height: 50px;
+        border:1px solid #000;
+        margin: auto;
+        font:16px/50px "宋体";
+        color:#000;
+        text-align: center;
+    }
+    li{
+        height: 30px;
+        background-color: #ccc;
+        margin: 5px;
+    }
+    .box{
+        border:1px solid blue;
+        background-color: #ccc;
+        position: absolute;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="btn">删除</div>
+    <ul class="list">
+        <li>
+            <input type="checkbox">
+            <span>1</span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <span>2</span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <span>3</span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <span>4</span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <span>5</span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <span>6</span>
+        </li>
+    </ul>
+
+    <script>
+        let list = document.querySelector(".list");
+        let lis = document.querySelectorAll("li");
+        let btn = document.querySelector(".btn");
+        let start = {}
+        let isdown = false
+        list.addEventListener("mousedown", function (e) {
+            start = {
+                x: e.clientX,
+                y: e.clientY,
+            }
+            let div = document.createElement("div");
+            div.className = "box";
+            list.appendChild(div);
+            box = document.querySelector(".box");
+            box.style.top = start.y + "px";
+            box.style.left = start.x + "px";
+            isdown = true;
+        })
+        list.addEventListener("mousemove",function(){
+            if(!isdown){
+                return
+            }
+            isdown = true;
+            let now = {
+                x: Math.min(e.clientX,start.x),
+                y:  Math.abs(e.clientX,start.x),
+            }
+            let nowHW = {
+                x: Math.abs(e.clientX - start.x),
+                y:  Math.abs(e.clientY - start.x),
+            }
+            box.style.top = now.y + "px";
+            box.style.left = now.x + "px";
+            box.style.height = nowHW.y + "px";
+            box.style.width = nowHW.x + "px";
+        })
+        list.addEventListener("mouseup",function(){
+            if(!isdown){
+                return
+            }
+            isdown = true;
+            list.removeChild("box");
+        })
+    </script>
+</body>
+
+</html>

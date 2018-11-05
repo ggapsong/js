@@ -14,10 +14,37 @@
             width: 0;
             height: 0;
             border: 1px solid transparent;
-            /* background-color: rgba(140, 163, 208, 0.5); */
+            background-color: rgba(140, 163, 208, 0.5);
+            border: 1px solid blue;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow: hidden;
+        }
+
+        li {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            border: 1px solid #000;
+            float: left;
+            margin: 20px;
         }
     </style>
 </head>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
 
 <body>
     <script src="../../global/miaov.js"></script>
@@ -29,13 +56,12 @@
         let start = {};
         let box = null;
         document.addEventListener("mousedown", function (e) {
-                if(e.button != 0){
-                 return;
-             }
+            if (e.button != 0) {
+                return;
+            }
             let div = document.createElement("div");
             div.className = "box";
             document.body.appendChild(div);
-
             let box = document.querySelector(".box");
             //鼠标初始坐标
             start = {
@@ -52,7 +78,7 @@
             });
 
             function move(e) {
-                //鼠标移动过后的坐标
+                //鼠标移动过后的坐标;
                 let now = {
                     x: Math.min(e.clientX, start.x),
                     y: Math.min(e.clientY, start.y),
@@ -65,9 +91,11 @@
                 box.style.left = now.x + "px";
                 box.style.height = cha.y + "px";
                 box.style.width = cha.x + "px";
-                box.style.backgroundColor = "#000";
+                // box.style.backgroundColor = "#000";
+                e.preventDefault();
             }
         })
+
     </script>
 </body>
 

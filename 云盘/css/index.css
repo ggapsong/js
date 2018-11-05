@@ -55,18 +55,13 @@ header {
   padding-top: 17px;
   box-sizing: border-box;
   overflow: hidden;
-  z-index: 20;
-  background-color: #fff;
+  z-index: 1;
 }
 header h1 {
   float: left;
 }
 header h1 img {
   margin-left: 28px;
-}
-header .TM {
-  width: 369px;
-  margin: 0 auto;
 }
 header .deg_box {
   background-color: #f3a960;
@@ -208,16 +203,19 @@ main .content .file_box ul .lis {
   float: left;
   width: 178px;
   height: 178px;
+  box-sizing: border-box;
   border: 1px solid transparent;
   border-radius: 3px;
   margin: 40px;
   background-color: #ebeff0;
+  padding-top: 34px;
 }
 main .content .file_box ul .lis .select {
   width: 14px;
   height: 14px;
   border: 1px solid #d0d9de;
   margin: 9px 0 9px 9px;
+  display: none;
 }
 main .content .file_box ul .lis .fileimg {
   text-align: center;
@@ -242,6 +240,10 @@ main .content .file_box ul .lis .changename {
 }
 main .content .file_box ul .lis:hover {
   background-color: #fff;
+  padding: 0;
+}
+main .content .file_box ul .lis:hover .select {
+  display: block;
 }
 main .content .file_box ul .ok {
   background: url("../img/ok_03.png") no-repeat;
@@ -250,11 +252,16 @@ main .content .file_box ul .selected {
   box-shadow: 0 0 3px 3px #d4e8f3;
   border: 1px solid #55addc;
   background-color: #fff;
+  padding: 0;
+}
+main .content .file_box ul .selected .select {
+  display: block;
 }
 main .content .file_box ul .none {
   display: none !important;
 }
 main .content .file_box .delesure {
+  display: none;
   width: 316px;
   height: 176px;
   border: 2px solid #55addc;
@@ -341,6 +348,7 @@ main .content .file_box .rightmenu .menu_box span {
   margin-left: 10px;
 }
 main .content .file_box .movebox {
+  display: none;
   width: 406px;
   height: 416px;
   border: 2px solid #55addc;
