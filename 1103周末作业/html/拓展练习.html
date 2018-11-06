@@ -11,7 +11,8 @@
         padding: 0;
         margin: 100px auto;
         list-style: none;
-        width: 300px;
+        width: 800px;
+        height: 800px;
         border:1px solid #000;
         position: relative;
     }
@@ -30,9 +31,14 @@
         margin: 5px;
     }
     .box{
+        position: fixed;
+        top:0;
+        left:0;
         border:1px solid blue;
-        background-color: #ccc;
+        background-color: #000;
         position: absolute;
+        width: 0;
+        height: 0;
     }
     </style>
 </head>
@@ -70,6 +76,8 @@
         let list = document.querySelector(".list");
         let lis = document.querySelectorAll("li");
         let btn = document.querySelector(".btn");
+        // let input = document.querySelectorAll("input");
+        // console.log(input);
         let start = {}
         let isdown = false
         list.addEventListener("mousedown", function (e) {
@@ -77,39 +85,73 @@
                 x: e.clientX,
                 y: e.clientY,
             }
-            let div = document.createElement("div");
+            let div = document.createElement("li");
             div.className = "box";
-            list.appendChild(div);
+            document.body.appendChild(div);
             box = document.querySelector(".box");
+            // console.log(box);
             box.style.top = start.y + "px";
+            // console.log(box.style.top);
             box.style.left = start.x + "px";
             isdown = true;
+            e.preventDefault();
         })
-        list.addEventListener("mousemove",function(){
-            if(!isdown){
+        document.addEventListener("mousemove", function (e) {
+            if (!isdown) {
                 return
             }
             isdown = true;
             let now = {
-                x: Math.min(e.clientX,start.x),
-                y:  Math.abs(e.clientX,start.x),
+                x: Math.min(e.clientX, start.x),
+                y: Math.min(e.clientY, start.y),
             }
+            console.log(now);
             let nowHW = {
                 x: Math.abs(e.clientX - start.x),
-                y:  Math.abs(e.clientY - start.x),
+                y: Math.abs(e.clientY - start.y),
             }
-            box.style.top = now.y + "px";
-            box.style.left = now.x + "px";
+            // console.log(now);
+            box.style.top = now.y + scrollY + "px";
+            box.style.left = now.x  + scrollX + "px";
             box.style.height = nowHW.y + "px";
             box.style.width = nowHW.x + "px";
+            lis.forEach((item) => {
+                if (isBoon(item, box)) {
+                    let input = item.children[0]
+                    input.checked = true;
+
+                }
+            })
+            e.preventDefault();
         })
-        list.addEventListener("mouseup",function(){
-            if(!isdown){
+        document.addEventListener("mouseup", function (e) {
+            if (!isdown) {
                 return
+                console.log(1);
             }
-            isdown = true;
-            list.removeChild("box");
+            // document.body.removeChild(box);
+            box.remove();
+            e.preventDefault();
         })
+
+        function isBoon(el, el2) {
+            /*
+                碰撞不到的情况:
+                    el.left > el2.right
+                    el2.left > el.right
+                    el.top > el2.bottom
+                    el2.top > el.bottom
+            */
+            let elRect = el.getBoundingClientRect();
+            let el2Rect = el2.getBoundingClientRect();
+            if (elRect.left > el2Rect.right ||
+                el2Rect.left > elRect.right ||
+                elRect.top > el2Rect.bottom ||
+                el2Rect.top > elRect.bottom) {
+                return false;
+            }
+            return true;
+        }
     </script>
 </body>
 

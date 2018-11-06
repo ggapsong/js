@@ -34,102 +34,98 @@
     </header>
     <main>
         <!--                 多级菜单                  -->
-        <ul class="menu_list">
-            <li class="active">
-                <div>
-                    <img src="../img/moref.png" alt="">
-                    <span>微云</span>
-                </div>
-                <ul>
-                    <li class="active">
-                        <div>
-                            <img src="../img/moref.png" alt="">
-                            <span>JS课程</span>
-                        </div>
-                        <ul>
-                            <li>
-                                <div>
-                                    <img src="../img/file.png" alt="" class="c">
-                                    <span>123</span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="on">
-                                <div>
-                                    <img src="../img/file.png" alt="">
-                                    <span>123</span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="active">
-                                <div>
-                                    <img src="../img/moref.png" alt="">
-                                    <span>CSS课程</span>
-                                </div>
-                                <ul>
-                                    <li>
-                                        <div>
-                                            <img src="../img/file.png" alt="" class="c">
-                                            <span>123</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        <div>
-                                            <img src="../img/file.png" alt="" class="c">
-                                            <span>js基础课程</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        <div>
-                                            <img src="../img/file.png" alt="" class="c">
-                                            <span>css课程</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div>
-                                    <img src="../img/moref.png" alt="">
-                                    <span>111</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <img src="../img/moref.png" alt="">
-                                    <span>111</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        <div class="menu_list">
+            <ul>
+                <li class="active">
+                    <div class="">
+                        <img src="../img/moref.png" alt="">
+                        <span>微云</span>
+                    </div>
+                    <ul>
+                        <li class="active">
+                            <div>
+                                <img src="../img/moref.png" alt="">
+                                <span>JS课程</span>
+                            </div>
+                            <ul>
+                                <li>
+                                    <div>
+                                        <img src="../img/file.png" alt="" class="c">
+                                        <span>123</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li class="on">
+                                    <div>
+                                        <img src="../img/file.png" alt="">
+                                        <span>123</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li class="active">
+                                    <div>
+                                        <img src="../img/moref.png" alt="">
+                                        <span>CSS课程</span>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <div>
+                                                <img src="../img/file.png" alt="" class="c">
+                                                <span>123</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <div>
+                                                <img src="../img/file.png" alt="" class="c">
+                                                <span>js基础课程</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <div>
+                                                <img src="../img/file.png" alt="" class="c">
+                                                <span>css课程</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div>
+                                        <img src="../img/moref.png" alt="">
+                                        <span>111</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <img src="../img/moref.png" alt="">
+                                        <span>111</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
         <div class="content">
             <!--            面包屑                  -->
 
             <div class="crumbs clearfix">
                 <div class="checkbox"></div>
-                <div class="detail">微云</div>
-                <div class="img">
-                    <img src="../img/right_03.png" alt="">
-                </div>
-                <div class="detail">JS课程</div>
-                <div class="img">
-                    <img src="../img/right_03.png" alt="">
-                </div>
-                <div class="detail active">CSS课程</div>
+                <ul class="fl" id="crumbs_list">
+                    
+                </ul>
             </div>
             <div class="file_box">
 
                 <!--         所有li文件夹         -->
                 <div class="file_box_content">
-                    <ul class ="file_parent" >
+                    <ul class="file_parent">
                         <!-- <li class="lis selected">
                             <div class="select ok"></div>
                             <div class="fileimg">
@@ -313,7 +309,6 @@
 </body>
 <script src="../js/data.js"></script>
 <script src="../js/miaov.js"></script>
-<script src="../js/fn.js"></script>
 <script src="../js/index.js"></script>
 
 </html>

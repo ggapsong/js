@@ -119,8 +119,11 @@ main {
   box-sizing: border-box;
 }
 main .menu_list {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   position: absolute;
-  width: 258px;
+  width: 238px;
   top: 71px;
   left: 0;
   bottom: 0;
@@ -128,9 +131,12 @@ main .menu_list {
   font-size: 0;
   margin-left: 20px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 main .menu_list li {
   padding-left: 20px;
+  font: 15px/33px "宋体";
+  color: #66757f;
 }
 main .menu_list li img {
   width: 16px;
@@ -162,6 +168,9 @@ main .content .crumbs {
   top: 0;
   right: 0;
   box-sizing: border-box;
+}
+main .content .crumbs ul li:last-child .img {
+  display: none;
 }
 main .content .crumbs .checkbox {
   width: 16px;
@@ -323,16 +332,18 @@ main .content .file_box .rightmenu {
   height: 94px;
   border: 1px solid #d1dadf;
   padding-top: 8px;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  right: 0;
   display: none;
+  background-color: #fff;
 }
 main .content .file_box .rightmenu .menu_box {
   font-size: 0;
   height: 30px;
-  background-color: #fff;
 }
 main .content .file_box .rightmenu .menu_box:hover {
-  background-color: #cae5f4;
+  background-color: #ccc;
 }
 main .content .file_box .rightmenu .menu_box i {
   width: 16px;

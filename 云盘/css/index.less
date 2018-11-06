@@ -129,8 +129,11 @@ main {
   height: 100%;
   box-sizing: border-box;
   .menu_list {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     position: absolute;
-    width: 258px;
+    width: 238px;
     top: 71px;
     left: 0;
     bottom: 0;
@@ -138,8 +141,11 @@ main {
     font-size: 0;
     margin-left: 20px;
     overflow-y: auto;
+    overflow-x: hidden;
     li {
       padding-left: 20px;
+      font: 15px/33px "宋体";
+      color: #66757f;
       img {
         width: 16px;
         height: 16px;
@@ -171,6 +177,11 @@ main {
       top: 0;
       right: 0;
       box-sizing: border-box;
+      ul li:last-child{
+        .img{
+          display: none;
+        }
+      }
       .checkbox {
         width: 16px;
         height: 16px;
@@ -332,14 +343,17 @@ main {
         height: 94px;
         border: 1px solid #d1dadf;
         padding-top: 8px;
-        position: absolute;
+        position: fixed;
+        top:0;
+        right:0;
         display: none;
+        background-color: #fff;
         .menu_box {
           font-size: 0;
           height: 30px;
-          background-color: #fff;
+          // background-color: #fff;
           &:hover {
-            background-color: #cae5f4;
+            background-color: #ccc;
           }
           i {
             width: 16px;

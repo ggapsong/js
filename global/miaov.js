@@ -272,41 +272,41 @@ function scrollWheel(el,upEvent,downEvent){
 
 //检测是否碰撞
 
-function drag(op){
-    let {el} = op; 
-    let startMouse = {};
-    let startPosition = {};
-    el.addEventListener("mousedown",function(e){
-        startMouse.x = e.clientX;
-        startMouse.y = e.clientY;
-        startPosition.x = css(el,"left");
-        startPosition.y = css(el,"top");
-        document.addEventListener("mousemove",move);
-        document.addEventListener("mouseup",function(e){
-            document.removeEventListener("mousemove",move);
-            op.up&&op.up.call(el,e);
-        },{
-            once: true
-        });
-        e.preventDefault();
-        op.down&&op.down.call(el,e);
-    });
-    function move(e){
-        let nowMouse = {
-            x: e.clientX,
-            y: e.clientY
-        };
-        let dis = {
-            x: nowMouse.x - startMouse.x,
-            y: nowMouse.y - startMouse.y
-        };
-        let l = dis.x + startPosition.x;
-        let t = dis.y + startPosition.y;
-        css(el,"left",l);
-        css(el,"top",t); 
-        op.move&&op.move.call(el,e);
-    }
-}
+// function drag(op){
+//     let {el} = op; 
+//     let startMouse = {};
+//     let startPosition = {};
+//     el.addEventListener("mousedown",function(e){
+//         startMouse.x = e.clientX;
+//         startMouse.y = e.clientY;
+//         startPosition.x = css(el,"left");
+//         startPosition.y = css(el,"top");
+//         document.addEventListener("mousemove",move);
+//         document.addEventListener("mouseup",function(e){
+//             document.removeEventListener("mousemove",move);
+//             op.up&&op.up.call(el,e);
+//         },{
+//             once: true
+//         });
+//         e.preventDefault();
+//         op.down&&op.down.call(el,e);
+//     });
+//     function move(e){
+//         let nowMouse = {
+//             x: e.clientX,
+//             y: e.clientY
+//         };
+//         let dis = {
+//             x: nowMouse.x - startMouse.x,
+//             y: nowMouse.y - startMouse.y
+//         };
+//         let l = dis.x + startPosition.x;
+//         let t = dis.y + startPosition.y;
+//         css(el,"left",l);
+//         css(el,"top",t); 
+//         op.move&&op.move.call(el,e);
+//     }
+// }
 // 检测两个元素是否有碰撞
 // true 为 碰撞 false 为 不碰撞
 function isBoon(el,el2){
