@@ -129,9 +129,9 @@ main {
   height: 100%;
   box-sizing: border-box;
   .menu_list {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    // -webkit-user-select: none;
+    // -moz-user-select: none;
+    // -ms-user-select: none;
     position: absolute;
     width: 238px;
     top: 71px;
@@ -139,13 +139,15 @@ main {
     bottom: 0;
     padding-top: 12px;
     font-size: 0;
-    margin-left: 20px;
+    padding-left: 20px;
+    background-clip: padding-box;
     overflow-y: auto;
     overflow-x: hidden;
     li {
       padding-left: 20px;
       font: 15px/33px "宋体";
       color: #66757f;
+      background-clip: padding-box;
       img {
         width: 16px;
         height: 16px;
@@ -177,6 +179,9 @@ main {
       top: 0;
       right: 0;
       box-sizing: border-box;
+      background-color: #fff;
+      font: 12px/46px "宋体";
+      color: #000;
       ul li:last-child{
         .img{
           display: none;
@@ -191,9 +196,7 @@ main {
       }
       .detail {
         float: left;
-        font: 12px/46px "宋体";
         padding: 0 4px;
-        color: #000;
         border-bottom: 2px solid transparent;
       }
       .active {
@@ -212,9 +215,10 @@ main {
       overflow-y: auto;
       box-sizing: border-box;
       // position: relative;
+      background-color: #f5f8fa;
       .file_box_content {
         height: 100%;
-        background-color: #f5f8fa;
+        // background-color: #f5f8fa;
       }
       ul {
         overflow: hidden;
@@ -260,6 +264,7 @@ main {
         .lis:hover {
           background-color: #fff;
           padding: 0;
+          padding-top: 0;
           .select {
             display: block;
           }
