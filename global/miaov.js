@@ -310,13 +310,6 @@ function scrollWheel(el,upEvent,downEvent){
 // 检测两个元素是否有碰撞
 // true 为 碰撞 false 为 不碰撞
 function isBoon(el,el2){
-    /*
-        碰撞不到的情况:
-            el.left > el2.right
-            el2.left > el.right
-            el.top > el2.bottom
-            el2.top > el.bottom
-    */
     let elRect = el.getBoundingClientRect();
     let el2Rect = el2.getBoundingClientRect();
     if(elRect.left > el2Rect.right

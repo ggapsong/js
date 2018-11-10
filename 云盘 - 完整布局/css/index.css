@@ -507,4 +507,8 @@ img {
   width: 26px;
   text-align: center;
 }
-
+.sel{
+  position: fixed;
+  border:1px solid blue;
+  background-color: #55addd;
+}
