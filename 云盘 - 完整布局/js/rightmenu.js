@@ -276,123 +276,120 @@ folders.addEventListener("click", function (ev) {
                 checkedAll.checked = false;
             }
         }
+        ev.cancelBubble = true;
+        ev.stopPropagation()
     }
-    ev.cancelBubble = true;
-    ev.stopPropagation()
 });
 //双击重命名
-folders.addEventListener("dblclick", function (e) {
-    console.log(1);
-    if (e.target.className == "folder-name") {
-        let folderName = e.target;
-        let editor = e.target.nextElementSibling
-        folderName.style.display = "none";
-        editor.style.display = "block";
-        editor.select();
-    }
-})
+// folders.ondblclick = function(e){
+//     if(e.target.className == "folder-name"){
+//         let folderName = e.target;
+//         let editor = e.target.nextElementSibling
+//             folderName.style.display = "none";
+//             editor.style.display = "block";
+//             editor.select();
+//     }
+// }
 //右键菜单
-let target_El;
-let rightmenu = document.querySelector("#contextmenu");
 folders.addEventListener("contextmenu", function (e) {
-    let item;
-    if (e.target.classList.contains("folder-item")) {
-        item = e.target;
-    } else if (e.target.classList.contains("folder-name") || e.target.tagName == "IMG") {
-        item = e.target.parentNode;
-    } else if (e.target.classList.contains("icon-checkbox-checked")) {
-        item = e.target.parentNode.parentNode;
-    }
-    if (item) {
-        target_El = item;
-        contextmenu.style.left = e.clientX + "px";
-        contextmenu.style.top = e.clientY + "px";
-        contextmenu.style.display = "block";
-    }
-    let folderName = e.target.querySelector(".folder-name");
-    let editor = e.target.querySelector(".editor");
-    let btns = rightmenu.querySelectorAll("li");
-    //右键重命名
-    btns[2].onclick = function () {
-        let id = editor.parentNode.dataset.id;
-        let s = self(id);
-        let nows = child(s.pid);
-        folderName.style.display = "none";
-        editor.style.display = "block";
-        rightmenu.style.display = "none";
-        editor.select();
-        let inner = folderName.innerHTML;
-        editor.onkeypress = function (ev) {
-            if (ev.keyCode == 13) {
+    let rightmenu = document.querySelector("#contextmenu");
+    let now = {
+        x: e.clientX,
+        y: e.clientY
+    };
+    // if (e.target.tagName == "IMG") {
+
+    //     // rightmenu.style.top = now.y + "px";
+    //     // rightmenu.style.left = now.x + "px";
+    //     // rightmenu.style.display = "block";
+    // }
+    if (e.target.tagName == "LI") {
+        let folderName = e.target.querySelector(".folder-name");
+        let editor = e.target.querySelector(".editor");
+        rightmenu.style.top = now.y + "px";
+        rightmenu.style.left = now.x + "px";
+        rightmenu.style.display = "block";
+        let btns = rightmenu.querySelectorAll("li");
+        //重命名
+        btns[2].onclick = function () {
+            let id = editor.parentNode.dataset.id;
+            let s = self(id);
+            let nows = child(s.pid);
+            folderName.style.display = "none";
+            editor.style.display = "block";
+            rightmenu.style.display = "none";
+            editor.select();
+            let inner = folderName.innerHTML;
+            editor.onkeypress = function (ev) {
+                if (ev.keyCode == 13) {
+                    changeName();
+                    renderMenuBF(nowId);
+                    initOpenFile();
+                }
+            };
+            editor.onblur = function () {
                 changeName();
                 renderMenuBF(nowId);
                 initOpenFile();
-            }
-        };
-        editor.onblur = function () {
-            changeName();
-            renderMenuBF(nowId);
-            initOpenFile();
-        };
+            };
 
-        function changeName() {
-            if (editor.value == "") {
-                msg("请输入正确的文件夹名", 1);
-            } else {
-                if (inner == editor.value) {
-                    folderName.style.display = "block";
-                    editor.style.display = "none";
-                    msg("文件名修改成功", 0);
+            function changeName() {
+                if (editor.value == "") {
+                    msg("请输入正确的文件夹名", 1);
                 } else {
-                    var can = true;
-                    for (let i = 0; i < nows.length; i++) {
-                        if (id != nows[i].id && editor.value == nows[i].title) {
-                            can = false;
-                        }
-                    }
-                    if (can) {
+                    if (inner == editor.value) {
                         folderName.style.display = "block";
-                        folderName.innerHTML = editor.value;
                         editor.style.display = "none";
-                        for (let i = 0; i < data.length; i++) {
-                            if (data[i].id == id) {
-                                data[i].title = editor.value;
-                                break;
-                            }
-                        }
                         msg("文件名修改成功", 0);
                     } else {
-                        msg("重名了", 1);
-                        editor.focus();
+                        var can = true;
+                        for (let i = 0; i < nows.length; i++) {
+                            if (id != nows[i].id && editor.value == nows[i].title) {
+                                can = false;
+                            }
+                        }
+                        if (can) {
+                            folderName.style.display = "block";
+                            folderName.innerHTML = editor.value;
+                            editor.style.display = "none";
+                            for (let i = 0; i < data.length; i++) {
+                                if (data[i].id == id) {
+                                    data[i].title = editor.value;
+                                    break;
+                                }
+                            }
+                            msg("文件名修改成功", 0);
+                        } else {
+                            msg("重名了", 1);
+                            editor.focus();
+                        }
                     }
                 }
             }
-        }
-    };
-    //右键移动
-    btns[1].onclick = function () {
-        rightmenu.style.display = "none";
-        yidong();
-    }
-    //右键删除
-    btns[0].onclick = function () {
-        let actives = document.querySelectorAll("#folders li.active");
-        if (actives.length > 0) {
-            rightmenu.style.display = "none";
-            showConfirm(actives.length);
-        } else {
-            rightmenu.style.display = "none";
-            msg("请选择要删除的文件", 1);
-        }
-    };
-})
-document.addEventListener("contextmenu", function (e) {
-    e.preventDefault();
-})
-folders.addEventListener("mousedown", function () {
-    rightmenu.style.display = "none";
-});
+        };
+        //右键移动
 
+        btns[1].onclick = function(){
+            rightmenu.style.display = "none";
+            yidong();
+        }
+        //右键菜单上的删除
+        btns[0].onclick = function () {
+            let actives = document.querySelectorAll("#folders li.active");
+            if (actives.length > 0) {
+                rightmenu.style.display = "none";
+                showConfirm(actives.length);
+            } else {
+                rightmenu.style.display = "none";
+                msg("请选择要删除的文件", 1);
+            }
+        };
+    }
+    e.preventDefault();
+    folders.addEventListener("mousedown", function () {
+        rightmenu.style.display = "none";
+    });
+});
 //提示框
 function msg(str, type) {
     var types = ["success", "warning"];
@@ -405,9 +402,9 @@ function msg(str, type) {
     }, 1000);
 }
 //删除
-let delBtn = document.querySelector(".del-btn"); //删除按钮
-let confirm = document.querySelector(".confirm"); //弹窗
-let confirmNavs = confirm.querySelectorAll("nav a"); //0确定 1取消
+let delBtn = document.querySelector(".del-btn");
+let confirm = document.querySelector(".confirm");
+let confirmNavs = confirm.querySelectorAll("nav a");
 delBtn.onclick = function () {
     let actives = document.querySelectorAll("#folders li.active");
     if (actives.length > 0) {
@@ -444,22 +441,19 @@ function showConfirm(type) {
     } else {
         confirm.querySelector("p").innerHTML = "确定要删除这些文件夹吗?";
     }
-    document.querySelector("#mask").style.display = "block";
     confirm.classList.add("confirm-show");
 }
 
 function hideConfirm(type) {
     confirm.classList.remove("confirm-show");
-    document.querySelector("#mask").style.display = "none";
 }
 // 新建文件夹
 document.querySelector(".create-btn").onclick = createFile;
-
 function createFile() {
     let obj = {
         id: new Date().getTime(),
         pid: nowId,
-        title: getNames(nowId),
+        title:getNames(nowId),  
     };
     //往数据里面添加数据并渲染文件视图
     data.push(obj);
@@ -472,99 +466,94 @@ function createFile() {
         checkedAll.checked = false;
     }
 }
-
-function getNames(id) {
+function getNames(id){
     let childs = child(id);
-    let names = childs.map((item) => item.title)
-    names = names.filter((item) => {
-        if (item == "新建文件夹") {
+    let names = childs.map((item)=>item.title
+    )
+    names = names.filter((item)=>{
+        if(item=="新建文件夹"){
             return true;
         }
-        let start = item.substr(0, 6)
-        let num = item.substring(6, item.length - 1);
-        let end = item.substr(item.length - 1);
-        if (start === "新建文件夹(" &&
-            Number(num) > 1 &&
-            parseInt(num) + "" === num &&
-            end === ")") {
-            return true;
+        let start = item.substr(0,6)
+        let num = item.substring(6,item.length-1);
+        let end = item.substr(item.length-1);
+        if(start==="新建文件夹("
+            &&Number(num)>1
+            &&parseInt(num)+""===num
+            &&end ===")"){
+                return true;
         }
         return false
     })
-    names.sort((n1, n2) => {
-        n1 = n1 == "新建文件夹" ? 1 : Number(n1.substring(6, n1.length - 1));
-        n2 = n2 == "新建文件夹" ? 1 : Number(n2.substring(6, n2.length - 1));
+    names.sort((n1,n2)=>{
+        n1 = n1 == "新建文件夹"?1:Number(n1.substring(6,n1.length-1));
+        n2 = n2 == "新建文件夹"?1:Number(n2.substring(6,n2.length-1));
         return n1 - n2;
     });
-    if (names[0] !== "新建文件夹") {
+    if(names[0] !== "新建文件夹"){
         return "新建文件夹";
     }
 
-    for (let i = 1; i < names.length; i++) {
-        if (names[i] !== "新建文件夹(" + (i + 1) + ")") {
-            return "新建文件夹(" + (i + 1) + ")";
+    for(let i= 1; i < names.length;i++){
+        if(names[i] !== "新建文件夹("+(i + 1)+")"){
+            return  "新建文件夹("+(i + 1)+")";
         }
     }
-    return "新建文件夹(" + (names.length + 1) + ")";
+    return "新建文件夹("+(names.length + 1)+")";
 
 }
 //移动到
 let moveBtn = document.querySelector(".top-nav .move-btn");
-let moveAlert = document.querySelector(".move-alert"); // move-alert-show
+let moveAlert = document.querySelector(".move-alert");// move-alert-show
 let closeBtn = moveAlert.querySelector(".clos");
-let confirmBtns = moveAlert.querySelectorAll(".confirm-btns a"); //0确定 1取消
-let moveAlertMenu = moveAlert.querySelector(".move-alert-menu"); //移动框里的内容
+let confirmBtns = moveAlert.querySelectorAll(".confirm-btns a");//0确定 1取消
+let moveAlertMenu = moveAlert.querySelector(".move-alert-menu");//移动框里的内容
 
-moveBtn.addEventListener("click", yidong)
-
-function yidong() {
+moveBtn.addEventListener("click",yidong)
+function yidong(){
     let actives = document.querySelectorAll("#folders li.active");
-    if (actives.length > 0) {
-
+    if(actives.length>0){
         moveAlert.classList.add("move-alert-show");
-        document.querySelector("#mask").style.display = "block";
         moveAlertMenu.innerHTML = createTree(-1, -1)
         let lis = moveAlertMenu.querySelectorAll("li");
         let ul = moveAlertMenu.querySelectorAll("ul");
         let ps = moveAlertMenu.querySelectorAll("p");
-        lis.forEach((e) => {
+        lis.forEach((e)=>{
             e.classList.add("open");
         });
-        ul.forEach((e) => {
+        ul.forEach((e)=>{
             e.style.display = "block";
         });
-        let now = moveAlertMenu.querySelector('li[data-id="' + nowId + '"] p');
+        let now = moveAlertMenu.querySelector('li[data-id="'+nowId+'"] p');
         now.classList.add('active');
-        ps.forEach((e) => {
-            e.onclick = function () {
+        ps.forEach((e)=>{
+            e.onclick = function(){
                 now.classList.remove('active');
                 this.classList.add('active');
                 now = this;
             }
         });
+
         //点击取消
-        closeBtn.onclick = confirmBtns[1].onclick = function () {
-            document.querySelector("#mask").style.display = "none";
+        closeBtn.onclick = confirmBtns[1].onclick = function(){
             moveAlert.classList.remove("move-alert-show");
         }
         //确定移动
         confirmBtns[0].onclick = function () {
             // 要移动到的li
             let id = now.parentNode.dataset.id;
-            let eveTitle = child(id);
             let success = 0;
             let fail = 0;
-            data.forEach(e => {
-                if (e.checked) {
+            data.forEach(e=>{
+                if(e.checked){
                     // 要移动的文件
-                    if (e.id == id) {
+                    if(e.id==id){
                         // msg('目标文件夹是当前要移动的文件夹',1);
                         fail++;
                         return;
                     }
-                   
-                    parents(id).forEach(e1 => {
-                        if (e1.pid == e.id) {
+                    parents(id).forEach(e1=>{
+                        if(e1.pid==e.id){
                             // msg('目标文件夹是当前要移动的文件夹的子文件夹',1);
                             fail++;
                             return;
@@ -575,96 +564,75 @@ function yidong() {
                 }
             });
             moveAlert.classList.remove("move-alert-show");
-            document.querySelector("#mask").style.display = "none";
             renderChild(child(nowId));
             renderMenuBF(id);
             renderMenuBF(nowId);
-            msg(`共移动${success+fail}项，成功${success}项，失败${fail}项`, 0);
+            msg(`共移动${success+fail}项，成功${success}项，失败${fail}项`,0);
         }
-    } else {
+    }else{
         msg("请选择要移动的文件", 1);
     }
 }
+
+
+
+
+
+
+
+
 //框选
-let start;
-let sel;
-let isdown = false;
-folders.addEventListener("mousedown", function (e) {
-    if (e.button !== 0) {
-        return false;
-    }
-    if (e.target.tagName == 'SPAN' && e.target.className.indexOf('iconfont') >= 0) {
-        return false;
-    }
-    sel = document.createElement("div");
-    sel.className = "sel";
-    document.body.appendChild(sel);
-    start = {
-        x: e.clientX,
-        y: e.clientY
-    };
-    sel.style.top = start.y + "px";
-    sel.style.left = start.x + "px";
-    isdown = true;
-    e.cancelBubble = true;
-    e.stopPropagation();
-})
-folders.addEventListener("mousemove", move);
-document.onmouseup = function (e) {
-    if (!isdown) {
-        return false;
-    };
-    isdown = false;
-    document.body.removeChild(sel);
-    e.cancelBubble = true;
-    e.stopPropagation();
-};
 
-function move(e) {
-    if (!isdown) {
-        return false;
-    }
-    let now = {
-        x: Math.min(e.clientX, start.x),
-        y: Math.min(e.clientY, start.y)
-    };
-    let WH = {
-        x: Math.abs(e.clientX - start.x),
-        y: Math.abs(e.clientY - start.y)
-    };
-    sel.style.height = WH.y + "px";
-    sel.style.width = WH.x + "px";
-    sel.style.top = now.y + "px";
-    sel.style.left = now.x + "px";
-    let lis = folders.querySelectorAll("li");
-    lis.forEach(e => {
-        let id = e.dataset.id;
-        //判断是否碰撞
-        if (isBoon(e, sel)) {
-            let input = e.querySelector("input[type=checkbox]");
-            input.checked = true
-            e.classList.add("active");
-            data.forEach((e, i) => {
-                if (e.id == id) {
-                    e.checked = true;
-                }
-            });
-        }
-    })
-    //全选
-    let liLength = folders.querySelectorAll("li.active");
-    let Lis = folders.querySelectorAll("li");
-    if (liLength.length == Lis.length) {
-        checkedAll.checked = true;
-    }
-    isdown = true;
-    e.cancelBubble = true;
-    e.stopPropagation()
-}
-document.addEventListener("selectstart", function (e) {
-    e.preventDefault();
-})
+// folders.onmousedown = function (e) {
+//     let sel = document.createElement("div");
+//     sel.className = "sel";
+//     document.body.appendChild(sel);
+//     let start = {
+//         x: e.clientX,
+//         y: e.clientY
+//     };
+//     sel.style.top = start.y + "px";
+//     sel.style.left = start.x + "px";
+//     document.onmousemove = function (e) {
+//         let now = {
+//             x: Math.min(e.clientX, start.x),
+//             y: Math.min(e.clientY, start.y)
+//         };
+//         let WH = {
+//             x: Math.abs(e.clientX - start.x),
+//             y: Math.abs(e.clientY - start.y)
+//         };
+//         sel.style.height = WH.y + "px";
+//         sel.style.width = WH.x + "px";
+//         sel.style.top = now.y + "px";
+//         sel.style.left = now.x + "px";
+//         let lis = folders.querySelectorAll("li");
+//         lis.forEach(e => {
+//             let id = e.dataset.id;
+//             //判断是否碰撞
+//             if (isBoon(e, sel)) {
+//                 let input = e.querySelector("input[type=checkbox]");
+//                 input.checked = true
+//                 e.classList.add("active");
+//                 data.forEach((e, i) => {
+//                     if (e.id == id) {
+//                         e.checked = true;
+//                     }
+//                 });
+//             }
+//         })
 
+
+//     };
+//     document.onmouseup = function (e) {
+//         document.onmouseup = document.onmousemove = null;
+//         document.body.removeChild(sel)
+//     };
+//     e.preventDefault();
+//     e.cancelBubble = true;
+//     e.stopPropagation()
+
+// };
 //检测碰撞公式
 function isBoon(el, el2) {
     let elRect = el.getBoundingClientRect();
