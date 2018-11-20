@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/jq.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .wrap {
+            width: 100%;
+            background-color: #fff;
+        }
+
+        ul {
+            width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        li {
+            width: 220px;
+            height: 373px;
+            border: 1px solid #f2f2f2;
+            box-sizing: border-box;
+            margin-right: 25px;
+            margin-top: 25px;
+            float: left;
+        }
+
+        .img {
+            width: 218px;
+            height: 293px;
+            margin-bottom: 6px;
+        }
+
+        img {
+            width: 218px;
+            height: 293px;
+        }
+
+        .box {
+            width: 199px;
+            margin: 0 auto;
+        }
+
+        .info {
+            font: 12px/20px "宋体";
+            color: #666666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+
+        }
+
+        .price {
+            font: bold 12px/30px "宋体";
+            color: #000;
+        }
+
+        li:nth-of-type(5n) {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<div class="wrap">
+    <ul class="list">
+        <!-- <li>
+            <div class="img">
+                <img src="" alt="">
+            </div>
+            <div class="box">
+                <div class="info">韩版小心机上衣透视网纱衬衣镂空针织衫两件套中长款学生条纹衬衫女</div>
+                <div class="price">￥99</div>
+            </div>
+        </li>
+        <li>
+            <div class="img">
+                <img src="" alt="">
+            </div>
+            <div class="box">
+                <div class="info">韩版小心机上衣透视网纱衬衣镂空针织衫两件套中长款学生条纹衬衫女</div>
+                <div class="price">￥99</div>
+            </div>
+        </li>
+        <li>
+            <div class="img">
+                <img src="" alt="">
+            </div>
+            <div class="box">
+                <div class="info">韩版小心机上衣透视网纱衬衣镂空针织衫两件套中长款学生条纹衬衫女</div>
+                <div class="price">￥99</div>
+            </div>
+        </li>
+        <li>
+            <div class="img">
+                <img src="" alt="">
+            </div>
+            <div class="box">
+                <div class="info">韩版小心机上衣透视网纱衬衣镂空针织衫两件套中长款学生条纹衬衫女</div>
+                <div class="price">￥99</div>
+            </div>
+        </li>
+        <li>
+            <div class="img">
+                <img src="" alt="">
+            </div>
+            <div class="box">
+                <div class="info">韩版小心机上衣透视网纱衬衣镂空针织衫两件套中长款学生条纹衬衫女</div>
+                <div class="price">￥99</div>
+            </div>
+        </li>
+        <li>
+            <div class="img">
+                <img src="" alt="">
+            </div>
+            <div class="box">
+                <div class="info">韩版小心机上衣透视网纱衬衣镂空针织衫两件套中长款学生条纹衬衫女</div>
+                <div class="price">￥99</div>
+            </div>
+        </li> -->
+    </ul>
+</div>
+
+<body>
+    <script>
+        let page = 1;
+        let timer = 0;
+        function fn(data) {
+            let inner = "";
+            data.result.wall.docs.forEach(e => {
+                inner +=`<li>
+                            <div class="img">
+                                <img src="${e.img}" alt="">
+                            </div>
+                            <div class="box">
+                                <div class="info">${e.title}</div>
+                                <div class="price">￥${e.price}</div>
+                            </div>
+                        </li>`
+            });
+            // $(".list").append(inner);
+            $(".list").html(inner);
+        }
+        $(function () {
+            let s =
+                '<script src="http://list.mogujie.com/search?callback=fn&_version=8193&ratio=3:4&cKey=15&page=' +
+                page + '"><\/script>';
+            $(document.body).append(s);
+        });
+    </script>
+</body>
+
+</html>

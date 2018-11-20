@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script src="http://127.0.0.1:8080/index.js"></script> -->
+</head>
+
+<body>
+    <input type="text" class="text">
+    <ul class="list"></ul>
+    <script>
+        let text = document.querySelector(".text");
+        let list = document.querySelector(".list")
+
+        function fn(data) {
+            let scripts = document.querySelectorAll(".script");
+            scripts.forEach((e) => {
+                e.remove();
+            })
+            let inner = ""
+            data.s.forEach((e) => {
+                inner += `<li>${e}</li>`
+            })
+            list.innerHTML = inner;
+        }
+        text.oninput = function () {
+            let script = document.createElement("script");
+            script.src = `
+        https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${text.value}&cb=fn`
+            script.className = script;
+            document.body.appendChild(script);
+        }
+    </script>
+</body>
+
+</html>

@@ -38,6 +38,7 @@
         .wrap .show {
             display: block;
         }
+
         .wrap li {
             border-top: 1px solid #000;
         }
@@ -71,12 +72,11 @@
         // 当前有多个菜单，如果只声明一个变量记录，是没有办法记录的
         titles.forEach((item, index) => {
             item.onclick = function () {
-                lists.forEach((item) => {
-                    item.style.display = "none";
+                lists.forEach((item1) => {
+                    item1.style.display = "none";
                 })
-                lists[index].style.display = "block"
+                lists[index].style.display = "block";
             }
-
         })
     </script>
 </body>

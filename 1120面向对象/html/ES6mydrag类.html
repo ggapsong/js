@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+
+        #box2 {
+            position: absolute;
+            left: 100px;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <div id="box2"></div>
+    <script>
+        class Drag {
+            constructor(el) {
+                this.el = el;
+                this.startMouse = {};
+                this.startPosition = {};
+                const THIS = this;
+                function fn(e) {
+                    THIS.move(e)
+                }
+                this.el.addEventListener("mousedown", function (e) {
+                    THIS.start(e);
+                    document.addEventListener("mousemove", fn);
+                    document.addEventListener("mouseup", function () {
+                        document.removeEventListener("mousemove", fn)
+                    }, {
+                        once: true,
+                    });
+                    e.preventDefault();
+                });
+            };
+            start(e) {
+                this.startMouse = {
+                    x: e.clientX,
+                    y: e.clientY
+                };
+                this.startPosition = {
+                    x: this.getStyle("left"),
+                    y: this.getStyle("top")
+                }
+            }
+            move(e) {
+                let dis = {
+                    x: e.clientX - this.startMouse.x,
+                    y: e.clientY - this.startMouse.y
+                };
+                let t = this.startPosition.y + dis.y;
+                let l = this.startPosition.x + dis.x;
+                this.setStyle("top", t);
+                this.setStyle("left", l);
+            }
+
+            setStyle(attr, val) {
+                this.el.style[attr] = val + "px"
+            }
+            getStyle(attr) {
+                return parseFloat(getComputedStyle(this.el)[attr])
+            }
+        };
+        class Drag2 extends Drag{};
+        let box = document.querySelector("#box");
+        new Drag(box);
+        let box2 = document.querySelector("#box2");
+        new Drag2(box2);
+        console.dir(Drag);
+        console.dir(Drag2);
+    </script>
+</body>
+
+</html>

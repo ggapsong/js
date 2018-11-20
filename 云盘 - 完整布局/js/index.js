@@ -75,6 +75,19 @@ function delChild(id) {
                 }
             }
         }
+    }for (let i = 0; i < data.length; i++) {
+        const e = data[i];
+        if (e.pid == id) {
+            data.splice(i, 1);
+            i--;
+            for (let i2 = 0; i2 < data.length; i2++) {
+                const e2 = data[i2];
+                if (e2.pid == e.id) {
+                    delChild(e.id);
+                    break;
+                }
+            }
+        }
     }
 }
 let treMenu = document.getElementById("tree-menu");
@@ -281,14 +294,64 @@ folders.addEventListener("click", function (ev) {
     ev.stopPropagation()
 });
 //双击重命名
+
 folders.addEventListener("dblclick", function (e) {
-    console.log(1);
     if (e.target.className == "folder-name") {
         let folderName = e.target;
-        let editor = e.target.nextElementSibling
+        let editor = e.target.nextElementSibling;
+        let id = editor.parentNode.dataset.id;
+        let s = self(id);
+        let nows = child(s.pid);
         folderName.style.display = "none";
         editor.style.display = "block";
         editor.select();
+        let inner = folderName.innerHTML;
+        editor.onkeypress = function (ev) {
+            if (ev.keyCode == 13) {
+                changeName();
+                renderMenuBF(nowId);
+                initOpenFile();
+            }
+        };
+        editor.onblur = function () {
+            changeName();
+            renderMenuBF(nowId);
+            initOpenFile();
+        };
+
+        function changeName() {
+            if (editor.value == "") {
+                msg("请输入正确的文件夹名", 1);
+            } else {
+                if (inner == editor.value) {
+                    folderName.style.display = "block";
+                    editor.style.display = "none";
+                    msg("文件名修改成功", 0);
+                } else {
+                    var can = true;
+                    for (let i = 0; i < nows.length; i++) {
+                        if (id != nows[i].id && editor.value == nows[i].title) {
+                            can = false;
+                        }
+                    }
+                    if (can) {
+                        folderName.style.display = "block";
+                        folderName.innerHTML = editor.value;
+                        editor.style.display = "none";
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].id == id) {
+                                data[i].title = editor.value;
+                                break;
+                            }
+                        }
+                        msg("文件名修改成功", 0);
+                    } else {
+                        msg("重名了", 1);
+                        editor.focus();
+                    }
+                }
+            }
+        }
     }
 })
 //右键菜单
@@ -296,6 +359,7 @@ let target_El;
 let rightmenu = document.querySelector("#contextmenu");
 folders.addEventListener("contextmenu", function (e) {
     let item;
+    if(e.target.classList.contains('editor')) return false;
     if (e.target.classList.contains("folder-item")) {
         item = e.target;
     } else if (e.target.classList.contains("folder-name") || e.target.tagName == "IMG") {
@@ -309,8 +373,8 @@ folders.addEventListener("contextmenu", function (e) {
         contextmenu.style.top = e.clientY + "px";
         contextmenu.style.display = "block";
     }
-    let folderName = e.target.querySelector(".folder-name");
-    let editor = e.target.querySelector(".editor");
+    let folderName = item.querySelector(".folder-name");
+    let editor = item.querySelector(".editor");
     let btns = rightmenu.querySelectorAll("li");
     //右键重命名
     btns[2].onclick = function () {
@@ -562,14 +626,21 @@ function yidong() {
                         fail++;
                         return;
                     }
-                   
+
                     parents(id).forEach(e1 => {
                         if (e1.pid == e.id) {
                             // msg('目标文件夹是当前要移动的文件夹的子文件夹',1);
                             fail++;
                             return;
                         }
-                    })
+                    });
+                    for (let i = 0; i < eveTitle.length; i++) {
+                        if (eveTitle[i].title == e.title) {
+                            // 要移动到的文件夹下有与当前正在移动的此项重名，不允许移动
+                            fail++;
+                            return;
+                        }
+                    }
                     e.pid = id;
                     success++;
                 }
@@ -579,7 +650,7 @@ function yidong() {
             renderChild(child(nowId));
             renderMenuBF(id);
             renderMenuBF(nowId);
-            msg(`共移动${success+fail}项，成功${success}项，失败${fail}项`, 0);
+            msg(`共移动${success+fail}项，成功${success}项，失败<span style="color:red;">${fail}</span>项`, 0);
         }
     } else {
         msg("请选择要移动的文件", 1);
@@ -590,12 +661,14 @@ let start;
 let sel;
 let isdown = false;
 folders.addEventListener("mousedown", function (e) {
+    var el = e.target;
     if (e.button !== 0) {
         return false;
     }
-    if (e.target.tagName == 'SPAN' && e.target.className.indexOf('iconfont') >= 0) {
+    if ($(el).parents('li').length > 0 || el.tagName == "LI") {
         return false;
     }
+
     sel = document.createElement("div");
     sel.className = "sel";
     document.body.appendChild(sel);
@@ -605,6 +678,8 @@ folders.addEventListener("mousedown", function (e) {
     };
     sel.style.top = start.y + "px";
     sel.style.left = start.x + "px";
+
+
     isdown = true;
     e.cancelBubble = true;
     e.stopPropagation();
@@ -624,6 +699,13 @@ function move(e) {
     if (!isdown) {
         return false;
     }
+    data.forEach((e) => {
+        if (e.checked) {
+            e.checked = false;
+        }
+    });
+    checkedAll.checked = false;
+    renderChild(child(nowId));
     let now = {
         x: Math.min(e.clientX, start.x),
         y: Math.min(e.clientY, start.y)
@@ -650,13 +732,13 @@ function move(e) {
                 }
             });
         }
+        //全选
+        let liLength = folders.querySelectorAll("li.active");
+        let Lis = folders.querySelectorAll("li");
+        if (liLength.length == Lis.length) {
+            checkedAll.checked = true;
+        }
     })
-    //全选
-    let liLength = folders.querySelectorAll("li.active");
-    let Lis = folders.querySelectorAll("li");
-    if (liLength.length == Lis.length) {
-        checkedAll.checked = true;
-    }
     isdown = true;
     e.cancelBubble = true;
     e.stopPropagation()

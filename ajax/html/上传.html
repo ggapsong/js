@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #wrap{
+        width: 500px;
+        height: 30px;
+        border:1px solid #000;
+    }
+    #nei{
+        width: 0;
+        height: 30px;
+        background-color: blue;
+    }
+    </style>
+</head>
+
+<body>
+    <input type="file" id="file" />
+    <input type="button" value="上传" id="btn">
+    <div id="wrap">
+        <div id="nei"></div>
+    </div>
+    <script>
+        let file = document.querySelector("#file");
+        let btn = document.querySelector("#btn");
+        btn.onclick = function () {
+            let ajax = new XMLHttpRequest;
+            let formData = new FormData;
+            ajax.open("POST", "/upload");
+            // for (let i = 0; i < file.files.length; i++) {
+            //     formData.append("file", file.files[i]);
+            // }
+            console.log(file.files[0]);
+            formData.append("file", file.files[0]);
+            ajax.upload.onprogress = function (ev) {
+                var precent = 500 * ev.loaded / ev.total;
+                document.getElementById('nei').style.width = precent + 'px';
+            }
+            ajax.send(formData);
+            ajax.onload = function () {
+                console.log(ajax.response);
+            };
+        }
+    </script>
+</body>
+
+</html>

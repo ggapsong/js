@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+
+        ul {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        #box2,
+        #box3 {
+            border-top: 2px solid #000;
+        }
+
+        .select {
+            color: blue;
+        }
+
+        .selectCon {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <nav>
+            <a class="active">选项一</a>
+            <a>选项二</a>
+            <a>选项三</a>
+            <a>选项四</a>
+        </nav>
+        <ul class="show">
+            <li>列表一</li>
+            <li>列表一</li>
+            <li>列表一</li>
+        </ul>
+        <ul>
+            <li>列表二</li>
+            <li>列表二</li>
+            <li>列表二</li>
+        </ul>
+        <ul>
+            <li>列表三</li>
+            <li>列表三</li>
+            <li>列表三</li>
+        </ul>
+        <ul>
+            <li>列表四</li>
+            <li>列表四</li>
+            <li>列表四</li>
+        </ul>
+    </div>
+
+    <!-- <div id="box2">
+        <nav>
+            <button>上一步</button>
+            <a class="active">选项一</a>
+            <a>选项二</a>
+            <a>选项三</a>
+            <a>选项四</a>
+            <button>下一步</button>
+        </nav>
+        <ul class="show">
+            <li>列表一</li>
+            <li>列表一</li>
+            <li>列表一</li>
+        </ul>
+        <ul>
+            <li>列表二</li>
+            <li>列表二</li>
+            <li>列表二</li>
+        </ul>
+        <ul>
+            <li>列表三</li>
+            <li>列表三</li>
+            <li>列表三</li>
+        </ul>
+        <ul>
+            <li>列表四</li>
+            <li>列表四</li>
+            <li>列表四</li>
+        </ul>
+    </div>
+
+    <div id="box3">
+        <nav>
+            <button>上一步</button>
+            <a class="select">选项一</a>
+            <a>选项二</a>
+            <a>选项三</a>
+            <a>选项四</a>
+            <button>下一步</button>
+        </nav>
+        <ul class="selectCon">
+            <li>列表一</li>
+            <li>列表一</li>
+            <li>列表一</li>
+        </ul>
+        <ul>
+            <li>列表二</li>
+            <li>列表二</li>
+            <li>列表二</li>
+        </ul>
+        <ul>
+            <li>列表三</li>
+            <li>列表三</li>
+            <li>列表三</li>
+        </ul>
+        <ul>
+            <li>列表四</li>
+            <li>列表四</li>
+            <li>列表四</li>
+        </ul>
+    </div> -->
+
+
+    <script>
+        function Tab(navs, cons) {
+            this.navs = navs,
+                this.cons = cons
+        }
+        tab.prototype = {
+            Tab() {
+                this.navs.forEach((item, index) => {
+                    item.classList.remove("active");
+                    this.cons[index].classList.remove("show");
+                });
+                this.navs[index].classList.add("active");
+                this.cons[index].classList.add("show");
+            }
+        }
+        let box = document.querySelector("#box");
+        let navs = box.querySelectorAll("nav a");
+        let cons = box.querySelectorAll("ul");
+        let tab = new Tab(navs,cons);
+        navs.forEach((e)=>{
+            e.onclick = function(){
+                tab();
+            }
+        })
+       
+    </script>
+</body>
+
+</html>
