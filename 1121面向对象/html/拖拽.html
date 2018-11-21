@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: #000;
+            position: absolute;
+            top: 0;
+            left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="box2"></div>
+    <script>
+        function Drag(el) {
+            this.el = el;
+            this.nowMouse = {};
+            this.nowPosition = {};
+            const THIS = this;
+
+            function fn(e) {
+                THIS.move(e)
+            };
+            this.el.addEventListener("mousedown", function (e) {
+                THIS.Start(e);
+                document.addEventListener("mousemove", fn)
+                document.addEventListener("mouseup", function () {
+                    document.removeEventListener("mousemove", fn)
+                    THIS.up();
+                }, {
+                    once: true,
+                })
+                e.preventDefault();
+            })
+        }
+        Drag.prototype = {
+            Start(e) {
+                //移动之前的鼠标位置和left和top值
+                this.nowMouse = {
+                    x: e.clientX,
+                    y: e.clientY,
+                };
+                this.nowPositionx = this.getStyle("left");
+                this.nowPositiony = this.getStyle("top");
+            },
+            move(e) {
+                let dis = {
+                    x: e.clientX - this.nowMouse.x,
+                    y: e.clientY - this.nowMouse.y,
+                }
+                let t = dis.y + this.nowPositiony;
+                let l = dis.x + this.nowPositionx;
+                this.setStyle("top", t);
+                this.setStyle("left", l);
+            },
+            up() {
+
+            },
+            setStyle(attr, val) {
+                this.el.style[attr] = val + "px";
+                return this;
+            },
+            getStyle(attr) {
+                return parseFloat(getComputedStyle(this.el)[attr])
+            },
+        }
+
+        // 构造函数继承
+        function CloneDrag(el) {
+            Drag.call(this, el);
+        }
+        for (let s in Drag.prototype) {
+            CloneDrag.prototype[s] = Drag.prototype[s]
+        }
+
+        CloneDrag.prototype = {
+            Start(e) {
+                this.nowMouse = {
+                    x: e.clientX,
+                    y: e.clientY,
+                };
+                this.nowPositionx = this.getStyle("left");
+                this.nowPositiony = this.getStyle("top"); 
+
+                let newEl = this.el.cloneNode(true);
+                this.el.parentNode.appendChild(newEl);
+                this.el.style.opacity = .5;
+            },
+            up() {
+                this.el.style.opacity = 1;
+                this.el.parentNode.removeChild(newEl);
+            },
+        }
+
+        let box = document.querySelector(".box");
+        let nbox = new Drag(box);
+        let box2 = document.querySelector(".box2");
+        let nbox2 = new CloneDrag(box2);
+        console.dir(nbox2);
+    </script>
+</body>
+
+</html>

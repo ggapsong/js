@@ -184,13 +184,13 @@
             let list = box.querySelectorAll("ul");
             let tab = new Tab(navs, list);
             tab.addEv("click");
-            tab.auto();
-            box.onmouseenter = function () {
-                tab.stopAuto();
-            };
-            box.onmouseleave = function () {
-                tab.auto();
-            }
+            // tab.auto();
+            // box.onmouseenter = function () {
+            //     tab.stopAuto();
+            // };
+            // box.onmouseleave = function () {
+            //     tab.auto();
+            // }
 
             let box2 = document.querySelector("#box2");
             let navs2 = box2.querySelectorAll("nav a");

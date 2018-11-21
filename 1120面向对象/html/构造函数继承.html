@@ -82,12 +82,14 @@ Drag.prototype = {
 function CloneDrag(el){
     Drag.call(this,el);
 }
-
+for(let s in Drag.prototype){
+    CloneDrag.prototype[s] = Drag.prototype[s]
+}
 (function(){
     let box = document.querySelector("#box");
     let box2 = document.querySelector("#box2");
     new Drag(box);
-   new CloneDrag(box2);
+    new CloneDrag(box2);
 })();    
 </script>
 </body>

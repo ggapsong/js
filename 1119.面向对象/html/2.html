@@ -64,7 +64,7 @@
         </ul>
     </div>
 
-    <!-- <div id="box2">
+    <div id="box2">
         <nav>
             <button>上一步</button>
             <a class="active">选项一</a>
@@ -98,13 +98,13 @@
     <div id="box3">
         <nav>
             <button>上一步</button>
-            <a class="select">选项一</a>
+            <a class="">选项一</a>
             <a>选项二</a>
             <a>选项三</a>
             <a>选项四</a>
             <button>下一步</button>
         </nav>
-        <ul class="selectCon">
+        <ul class="">
             <li>列表一</li>
             <li>列表一</li>
             <li>列表一</li>
@@ -124,34 +124,115 @@
             <li>列表四</li>
             <li>列表四</li>
         </ul>
-    </div> -->
+    </div>
 
 
     <script>
         function Tab(navs, cons) {
-            this.navs = navs,
-                this.cons = cons
+            this.navs = navs;
+            this.cons = cons;
+            this.active = "active";
+            this.show = "show";
+            this.num = 0;
+            this.timer = null;
         }
-        tab.prototype = {
-            Tab() {
-                this.navs.forEach((item, index) => {
-                    item.classList.remove("active");
-                    this.cons[index].classList.remove("show");
+        Tab.prototype = {
+            addEv(event){
+                this.navs.forEach((e,i)=>{
+                    e.addEventListener(event,()=>{
+                        this.num = i,
+                        this.tab();
+                    })
+                })
+            },
+            tab() {
+                this.navs.forEach((e,i) => {
+                    e.classList.remove(this.active);
+                    this.cons[i].classList.remove(this.show);
                 });
-                this.navs[index].classList.add("active");
-                this.cons[index].classList.add("show");
+                this.navs[this.num].classList.add(this.active);
+                this.cons[this.num].classList.add(this.show);
+            },
+            prev() {
+                this.num--;
+                if (this.num < 0) {
+                    this.num = this.navs.length - 1
+                }
+                this.tab();
+            },
+            next() {
+                this.num++;
+                if (this.num > this.navs.length - 1) {
+                    this.num = 0;
+                }
+                this.tab();
+            },
+            auto() {
+                this.stop()
+                this.timer = setInterval(()=> {
+                    this.next();
+                }, 500)
+            },
+            stop(){
+                clearInterval(this.timer)
             }
+
         }
         let box = document.querySelector("#box");
         let navs = box.querySelectorAll("nav a");
         let cons = box.querySelectorAll("ul");
-        let tab = new Tab(navs,cons);
-        navs.forEach((e)=>{
-            e.onclick = function(){
-                tab();
-            }
-        })
-       
+        let news = new Tab(navs, cons);//实列化对象
+        news.addEv("click");//给实列话对象添加事件
+        news.auto();//实例化对象自动播放
+        box.onmouseover = function(){//移出box时清除定时器
+            news.stop();
+        }
+        box.onmouseout = function(){//移出box时添加定时器
+            news.auto();
+        }
+
+
+        let box2 = document.querySelector("#box2");
+        let navs2 = box2.querySelectorAll("nav a");
+        let cons2 = box2.querySelectorAll("ul");
+        let news2 = new Tab(navs2, cons2);
+        let btns = box2.querySelectorAll("button");
+        btns[0].addEventListener("click",function(){//prev点击查看上一张
+            news2.prev()
+        });
+        news2.addEv("mouseover");//给实列化对象添加事件
+        btns[1].onclick = function(){//next点击查看上一张
+            news2.next()
+        };
+        news2.auto();//自动播放
+        box2.onmouseover = function(){//移入清除定时器
+            news2.stop();
+        }
+        box2.onmouseout = function(){//移出添加定时器
+            news2.auto();
+        }
+
+        let box3 = document.querySelector("#box3");
+        let navs3 = box3.querySelectorAll("nav a");
+        let cons3 = box3.querySelectorAll("ul");
+        let news3 = new Tab(navs3, cons3);
+        let btns3 = box3.querySelectorAll("button");
+        news3.active = "select";                   
+        news3.show = "selectCon";
+        btns3[0].addEventListener("click",function(){//prev点击查看上一张
+            news3.prev()
+        });
+        news3.addEv("mouseover");//给实列化对象添加事件
+        btns3[1].onclick = function(){//next点击查看上一张
+            news3.next()
+        };
+        news3.auto();//自动播放
+        box3.onmouseover = function(){//移入清除定时器
+            news3.stop();
+        }
+        box3.onmouseout = function(){//移出添加定时器
+            news3.auto();
+        }
     </script>
 </body>
 
