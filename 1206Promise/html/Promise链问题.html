@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    new Promise(function(resolve,reject){
+        setTimeout(()=>{
+            let isLogin = false;
+            if(isLogin){
+                resolve("登陆成功");
+            }else{
+                reject("登陆失败");
+            }
+        },1000)
+    }).then((data)=>{
+        let isVIP = true;
+        console.log(data);
+        if(isVIP){
+            return Promise.resolve("是VIP")
+        }else{
+            return Promise.reject("不是VIP")
+        }
+    },(err)=>{
+        console.log(err);
+        return Promise.reject("没有登陆")
+    }).then(
+    (data)=>{
+        console.log(data,"获取会员大礼包");
+    },
+    (err)=>{
+        console.log(err,"不能获取大礼包");
+    })
+
+
+
+    
+</script>
+</body>
+</html>

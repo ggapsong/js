@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/data.js"></script>
+    <style>
+        .panel {
+        border: 1px solid #000;
+        width: 80%;
+    }
+    .title {
+        margin: 0;
+        padding: 10px;
+        background: #ccc;
+    }
+    p.vip {
+        color: red;
+    }
+    p.message {
+        color: #aaa;
+    }
+    
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class ListItem extends React.Component{
+            render(){
+                let {data,showUl,change,index} = this.props;
+                console.log(showUl)
+                return (
+                    <div>
+                        <h2 
+                            className="title"
+                            onClick={()=>{
+                                change(index);
+                            }}
+                        >{data.name}</h2>
+                        {
+                            showUl
+                            ?
+                            (<ul>
+                                {
+                                    data.list.map((e,i)=>{
+                                        return <Li key={i} data={e}/>
+                                    })
+                                }
+                            </ul>)
+                            :
+                            ""
+                        }
+                    </div>
+                )
+            }
+        }
+        class Li extends React.Component{
+            render(){
+                let {data} = this.props;
+                return (
+                    <li>
+                        <p className={data.vip?"vip":""}>{data.username}</p>
+                        <p className="message">{data.message}</p>
+                    </li>
+                )
+            }
+        }
+        class List extends React.Component{
+            constructor(prop){
+                super(prop);
+                this.state = {
+                    show:0
+                };
+                this.changeShow = this.changeShow.bind(this);
+            }
+            changeShow(i){
+                let index = -1;
+                if(this.state.show!==i){
+                    index = i;
+                }else{
+                    index = -1
+                };
+                this.setState({
+                    show:index
+                })
+            }
+            render(){
+                let {data} = this.props;
+                let {show} = this.state;
+                return (
+                    <div className="panel">
+                        {
+                            Object.values(data).map((e,i)=>{
+                               return (
+                                <ListItem 
+                                    key={i} 
+                                    data={e} 
+                                    showUl={show==i} 
+                                    change={this.changeShow}
+                                    index={i}
+                                />
+                               )
+                            })
+                        }
+                    </div>
+                )
+            }
+        } 
+    ReactDOM.render(
+        <List data = {dataList}/>
+        ,
+        document.getElementById("root")
+    )
+    
+    </script>
+</body>
+
+</html>
