@@ -70,9 +70,6 @@ function PageHeader(props){
                     </Col>
                 </Row>
             </div>
-
-
-
         </Layout.Header>
     )
 }

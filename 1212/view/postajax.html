@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+   
+    ul{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    input{
+        width: 200px;
+        height: 25px;
+        outline: none;
+        display: block;
+        margin: 20px;
+        padding-left:5px;
+        
+    }
+    button{
+        width: 100px;
+        height: 30px;
+        background-color: rgb(126, 196, 155);
+        margin: 10px;
+        font: 16px/20px "宋体";
+        color:#000;
+    }
+    .wrap{
+        width: 500px;
+        height: 1000px;
+        margin: 0 auto;
+    }
+    .box{
+        width: 360px;
+        height: 300px;
+        font: bold 20px/30px "宋体";
+        color:#000;
+        margin:0 auto;
+    }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <input type="text" name="" id="username" placeholder="用户名"/>
+        <input type="password" name="" id="password" placeholder="密码">
+        <button class="register">注册</button>
+        <button class="login">登陆</button>
+        <ul class="box"></ul>
+    </div>
+    
+</body>
+<script>
+    function ajax(
+        {data={},type='get',url=null,success=()=>{}}
+    ){
+        if(!url){ alert('请传入url'); return}
+        let ajax=new XMLHttpRequest;
+
+        if(type=='get'){
+            let str='';
+            for(item in data){
+                str+=item +'='+ data[item]+'&'
+            }
+            str=str.substring(0,str.length-1);
+            //api/addUser?name=123&pass=566
+            ajax.open(type,url+'?'+str); 
+            ajax.send();
+        }else{
+            ajax.open(type,url);
+            //请求头
+            ajax.setRequestHeader('Content-type','application/x-www-form-urlencoded')
+            ajax.send(JSON.stringify(data));
+        }
+        ajax.onload=function(){
+            success(ajax.responseText);
+        }
+    }
+
+
+    let userInp=document.querySelector('#username');
+    let passInp=document.querySelector('#password');
+    let Btns=document.querySelectorAll('button');
+    let box = document.querySelector(".box")
+    Btns[0].onclick=function(){
+        ajax({
+            url:'/api/post',
+            type:'post',
+            data:{
+                name:userInp.value,
+                pass:passInp.value
+            },
+            success:function(res){
+                let data =JSON.parse(res)
+                if(data.code==1){
+                    alert("请输入内容")
+                }else if(data.code==2){
+                    alert("名字太火换个吧")
+                }else if(data.code==0){
+                    alert("注册成功")
+                }
+                userInp.value=""
+                passInp.value=""
+                getUserList()
+            }
+        })
+    }
+    Btns[1].onclick=function(){
+        ajax({
+            url:'/api/register',
+            type:'post',
+            data:{
+                name:userInp.value,
+                pass:passInp.value
+            },
+            success:function(res){
+                let data =JSON.parse(res)
+                if(data.code==0){
+                    alert("登陆成功")
+                }else if(data.code==3){
+                    alert("没有这个用户")
+                }else if(data.code==4){
+                    alert("密码错误")
+                }
+                userInp.value=""
+                passInp.value=""
+                console.log(data);
+            }
+        })
+    }
+    getUserList()
+    function getUserList(){
+        ajax({
+            url:'/api/getUserList',
+            success:function(res){
+                let data = JSON.parse(res)
+                // console.log(data);
+                let div = document.createElement("div");
+                div.className = "box";
+                let names = Object.values(data).map(e => {
+                    return '<li>用户名:'+e.name+'</li>'
+                });
+                console.log(data);
+                box.innerHTML = names;
+                // console.log(data);
+            }
+        })
+    }
+</script>
+</html>
