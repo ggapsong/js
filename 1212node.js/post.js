@@ -19,7 +19,7 @@ let app = http.createServer((res,req)=>{
     let path='./view';
     if(Url.includes("/api")){
         //请求数据
-        if(Url.includes("/api/post")){
+        if(Url.includes("/post")){
             let str="";
             res.on("data",(data)=>{
                 str+=data
@@ -48,7 +48,7 @@ let app = http.createServer((res,req)=>{
                      }
                 }
             })
-        }else if(Url.includes("/api/register")){
+        }else if(Url.includes("/register")){
             let str = "";
                     res.on("data",(data)=>{
                         str+=data
@@ -72,6 +72,7 @@ let app = http.createServer((res,req)=>{
                 }else if(Url.includes("/api/getUserList")){
                     req.write(JSON.stringify(userArr));
                     req.end();
+                    return;
                 }
       
     }else{
