@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .list .editbox, .edting .infoBox{
+            display: none
+        }
+        .edting .editbox{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="tree">
+       <input 
+            type="text" 
+            v-model="msg"
+            @keydown.13="add"
+            />
+       <button @click="add">添加</button>
+       <h3>
+            全选
+            <input 
+                type="checkbox"
+                v-model="allCheck"
+            />
+       </h3>
+       <ul class="list">
+            <li v-if="!list.length">暂无数据</li>
+            <li v-else 
+                v-for="(item,i) in list"
+                :class="{edting:changeInp&&activeI==i}"
+                >
+               <span class="editbox">
+                   <input type="text" 
+                        v-model="editVal" 
+                        @keydown.13="editEnd(i)">
+                   <button 
+                        @click="editEnd(i)"
+                   >添加</button>
+               </span>
+               <div class="infoBox" ref="infoBox">
+                    <input 
+                        type="checkbox"
+                        v-model="item.checked"
+                    >
+                    <span v-html="item.msg"></span>
+                    <button @click="remove(i)">删除</button>
+                    <button @click="edit(i)">编辑</button>
+               </div>
+           </li>
+       </ul>
+    </div>
+    <script>
+    var vm = new Vue({
+        el:"#tree",
+        data:{
+            msg:"",
+            editVal:"",
+            activeI:"-1",
+            changeInp:false,
+            list:[],
+            count:0
+        },
+        methods:{
+            //添加
+            add(i){
+                this.list.push({
+                    msg:this.msg,
+                    checked:false,
+                });
+                this.msg=""
+            },
+            //删除
+            remove(i){
+                this.list.splice(i,1)
+            },
+            //编辑
+            edit(i){
+                this.changeInp = true;
+                this.activeI = i;
+                this.editVal = this.list[i].msg
+            },
+            editEnd(i){
+                this.changeInp = false;
+                this.list[i].msg = this.editVal;
+            }
+        },
+        computed:{
+            allCheck:{
+                get(){
+                    if(this.list.length == 0){
+                        return false;
+                    }
+                    return this.list.every((item)=>item.checked)
+                },
+                set(val){
+                    this.list.map((e)=>{
+                        e.checked = val;
+                    })
+                }
+            }
+        }
+    })
+    </script>
+</body>
+</html>
