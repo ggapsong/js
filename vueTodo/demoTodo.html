@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input  
+                    class="new-todo"  
+                    placeholder="请输入内容"
+                    v-model="content"
+                    @keydown.13="addTodo"
+                    />
+            </header>
+            <section class="main">
+                <input 
+                    class="toggle-all" 
+                    type="checkbox"
+                    :checked="itemChecked"
+                    @click = "goAll"
+                    />
+                <ul class="todo-list">
+                    <li 
+                        v-for="(item,i,id) in changeShow(selectI)" 
+                        :class="{completed:item.checked,editing:activeI==i}">
+                        <div class="view" 
+                        >
+                            <input 
+                                class="toggle" 
+                                type="checkbox" 
+                                v-model="item.checked"
+                                />
+                            <label @dblclick = "editing(i,item)">{{item.title}}</label>
+                            <button
+                                class="destroy"
+                                @click="removeOne(item)"
+                            ></button>
+                        </div>
+                        <input 
+                            class="edit"
+                            v-model="editVal"
+                            @keydown.13="editEnd(item)"
+                            v-focus
+                            @blur="editEnd(item)"
+                            @keydown.esc="cancleEdit(i,item.id)"
+                            />
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer">
+	            <span class="todo-count">
+	            	<strong id="num">{{unchecked.length}}</strong>
+	            	<span>条未选中</span>
+                </span>
+                <ul class="filters">
+                    <li  v-for="(item,index) in conList">
+                        <a href="javascript:;"
+                            :class="{selected:selectI == index}"
+                            @click = "changeShow(index)"
+                        >{{item}}</a>
+                    </li>   
+                </ul>
+            </footer>
+        </div>
+    </section>
+
+<script>
+    /*
+       1.添加
+       2.删除
+       3.编辑
+       4.全选
+        6. 筛选展示 OK         
+        7. 统计选中条数 OK
+
+
+    //编辑
+        进入编辑状态时 自动获取焦点
+        新增退出编辑，不改变值 ESC
+        保存事件新增 失去焦点时保存
+
+    */
+   
+   new Vue({
+       el:".todoapp",
+       data:{
+            content:"",
+            activeI:-1,
+            editVal:"",
+            selectI:0,
+            list:JSON.parse(localStorage.getItem("list"))||[],
+            conList:[
+               "全部",
+               "已选中",
+               "未选中"
+           ]
+       },
+       methods:{
+           //添加
+            addTodo(){
+                if(this.content==""){
+                    alert("请输入内容");
+                    return
+                }
+                this.list.unshift({
+                    title:this.content,
+                    checked:false,
+                    id:this.list.length+1
+                })
+                this.content = "";
+            },
+            //删除
+            removeOne(e){
+                let i = this.list.indexOf(e);
+                this.list.splice(i,1);
+            },
+            //编辑
+            editing(index,e){
+                this.activeI = index;
+                let i = this.list.indexOf(e);
+                this.editVal = this.list[i].title;
+                  
+               
+            },
+            //确定编辑
+            editEnd(e){
+                let i = this.list.indexOf(e);
+                this.list[i].title = this.editVal;
+                this.activeI = -1;
+            },
+            //全选
+            goAll(e){
+                this.list.forEach(item => {
+                    item.checked = e.target.checked
+                });
+            },
+            //有条件的渲染
+            changeShow(index){
+                this.selectI = index;
+                switch(index){
+                    case 0:
+                        return this.list;
+                    break;
+                    case 1:
+                        return this.list.filter(e=>e.checked);
+                    break;
+                    case 2:
+                        return this.list.filter(e=>!e.checked);
+                    break;
+                }
+            },
+            cancleEdit(i){
+                this.editVal = this.list[i].title
+                this.activeI = -1;
+            },
+       },
+       directives:{
+           "focus":{
+               update(el,binding){
+                   el.focus();
+               }
+           }
+       },
+       computed:{
+            //每一个input点击时 
+            itemChecked(){
+                if(this.list.length==0){
+                    return false
+                }
+                return this.list.every(e=>e.checked)
+            },
+            unchecked(){
+                return this.list.filter(e=>!e.checked);
+            }
+       },
+       watch:{
+           list:{
+            handler:function(){
+                localStorage.setItem("list",JSON.stringify(this.list))
+            },
+            deep:true
+           }
+       }
+   })
+</script>
+</body>
+</html>
