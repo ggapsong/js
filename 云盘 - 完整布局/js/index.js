@@ -210,7 +210,7 @@ function renderChild(arr) {
                 <li class="folder-item ${e.checked ? "active" : ""}" data-id="${
       e.id
     }">
-                    <img src="../img/folder-b.png" alt="">
+                    <img src="../img/folder-b.png" alt="" class="dbcimg">
                     <span class="folder-name">${e.title}</span>
                     <input type="text" class="editor" value="${e.title}">
                     <label class="checked">
@@ -235,7 +235,6 @@ nav.addEventListener("click", function (ev) {
     }
 });
 // 渲染左侧列表
-
 function renderMenuTree(id) {
     if (id !== undefined) {
         let ul = document.querySelector('li[data-id="' + id + '"]').children[1];
@@ -294,8 +293,20 @@ folders.addEventListener("click", function (ev) {
     ev.stopPropagation()
 });
 //双击重命名
+let dbcimg = folders.getElementsByClassName("dbcimg");
 
 folders.addEventListener("dblclick", function (e) {
+    //双击进入文件夹
+    
+    // if(e.target.className == "dbcimg"){
+    //     //目标元素
+    //     let dbc_imh = e.target
+    //     let id = dbc_imh.parentNode.dataset.id
+    //     renderCrumbs(parents(id));
+    //     renderChild(child(id));
+    //     renderMenuBF(id)
+    // }
+    //双击重命名
     if (e.target.className == "folder-name") {
         let folderName = e.target;
         let editor = e.target.nextElementSibling;
@@ -660,7 +671,8 @@ function yidong() {
 let start;
 let sel;
 let isdown = false;
-folders.addEventListener("mousedown", function (e) {
+let select_box = document.querySelector(".select_box")
+select_box.addEventListener("mousedown", function (e) {
     var el = e.target;
     if (e.button !== 0) {
         return false;
@@ -671,7 +683,8 @@ folders.addEventListener("mousedown", function (e) {
 
     sel = document.createElement("div");
     sel.className = "sel";
-    document.body.appendChild(sel);
+    select_box.appendChild(sel);
+    
     start = {
         x: e.clientX,
         y: e.clientY
@@ -684,13 +697,13 @@ folders.addEventListener("mousedown", function (e) {
     e.cancelBubble = true;
     e.stopPropagation();
 })
-folders.addEventListener("mousemove", move);
+select_box.addEventListener("mousemove", move);
 document.onmouseup = function (e) {
     if (!isdown) {
         return false;
     };
     isdown = false;
-    document.body.removeChild(sel);
+    select_box.removeChild(sel);
     e.cancelBubble = true;
     e.stopPropagation();
 };
